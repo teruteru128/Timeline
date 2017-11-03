@@ -1,0 +1,15 @@
+<div id="page">
+        <div class="login">
+                <div class="inner">
+                        <h1>Sign in</h1>
+                        <form #loginForm="ngForm" method="post">
+                            <span class="error" *ngIf="formErr">ログインできません。</span>
+                            <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" required>
+                            <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required>
+                            <button (click)="onSubmit()" class="signin"
+                            [disabled]="!loginForm.form.valid"
+                            [class.signin-disabled]="!loginForm.form.valid">Sign in</button>
+                        </form>
+                </div>
+            </div>
+</div>
