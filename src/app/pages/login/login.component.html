@@ -6,10 +6,13 @@
                             <span class="error" *ngIf="formErr">ログインできません。</span>
                             <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" required>
                             <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required>
-                            <button (click)="onSubmit()" class="signin"
+                            <button (click)="onSubmit()" class="submit"
                             [disabled]="!loginForm.form.valid"
-                            [class.signin-disabled]="!loginForm.form.valid">Sign in</button>
+                            [class.submit-disabled]="!loginForm.form.valid">Sign in</button>
                         </form>
+                        <span class="newuser">
+                                アカウントをお持ちではないですか？ <a href="/signup">登録する</a>
+                        </span>
                 </div>
             </div>
 </div>
