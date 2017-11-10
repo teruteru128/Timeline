@@ -40,7 +40,16 @@ export class UserService {
     return new Observable<LoginCallback>(obs => {
       this.http.post<LoginCallback>(this.config.apiEndpoint + '/v1/auth', claim)
         .subscribe((resp: LoginCallback) => {
-          this.storageService.store('token', resp.sessionToken);
+          if (resp.permanentId === undefined && resp.sessionToken === undefined) {
+            obs.error();
+            return;
+          }
+
+          const user = {
+            userId: resp.permanentId,
+            token: resp.sessionToken
+          };
+          this.storageService.store('user', JSON.stringify(user));
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err.error);
@@ -49,7 +58,7 @@ export class UserService {
   }
 
   logout() {
-    this.storageService.clear('token');
+    this.storageService.clear('user');
   }
 
 }
