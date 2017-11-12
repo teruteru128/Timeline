@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimelineComponent } from './timeline.component';
 import { PostCardModule } from '../post-card/post-card.module';
+import { FormsModule } from '@angular/forms';
 
 describe('TimelineComponent', () => {
   let component: TimelineComponent;
@@ -10,7 +11,8 @@ describe('TimelineComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        PostCardModule
+        PostCardModule,
+        FormsModule
       ],
       declarations: [ TimelineComponent ]
     })

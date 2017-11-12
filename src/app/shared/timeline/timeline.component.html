@@ -1,3 +1,20 @@
-<h1>Timeline</h1>
-
-<tl-post-card></tl-post-card>
+<section class="timeline">
+        <div class="newpost">
+                <div class="post-top">
+                        <div class="left">
+                                <!-- API -->
+                                <img src="/assets/img/logo.png" class="my-avatar" alt="USER_NAME">
+                        </div>
+                        <div class="right">
+                                <textarea class="post-body" placeholder="今何してる？" required [(ngModel)]="body"></textarea>
+                        </div>
+                </div>
+                <div class="post-bottom">
+                        <button class="submit btn"
+                        [disabled]="body.length === 0"
+                        [class.submit-disabled]="body.length === 0">投稿</button>
+                </div>
+        </div>
+        
+        <tl-post-card></tl-post-card>
+</section>

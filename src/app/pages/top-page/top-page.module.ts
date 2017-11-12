@@ -4,11 +4,15 @@ import { TopPageComponent } from './top-page.component';
 import { TimelineModule } from '../../shared/timeline/timeline.module';
 import { LoginModule } from '../login/login.module';
 import { SignupModule } from '../signup/signup.module';
+import { HeaderModule } from '../../shared/header/header.module';
+import { LeftSidebarModule } from '../../shared/left-sidebar/left-sidebar.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    TimelineModule
+    TimelineModule,
+    HeaderModule,
+    LeftSidebarModule
   ],
   declarations: [
     TopPageComponent

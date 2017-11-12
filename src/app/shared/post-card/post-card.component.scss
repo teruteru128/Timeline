@@ -1,0 +1,70 @@
+.card {
+    width: 50vw;
+    max-width: 90%;    
+    margin: 32px auto 0 auto;
+    padding: 12px 24px;
+    background: #fff;
+    box-shadow: rgba(0,0,0,.25) 0 4px 8px;
+
+    .post-top {
+        display: flex;
+        align-content: center;
+        width: 100%;
+        .left {
+            margin-right: 8px;
+            .avatar {
+                display: block;
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        .right {
+            width: 100%;
+            .name {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+            .meta {
+                color: #ccc;
+                font-size: .8rem;
+            }
+        }
+    }
+
+    .post-body {
+        display: block;
+        margin: .75rem 0;
+    }
+
+    .post-bottom {
+        margin-top: 1rem;
+
+        .icon {
+            margin-right: 24px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+// TODO: 後で分離
+.icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.reply {
+    background: url('/assets/img/icons/reply.svg') no-repeat 100%;
+}
+
+.share {
+    background: url('/assets/img/icons/share.svg') no-repeat 100%;
+}
+
+.like {
+    background: url('/assets/img/icons/like.svg') no-repeat 100%;
+}
