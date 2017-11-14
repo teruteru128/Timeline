@@ -16,5 +16,5 @@
                 </div>
         </div>
         
-        <tl-post-card></tl-post-card>
+        <tl-post-card *ngFor="let post of posts" [post]="post"></tl-post-card>
 </section>

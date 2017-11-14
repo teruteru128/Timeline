@@ -7,11 +7,12 @@ export class StorageService {
 
   fetch(key: string): Object[] {
     const data = localStorage.getItem(key);
-    return JSON.parse(data) || [];
+    const j = JSON.parse(data);
+    return JSON.parse(j) || [];
   }
 
-  store(key: string, item: string) {
-    localStorage.setItem(key, JSON.stringify(item));
+  store(key: string, items: string[]) {
+    localStorage.setItem(key, JSON.stringify(items));
   }
 
   clear(key: string) {

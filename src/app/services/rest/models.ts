@@ -18,6 +18,14 @@ export interface LoginCallback {
     sessionToken: string;       // JWTセッショントークン(RS256_JWT_TOKEN)
 }
 
+export interface Post {
+    userId: string;             // ユーザID
+    postId: string;             // 投稿ID
+    text: string;               // 投稿内容
+    createdDate: Date;          // 投稿日時
+    user: User;                 // 投稿ユーザ情報
+}
+
 export interface ErrorResponse {
    error: string;
 }
