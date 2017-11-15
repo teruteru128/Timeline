@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 import { SocketIOService } from '../../services/socketio/socket-io.service';
+import { ModalService } from '../modal-service/modal.service';
+import { ProfileModalComponent } from '../../modal/profile-modal/profile-modal.component';
+import { ModalSize } from '../modal/modal.component';
 
 @Component({
   selector: 'tl-timeline',
@@ -15,14 +18,22 @@ import { SocketIOService } from '../../services/socketio/socket-io.service';
 export class TimelineComponent implements OnInit, OnDestroy {
 
   @Input() stream: string;
-  
+
+  private modalSize: ModalSize;
+
   posts: Post[] = [];
 
   constructor(
     private postService: PostService,
-    private sio: SocketIOService) { }
+    private sio: SocketIOService,
+    private modal: ModalService) { }
 
   ngOnInit() {
+    this.modalSize = {
+      width: '410px',
+      height: '560px'
+    };
+
     switch (this.stream) {
       case 'sample':
       this.postService.listenSampleStream()
@@ -34,6 +45,10 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sio.disconnect();
+  }
+
+  openProfile(event: Post) {
+    this.modal.open(ProfileModalComponent, event);
   }
 
 }

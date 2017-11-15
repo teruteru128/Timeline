@@ -7,10 +7,12 @@ import { TopPageModule } from './pages/top-page/top-page.module';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { SignupModule } from './pages/signup/signup.module';
 import { LoginModule } from './pages/login/login.module';
+import { ProfileModalComponent } from './modal/profile-modal/profile-modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileModalComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +24,9 @@ import { LoginModule } from './pages/login/login.module';
   providers: [
     AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ProfileModalComponent
+  ]
 })
 export class AppModule { }
