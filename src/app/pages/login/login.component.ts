@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../../services/rest/user/user.service';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild('idField') idField: ElementRef;
 
   form = {
     id: '',
@@ -28,6 +30,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['']);
     }, err => {
       this.formErr = true;
+      this.idField.nativeElement.focus();
       this.form = {
         id: '',
         password: ''

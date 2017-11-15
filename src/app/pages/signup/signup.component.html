@@ -4,7 +4,7 @@
                   <h1>Sign up</h1>
                   <form #loginForm="ngForm" method="post">
                       <span class="error" *ngIf="formErr">エラーが発生しました。</span>
-                      <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" required>                      
+                      <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" #idField required>                      
                       <input type="email" value="" name="email" placeholder="Email" [(ngModel)]="form.mail" email required>                      
                       <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required>
                       <button (click)="onSubmit()" class="submit"
