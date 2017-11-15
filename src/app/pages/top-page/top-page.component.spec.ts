@@ -4,6 +4,9 @@ import { TopPageComponent } from './top-page.component';
 import { TimelineModule } from '../../shared/timeline/timeline.module';
 import { HeaderModule } from '../../shared/header/header.module';
 import { LeftSidebarModule } from '../../shared/left-sidebar/left-sidebar.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
+import { StorageService } from '../../services/storage/storage.service';
 
 describe('TopPageComponent', () => {
   let component: TopPageComponent;
@@ -14,9 +17,14 @@ describe('TopPageComponent', () => {
       imports: [
         TimelineModule,
         HeaderModule,
-        LeftSidebarModule
+        LeftSidebarModule,
+        HttpClientTestingModule
       ],
-      declarations: [ TopPageComponent ]
+      declarations: [ TopPageComponent ],
+      providers: [
+        {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
+        StorageService
+      ]
     })
     .compileComponents();
   }));
@@ -27,7 +35,4 @@ describe('TopPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

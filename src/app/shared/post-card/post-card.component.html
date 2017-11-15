@@ -1,19 +1,18 @@
 <div class="card">
     <div class="post-top">
         <div class="left">
-          <!-- API -->
-          <img src="/assets/img/logo.png" class="avatar" alt="USER_NAME">
+          <img [src]="post.user.avatarUrl" class="avatar" [alt]="post.userId">
         </div>
         <div class="right">
-          <span class="name">TinyKitten</span>
+          <span class="name">{{post.user.displayName}}</span>
           <span class="meta">
-            @tinykitten&nbsp;
-            45秒前
+            @{{post.userId}}&nbsp;
+            {{post.createdDate}}
           </span>
         </div>
   </div>
   <span class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      {{post.text}}
   </span>
   <div class="post-bottom">
       <i class="icon reply"></i>
