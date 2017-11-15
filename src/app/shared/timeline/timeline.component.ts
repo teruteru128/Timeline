@@ -19,7 +19,7 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   @Input() stream: string;
 
-  private modalSize: ModalSize;
+  modalSize: ModalSize;
 
   posts: Post[] = [];
 

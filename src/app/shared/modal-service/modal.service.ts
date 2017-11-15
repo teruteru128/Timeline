@@ -18,7 +18,7 @@ export class ModalService {
 
     const factory = this.resolver.resolveComponentFactory(data);
     const component = this.vcr.createComponent(factory);
-    component.instance.data = arg;
+    component.instance['data'] = arg;
 
     // if other modal container is created
     if (this.currentComponent) {
