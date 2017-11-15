@@ -1,7 +1,7 @@
 <div class="card">
     <div class="post-top">
         <div class="left">
-          <img [src]="post.user.avatarUrl" class="avatar" [alt]="post.userId">
+          <img (click)="profileClick()" [src]="post.user.avatarUrl" class="avatar" [alt]="post.userId">
         </div>
         <div class="right">
           <span class="name">{{post.user.displayName}}</span>

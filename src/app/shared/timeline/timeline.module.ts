@@ -7,13 +7,16 @@ import { PostService } from '../../services/rest/post/post.service';
 import { SocketIOService } from '../../services/socketio/socket-io.service';
 import { NewPostComponent } from '../new-post/new-post.component';
 import { ButtonModule } from '../button/button.module';
+import { ModalService } from '../modal-service/modal.service';
+import { ModalModule } from '../modal/modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
     PostCardModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    ModalModule
   ],
   declarations: [
     TimelineComponent,
@@ -24,7 +27,8 @@ import { ButtonModule } from '../button/button.module';
   ],
   providers: [
     PostService,
-    SocketIOService
+    SocketIOService,
+    ModalService
   ]
 })
 export class TimelineModule { }

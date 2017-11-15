@@ -27,7 +27,6 @@ export class PostService {
       const token = this.storageService.fetch('user')['token'];
       this.sio.emit('authenticate', token);
       this.sio.on('authenticated').subscribe(() => {
-        console.log('authenticated');
         this.sio.on('connect').subscribe(evt => console.log('Streaming API connected'));
         this.sio.on('sample').subscribe((evt: Post) => observer.next(evt));
       });
