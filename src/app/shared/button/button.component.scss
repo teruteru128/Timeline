@@ -1,0 +1,17 @@
+.btn {
+    transition: 0.25s;    
+    cursor: pointer;
+    background: #008FFE;
+    border: none;
+    color: #fff;
+    border-radius: 1px;
+    font-size: 1rem;
+    padding: 2px 1.85rem;
+    box-shadow: rgba(0, 0, 0, .5) 0 1px 2px;
+}
+
+.submit-disabled {
+    transition: 0.25s;
+    cursor: default;
+    background: #aaa;
+}

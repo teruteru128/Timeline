@@ -5,15 +5,19 @@ import { PostCardModule } from '../post-card/post-card.module';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../services/rest/post/post.service';
 import { SocketIOService } from '../../services/socketio/socket-io.service';
+import { NewPostComponent } from '../new-post/new-post.component';
+import { ButtonModule } from '../button/button.module';
 
 @NgModule({
   imports: [
     CommonModule,
     PostCardModule,
-    FormsModule
+    FormsModule,
+    ButtonModule
   ],
   declarations: [
-    TimelineComponent
+    TimelineComponent,
+    NewPostComponent
   ],
   exports: [
     TimelineComponent
