@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { PostService } from '../../services/rest/post/post.service';
 import { Post } from '../../services/rest/models';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,6 +14,8 @@ import { SocketIOService } from '../../services/socketio/socket-io.service';
 })
 export class TimelineComponent implements OnInit, OnDestroy {
 
+  @Input() stream: string;
+
   body = '';
 
   posts: Post[] = [];
@@ -23,10 +25,13 @@ export class TimelineComponent implements OnInit, OnDestroy {
     private sio: SocketIOService) { }
 
   ngOnInit() {
-    this.postService.listenSampleStream()
-    .subscribe(post => {
-      this.posts.unshift(post);
-    });
+    switch (this.stream) {
+      case 'sample':
+      this.postService.listenSampleStream()
+      .subscribe(post => {
+        this.posts.unshift(post);
+      });
+    }
   }
 
   ngOnDestroy() {
