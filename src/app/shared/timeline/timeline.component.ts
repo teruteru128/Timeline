@@ -15,9 +15,7 @@ import { SocketIOService } from '../../services/socketio/socket-io.service';
 export class TimelineComponent implements OnInit, OnDestroy {
 
   @Input() stream: string;
-
-  body = '';
-
+  
   posts: Post[] = [];
 
   constructor(

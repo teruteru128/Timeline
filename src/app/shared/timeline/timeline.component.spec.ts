@@ -8,6 +8,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SocketIOService } from '../../services/socketio/socket-io.service';
 import { APP_DI_CONFIG, APP_CONFIG } from '../../app.config';
 import { StorageService } from '../../services/storage/storage.service';
+import { NewPostComponent } from '../new-post/new-post.component';
+import { ButtonModule } from '../button/button.module';
 
 describe('TimelineComponent', () => {
   let component: TimelineComponent;
@@ -20,7 +22,10 @@ describe('TimelineComponent', () => {
         FormsModule,
         HttpClientTestingModule
       ],
-      declarations: [ TimelineComponent ],
+      declarations: [
+        TimelineComponent,
+        NewPostComponent
+      ],
       providers: [
         SocketIOService,
         {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
