@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit, OnDestroy, Input } from '@angular/core';
-import { ModalService } from '../modal-service/modal.service';
+import { ModalService } from './modal.service';
 import { Subscription } from 'rxjs/Subscription';
 
 export interface ModalSize {
