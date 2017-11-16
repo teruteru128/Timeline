@@ -21,14 +21,16 @@ export class PostService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) {}
 
-  listenSampleStream(): Observable<Post> {
+  listen(): Observable<any> {
     return new Observable(observer => {
       this.sio.connect(this.url());
       const token = this.storageService.fetch('user')['sessionToken'];
+      const id = this.storageService.fetch('user')['id'];
       this.sio.emit('authenticate', token);
       this.sio.on('authenticated').subscribe(() => {
-        this.sio.on('connect').subscribe(evt => console.log('Streaming API connected'));
-        this.sio.on('sample').subscribe((evt: Post) => observer.next(evt));
+        console.log('Streaming API connected');
+        this.sio.on(id).subscribe((dat: string) => observer.next(JSON.parse(dat)));
+
       });
       this.sio.on('unauthorized').subscribe((err) => {
         console.error('Socket unauthorized: ' + JSON.stringify(err['data']));

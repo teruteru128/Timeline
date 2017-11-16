@@ -20,10 +20,6 @@ export class ProfileModalComponent implements OnInit {
     private followService: FollowService) { }
 
   ngOnInit() {
-    if (this.data.sample) {
-      this.followState = 'DUMMY';
-    }
-
     this.followService.checkFollowing(this.data.user.userId)
     .subscribe(b => {
       console.log(b);
