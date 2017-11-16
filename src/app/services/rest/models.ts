@@ -25,6 +25,7 @@ export interface Post {
     text: string;               // 投稿内容
     createdDate: Date;          // 投稿日時
     user: User;                 // 投稿ユーザ情報
+    sample: boolean;            // サンプルユーザ
 }
 
 export interface ErrorResponse {
@@ -33,4 +34,8 @@ export interface ErrorResponse {
 
 export interface MessageResponse {
   message: string;
+}
+
+export interface UsersResponse {
+    users: User[];
 }

@@ -30,8 +30,8 @@
       </div>
 
       <!-- 後で分割 -->
-      <button class="large-btn follow">
-        Follow
+      <button class="large-btn follow" [disabled]="data.sample" [class.btn-disabled]="data.sample" (click)="followClick()">
+        {{followState}}
       </button>
     </div>
 </div>

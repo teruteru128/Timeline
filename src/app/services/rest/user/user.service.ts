@@ -34,11 +34,7 @@ export class UserService {
             return;
           }
 
-          const user = {
-            id: resp.id,
-            token: resp.sessionToken
-          };
-          this.storageService.store('user', [JSON.stringify(user)]);
+          this.storageService.store('user', [JSON.stringify(resp)]);
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err.error);

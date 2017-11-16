@@ -6,6 +6,9 @@ import { LoginModule } from '../login/login.module';
 import { SignupModule } from '../signup/signup.module';
 import { HeaderModule } from '../../shared/header/header.module';
 import { LeftSidebarModule } from '../../shared/left-sidebar/left-sidebar.module';
+import { FollowService } from '../../services/rest/follow/follow.service';
+import { StorageService } from '../../services/storage/storage.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
@@ -19,6 +22,10 @@ import { LeftSidebarModule } from '../../shared/left-sidebar/left-sidebar.module
   ],
   exports: [
     TopPageComponent
+  ],
+  providers: [
+    FollowService,
+    StorageService
   ]
 })
 export class TopPageModule { }

@@ -38,6 +38,7 @@ export class TimelineComponent implements OnInit, OnDestroy {
       case 'sample':
       this.postService.listenSampleStream()
       .subscribe(post => {
+        post.sample = true;
         this.posts.unshift(post);
       });
     }
