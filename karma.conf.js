@@ -15,8 +15,21 @@ module.exports = function (config) {
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+    coverageReporter: {
+      dir: './coverage/',
+      exclude: [
+          "node_modules",
+          "**/*.spec.ts"
+      ],
+      includeAllSources: true,
+      reporters: [
+          {type: 'lcov'},
+          {type: 'text-summary'},
+          {type: 'text'},
+     ],
+  },
+  coverageIstanbulReporter: {
+      reporters: ['coverage', 'coveralls'],
       fixWebpackSourcePaths: true
     },
     angularCli: {
