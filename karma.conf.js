@@ -16,10 +16,19 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageReporter: {
-      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
-      dir: 'coverage/'
-    },      
-    coverageIstanbulReporter: {
+      dir: './coverage/',
+      exclude: [
+          "node_modules",
+          "**/*.spec.ts"
+      ],
+      includeAllSources: true,
+      reporters: [
+          {type: 'lcov'},
+          {type: 'text-summary'},
+          {type: 'text'},
+     ],
+  },
+  coverageIstanbulReporter: {
       reporters: ['coverage', 'coveralls'],
       fixWebpackSourcePaths: true
     },
