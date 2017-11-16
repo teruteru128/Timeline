@@ -15,8 +15,12 @@ module.exports = function (config) {
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    coverageReporter: {
+      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
+      dir: 'coverage/'
+    },      
     coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+      reporters: ['coverage', 'coveralls'],
       fixWebpackSourcePaths: true
     },
     angularCli: {
