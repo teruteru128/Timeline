@@ -47,7 +47,8 @@ describe('UserService', () => {
           followingCount: 2,
           followersCount: 3,
           websiteUrl: 'https://example.com',
-          avatarUrl: 'https://static.example.com/kitten.png'
+          avatarUrl: 'https://static.example.com/kitten.png',
+          official: false
       };
       service.getUserById('kitten').subscribe((resp: User) => {
         expect(resp.id).toBe('unique_id');
