@@ -8,6 +8,7 @@ export interface User {
     followersCount: number;     // フォローされている数(0-)
     websiteUrl: string;         // ウェブサイトのURL(http://example.com)
     avatarUrl: string;          // プロフィール画像(http://static_cdn/profile_images/0.png)
+    official: boolean;          // 公式
 }
 
 export interface LoginCallback {

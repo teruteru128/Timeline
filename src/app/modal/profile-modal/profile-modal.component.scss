@@ -81,6 +81,12 @@
             border-radius: 24px;
             letter-spacing: 1px;
             box-shadow: #aaa 0 2px 8px;
+            transition: .25s;            
+            &:hover {
+                transition: .25s;
+                background: rgb(52, 165, 252);
+                box-shadow: #aaa 2px 4px 14px;;                
+            }
         }
     }
 }

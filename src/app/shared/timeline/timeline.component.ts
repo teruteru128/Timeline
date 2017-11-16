@@ -6,9 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 import { SocketIOService } from '../../services/socketio/socket-io.service';
-import { ModalService } from '../modal-service/modal.service';
 import { ProfileModalComponent } from '../../modal/profile-modal/profile-modal.component';
 import { ModalSize } from '../modal/modal.component';
+import { ModalService } from '../modal/modal.service';
 
 @Component({
   selector: 'tl-timeline',
@@ -49,6 +49,10 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   openProfile(event: Post) {
     this.modal.open(ProfileModalComponent, event);
+  }
+
+  followClickedHandler(event: Post) {
+    console.log(event);
   }
 
 }

@@ -2,7 +2,10 @@
     <img [src]="data.user.avatarUrl" class="avatar" [alt]="data.userId">
     
     <div class="top">
-      <h3 class="displayName">{{data.user.displayName}}</h3>
+      <h3 class="displayName">
+        {{data.user.displayName}}
+        <img src="/assets/img/icons/official.svg" alt="official">  
+      </h3>
       <span class="meta">
         @{{data.user.userId}}<br>
         {{data.user.location}}
