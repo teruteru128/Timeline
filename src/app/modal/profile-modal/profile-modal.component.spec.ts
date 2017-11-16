@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileModalComponent } from './profile-modal.component';
+import { FollowService } from '../../services/rest/follow/follow.service';
 
 describe('ProfileModalComponent', () => {
   let component: ProfileModalComponent;
@@ -8,7 +9,10 @@ describe('ProfileModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileModalComponent ]
+      declarations: [ ProfileModalComponent ],
+      providers: [
+        FollowService
+      ]
     })
     .compileComponents();
   }));

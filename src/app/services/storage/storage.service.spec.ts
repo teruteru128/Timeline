@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { StorageService } from './storage.service';
 
 describe('StorageService', () => {
-  const STORAGE_KEY = 'token';
+  const STORAGE_KEY = 'sessionToken';
   const STORAGE_VALUE = 'hoge';
 
   beforeEach(() => {

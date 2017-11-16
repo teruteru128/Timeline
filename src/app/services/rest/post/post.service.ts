@@ -24,7 +24,7 @@ export class PostService {
   listenSampleStream(): Observable<Post> {
     return new Observable(observer => {
       this.sio.connect(this.url());
-      const token = this.storageService.fetch('user')['token'];
+      const token = this.storageService.fetch('user')['sessionToken'];
       this.sio.emit('authenticate', token);
       this.sio.on('authenticated').subscribe(() => {
         this.sio.on('connect').subscribe(evt => console.log('Streaming API connected'));

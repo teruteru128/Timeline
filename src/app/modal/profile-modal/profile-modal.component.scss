@@ -88,5 +88,17 @@
                 box-shadow: #aaa 2px 4px 14px;;                
             }
         }
+
+        .btn-disabled {
+            transition: 0.25s;
+            cursor: default;
+            background: #aaa;
+            &:hover {
+                transition: .25s;
+                cursor: default;
+                background: #aaa;
+                box-shadow: rgba(0, 0, 0, .5) 0 1px 2px;
+            }
+        }        
     }
 }
