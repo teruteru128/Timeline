@@ -30,17 +30,29 @@ export class PostService {
       this.sio.on('authenticated').subscribe(() => {
         console.log('Streaming API connected');
         this.sio.on(id).subscribe((dat: string) => observer.next(JSON.parse(dat)));
-
       });
       this.sio.on('unauthorized').subscribe((err) => {
-        console.error('Socket unauthorized: ' + JSON.stringify(err['data']));
-        throw new Error(err['data']['type']);
+        console.error('Socket unauthorized: ' + JSON.stringify(err));
+        if (err === 'invalid jwt token' || err === 'not found') {
+          // 利用資格がないため認可情報を消去
+          this.storageService.clear('user');
+        }
+        observer.error(err);
       });
     });
   }
 
-  getPosts() {
-
+  post(text: string): Observable<any> {
+    return new Observable(obs => {
+      const token = this.storageService.fetch('user')['sessionToken'];
+      const header = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+      const body = {'text': text};
+      this.http.post(this.config.apiEndpoint + '/v1/posts', body, {headers: header})
+      .subscribe(resp => {
+        obs.next(resp);
+      }, (err: HttpErrorResponse) => {
+        obs.error(err.error);
+      });
+    });
   }
-
 }
