@@ -20,18 +20,20 @@
     <div class="bottom">
       <div class="ff">
         <div class="following">
-          <span class="count">{{data.user.followingCount}}</span>
+          <span class="count">{{data.user.following.length}}</span>
           <span class="label">FOLLOWING</span>          
         </div>
         <div class="follower">
-            <span class="count">{{data.user.followersCount}}</span>
+            <span class="count">{{data.user.followers.length}}</span>
             <span class="label">FOLLOWERS</span>
         </div>
       </div>
 
       <!-- 後で分割 -->
-      <button class="large-btn follow" [disabled]="data.sample" [class.btn-disabled]="data.sample" (click)="followClick()">
-        {{followState}}
-      </button>
+      <div class="actions" *ngIf="!own">
+        <button class="large-btn follow" [disabled]="data.sample" [class.btn-disabled]="data.sample" [class.btn-warn]="followState === 'Remove'" (click)="followClick()">
+          {{followState}}
+        </button>  
+      </div>
     </div>
 </div>

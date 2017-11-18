@@ -44,8 +44,8 @@ describe('UserService', () => {
           displayName: 'Kitten',
           postsCount: 1,
           location: 'Gunma Empire',
-          followingCount: 2,
-          followersCount: 3,
+          followers: [],
+          following: [],
           websiteUrl: 'https://example.com',
           avatarUrl: 'https://static.example.com/kitten.png',
           official: false
@@ -56,8 +56,8 @@ describe('UserService', () => {
         expect(resp.displayName).toBe('Kitten');
         expect(resp.postsCount).toBe(1);
         expect(resp.location).toBe('Gunma Empire');
-        expect(resp.followingCount).toBe(2);
-        expect(resp.followersCount).toBe(3);
+        expect(resp.following.length).toBe(0);
+        expect(resp.followers.length).toBe(0);
         expect(resp.websiteUrl).toBe('https://example.com');
         expect(resp.avatarUrl).toBe('https://static.example.com/kitten.png');
       }, err => {

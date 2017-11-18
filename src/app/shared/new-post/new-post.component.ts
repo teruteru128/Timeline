@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/rest/post/post.service';
 
 @Component({
   selector: 'tl-new-post',
@@ -9,7 +10,7 @@ export class NewPostComponent implements OnInit {
 
   inputText = '';
 
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
   }
@@ -22,5 +23,12 @@ export class NewPostComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  submit() {
+    this.postService.post(this.inputText)
+      .subscribe(resp => {
+        this.inputText = '';
+      });
   }
 }

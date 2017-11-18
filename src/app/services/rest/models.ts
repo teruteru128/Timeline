@@ -2,10 +2,10 @@ export interface User {
     id: string;                 // 恒久ID
     userId: string;             // ユーザ名(@kitten)
     displayName: string;        // 表示名(Kitten)
-    postsCount: number;         // 投稿総数(0-)
+    postsCount: number;         // 投稿
     location: string;           // 居住地(グンマー)
-    followingCount: number;     // フォローしている数(0-)
-    followersCount: number;     // フォローされている数(0-)
+    following: string[];     // フォローしている数(0-)
+    followers: string[];     // フォローされている数(0-)
     websiteUrl: string;         // ウェブサイトのURL(http://example.com)
     avatarUrl: string;          // プロフィール画像(http://static_cdn/profile_images/0.png)
     official: boolean;          // 公式
@@ -25,7 +25,6 @@ export interface Post {
     text: string;               // 投稿内容
     createdDate: Date;          // 投稿日時
     user: User;                 // 投稿ユーザ情報
-    sample: boolean;            // サンプルユーザ
 }
 
 export interface ErrorResponse {

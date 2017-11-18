@@ -14,6 +14,6 @@
     </div>
     <div class="post-bottom">
       <span class="inputLength" [class.tooLong]="inputText.length > 140">{{inputText.length}}</span>
-      <tl-button text="投稿" [disabled]="checkPostable()"></tl-button>
+      <tl-button text="投稿" [disabled]="checkPostable()" (click)="submit()"></tl-button>
     </div>
 </div>

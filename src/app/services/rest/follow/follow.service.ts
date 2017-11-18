@@ -45,21 +45,28 @@ export class FollowService {
       });
     }
 
-    checkFollowing(displayName: string): Observable<boolean> {
+    checkFollowing(to: string): Observable<boolean> {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         const token = this.storageService.fetch('user')['sessionToken'];
         const id = this.storageService.fetch('user')['id'];
+        const displayName = this.storageService.fetch('user')['userId'];
 
         this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/following/' + displayName + '?token=' + token)
-        .subscribe(resp => {
+        .subscribe((resp: UsersResponse) => {
+
+          if (resp.users === null) {
+            observer.next(false);
+            return;
+          }
           resp.users.map(user => {
-            if (user.id === id) {
+            if (user.displayName === to) {
               observer.next(true);
+              return;
             }
+            observer.next(false);
           });
-          observer.next(false);
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
         });
@@ -75,6 +82,10 @@ export class FollowService {
 
         this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/follower/' + displayName + '?token=' + token)
         .subscribe(resp => {
+          if (resp.users === null) {
+            observer.next(false);
+            return;
+          }
           resp.users.map(user => {
             if (user.id === id) {
               observer.next(true);
