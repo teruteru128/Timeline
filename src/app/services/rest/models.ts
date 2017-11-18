@@ -4,8 +4,8 @@ export interface User {
     displayName: string;        // 表示名(Kitten)
     postsCount: number;         // 投稿
     location: string;           // 居住地(グンマー)
-    following: number;     // フォローしている数(0-)
-    followers: number;     // フォローされている数(0-)
+    following: string[];     // フォローしている数(0-)
+    followers: string[];     // フォローされている数(0-)
     websiteUrl: string;         // ウェブサイトのURL(http://example.com)
     avatarUrl: string;          // プロフィール画像(http://static_cdn/profile_images/0.png)
     official: boolean;          // 公式
