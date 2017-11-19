@@ -50,8 +50,6 @@ describe('TimelineComponent', () => {
   });
 
   it('checkStream', async(() => {
-    component.checkStream();
-    fixture.detectChanges();
     expect(component.posts.length).toBe(1);
   }));
 
