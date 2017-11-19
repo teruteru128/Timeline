@@ -3,15 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SignupComponent } from './signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
-import { UserService } from '../../services/rest/user/user.service';
-import { StorageService } from '../../services/storage/storage.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   declarations: [
     SignupComponent
@@ -20,9 +19,6 @@ import { StorageService } from '../../services/storage/storage.service';
     SignupComponent
   ],
   providers: [
-    {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
-    UserService,
-    StorageService
   ]
 })
 export class SignupModule { }

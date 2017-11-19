@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { UserService } from '../../services/rest/user/user.service';
 import { Router } from '@angular/router';
+import { RandomImageService } from '../random-image/random-image.service';
+import { UserService } from '../../../services/rest/user/user.service';
 
 @Component({
   selector: 'tl-login',
@@ -11,6 +12,14 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('idField') idField: ElementRef;
 
+  bg: string;
+
+  private images = [
+    '/assets/bgimgs/1.jpg',
+    '/assets/bgimgs/2.jpg',
+    '/assets/bgimgs/3.jpg'
+  ];
+
   form = {
     id: '',
     password: ''
@@ -18,9 +27,13 @@ export class LoginComponent implements OnInit {
 
   formErr = false;
 
-  constructor(private service: UserService, private router: Router) { }
+  constructor(
+    private service: UserService,
+    private router: Router,
+    private bgService: RandomImageService) { }
 
   ngOnInit() {
+    this.bg = this.bgService.getRandomImage(this.images);
   }
 
   onSubmit() {

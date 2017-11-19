@@ -4,9 +4,10 @@ import { SignupComponent } from './signup.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
-import { StorageService } from '../../services/storage/storage.service';
-import { UserService } from '../../services/rest/user/user.service';
+import { RandomImageService } from '../random-image/random-image.service';
+import { UserService } from '../../../services/rest/user/user.service';
+import { APP_CONFIG, APP_DI_CONFIG } from '../../../app.config';
+import { StorageService } from '../../../services/storage/storage.service';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -23,7 +24,8 @@ describe('SignupComponent', () => {
       providers: [
         {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
         UserService,
-        StorageService
+        StorageService,
+        RandomImageService
       ]
     })
     .compileComponents();

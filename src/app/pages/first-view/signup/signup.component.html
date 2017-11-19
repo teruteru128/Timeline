@@ -1,0 +1,17 @@
+<div id="page" [ngStyle]="{'background-image': 'url(' + bg + ')'}">
+        <div class="login">
+        <img src="/assets/img/logo.png" class="logo" alt="logo">
+        <div class="inner">
+            <form #loginForm="ngForm" method="post" autocomplete="off">
+                <div class="error-wrapper">
+                        <span class="error" *ngIf="formErr">エラーが発生しました。</span>                        
+                </div>
+                <input type="email" value="" name="email" placeholder="Email" [(ngModel)]="form.mail" email required [autofocus]>
+                <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" #idField required [autofocus]>
+                <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required [autofocus]>
+                <button (click)="onSubmit()" class="submit" [disabled]="!loginForm.form.valid" [class.submit-disabled]="!loginForm.form.valid">登録</button>
+            </form>
+        </div>
+        <a class="newuser" [routerLink]="['/login']">ログインする</a>        
+    </div>
+</div>
