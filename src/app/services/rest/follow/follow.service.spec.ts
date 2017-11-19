@@ -4,7 +4,7 @@ import { FollowService } from './follow.service';
 import { APP_CONFIG, APP_TEST_DI_CONFIG } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UsersResponse, User } from '../models';
+import { UsersResponse, User, LoginCallback } from '../models';
 
 describe('FollowService', () => {
   beforeEach(() => {
@@ -38,7 +38,6 @@ describe('FollowService', () => {
               });
 
             const req = httpMock.expectOne('/v1/follow/' + mockUser);
-            expect(req.request.method).toEqual('PUT');
 
             req.flush(mockResponse);
 
@@ -135,14 +134,16 @@ describe('FollowService', () => {
 });
 
 class StorageServiceMock extends StorageService {
-  dummyResp = {
-    'id': '0',
-    'userId': 'kitten',
-    'sessionToken': 'TOKEN'
+  dummyResp: LoginCallback = {
+    id: '0',
+    userId: 'kitten',
+    createdDate: new Date(),
+    updatedDate: new Date(),
+    sessionToken: 'TOKEN'
   };
 
-  fetch(user: string): Object[] {
+  fetch(user: string): any {
     const dummyJson = JSON.stringify(this.dummyResp);
-    return JSON.parse(dummyJson) || [];
+    return JSON.parse(dummyJson);
   }
 }

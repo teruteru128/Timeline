@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { StorageService } from '../../services/storage/storage.service';
+import { LoginCallback } from '../../services/rest/models';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,16 +17,16 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    const user = this.storageService.fetch('user');
+    const user = this.storageService.fetch('user') as LoginCallback;
 
     if (url === '/login' || url === '/signup') {
-      if (user.length === 0) { return true; }
+      if (user === null) { return true; }
 
       this.router.navigate(['']);
       return false;
     }
 
-    if (user.length !== 0) { return true; }
+    if (user !== null) { return true; }
 
     this.router.navigate(['/login']);
     return false;

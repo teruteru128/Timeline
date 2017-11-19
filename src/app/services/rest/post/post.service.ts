@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Post } from '../models';
+import { Post, LoginCallback } from '../models';
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { StorageService } from '../../storage/storage.service';
@@ -20,8 +20,9 @@ export class PostService {
   listen(): Observable<any> {
     return new Observable(observer => {
       this.sio.connect(this.config.apiEndpoint);
-      const token = this.storageService.fetch('user')['sessionToken'];
-      const id = this.storageService.fetch('user')['id'];
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      const token = storageData.sessionToken;
+      const id = storageData.id;
       this.sio.emit('authenticate', token);
       this.sio.on('authenticated').subscribe(() => {
         console.log('Streaming API connected');
@@ -31,7 +32,7 @@ export class PostService {
         console.error('Socket unauthorized: ' + JSON.stringify(err));
         if (err === 'invalid jwt token' || err === 'not found') {
           // 利用資格がないため認可情報を消去
-          this.storageService.clear('user');
+          this.storageService.delete('user');
         }
         observer.error(err);
       });
@@ -40,8 +41,8 @@ export class PostService {
 
   post(text: string): Observable<any> {
     return new Observable(obs => {
-      const token = this.storageService.fetch('user')['sessionToken'];
-      const header = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.sessionToken);
       const body = {'text': text};
       this.http.post(this.config.apiEndpoint + '/v1/posts', body, {headers: header})
       .subscribe(resp => {

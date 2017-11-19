@@ -34,7 +34,7 @@ export class UserService {
             return;
           }
 
-          this.storageService.store('user', [JSON.stringify(resp)]);
+          this.storageService.store('user', JSON.stringify(resp));
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err.error);
@@ -55,7 +55,7 @@ export class UserService {
   }
 
   logout() {
-    this.storageService.clear('user');
+    this.storageService.delete('user');
   }
 
 }

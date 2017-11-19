@@ -6,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { SocketIOService } from '../../socketio/socket-io.service';
 import { APP_CONFIG, APP_TEST_DI_CONFIG } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
+import { LoginCallback } from '../models';
 
 describe('PostService', () => {
   beforeEach(() => {
@@ -17,7 +18,7 @@ describe('PostService', () => {
         { provide: APP_CONFIG, useValue: APP_TEST_DI_CONFIG },
         PostService,
         SocketIOService,
-        StorageService
+        { provide: StorageService, useClass: StorageServiceMock }
       ]
     });
   });
@@ -72,13 +73,15 @@ describe('PostService', () => {
 });
 
 class StorageServiceMock extends StorageService {
-  dummyResp = {
-    'id': '0',
-    'sessionToken': 'TOKEN'
+  dummyResp: LoginCallback = {
+    id: '0',
+    userId: '0',
+    createdDate: new Date(),
+    updatedDate: new Date(),
+    sessionToken: 'TOKEN'
   };
 
-  fetch(user: string): Object[] {
-    const dummyJson = JSON.stringify(this.dummyResp);
-    return JSON.parse(dummyJson) || [];
+  fetch(user: string): any {
+    return this.dummyResp;
   }
 }

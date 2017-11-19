@@ -17,12 +17,12 @@ export class NewPostComponent implements OnInit {
 
   checkPostable(): boolean {
     if (this.inputText.length === 0) {
-      return true;
+      return false;
     }
-    if (this.inputText.length > 140) {
-      return true;
+    if (this.inputText.length >= 140) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   submit() {
