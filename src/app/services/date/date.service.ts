@@ -10,7 +10,7 @@ export class DateService {
     const diff = new Date().getTime() - date.getTime();
     const d = new Date(diff);
 
-    const uy = date.getUTCFullYear() + 1;
+    const uy = date.getUTCFullYear();
     const umo = d.getUTCMonth() + 1;
     const ud = d.getUTCDay() + 1;
     const uh = d.getUTCHours();
