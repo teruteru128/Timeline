@@ -20,7 +20,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "tl",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "reset.scss",
+        "tl-theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

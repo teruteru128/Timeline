@@ -1,53 +1,67 @@
-.newpost {
+.post-top {
+  display: flex;
+  width: 100%;
+  .left {
+    margin-right: 8px;
+    .my-avatar {
+      display: block;
+      width: 48px;
+      height: 48px;
+    }
+  }
+  .right {
+    width: 100%;
+    .post-body {
+      display: block;
+      color: #555;
+      border: none;
+      resize: none;
+      font-size: 1.1rem;
+      width: 100%;
+      min-height: 5rem;
+    }
+  }
+}
+
+.post-bottom {
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  .inputLength {
+    transition: 0.25s;
+    margin-right: 8px;
+    font-size: 1.2rem;
+    color: #555;
+  }
+}
+
+.tooLong {
+  transition: 0.25s;
+  color: red;
+}
+
+@media screen and (min-width: 961px) {
+  .newpost {
     width: 50vw;
     max-width: 90%;
     margin: 0 auto;
     padding: 12px 24px;
     background: #fff;
-    box-shadow: rgba(0,0,0,.25) 0 4px 8px;
-    .post-top {
-        display: flex;
-        width: 100%;
-        .left {
-            margin-right: 8px;
-            .my-avatar {
-                display: block;
-                width: 48px;
-                height: 48px;
-            }
-        }
-
-        .right {
-            width: 100%;
-            .post-body {
-                display: block;
-                color: #555;
-                border: none;
-                resize: none;
-                font-size: 1.1rem;
-                width: 100%;
-                min-height: 5rem;
-            }
-        }
-    }
-
-    .post-bottom {
-        display: flex;
-        margin-top: 8px;
-        align-items: center;
-        justify-content: flex-end;
-
-        .inputLength {
-            font-weight: 600;
-            transition: 0.25s;
-            margin-right: 8px;
-            font-size: 1.2rem;
-            color: #555;
-        }
-    }
+    box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
+  }
 }
 
-.tooLong {
-    transition: 0.25s;
-    color: red;
+@media only screen and (min-width: 641px) and (max-width: 960px) {
+}
+
+@media screen and (max-width: 640px) {
+  .newpost {
+    width: 75vw;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 12px 24px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
+  }
 }

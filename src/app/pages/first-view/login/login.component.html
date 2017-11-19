@@ -1,0 +1,17 @@
+<div id="page" [ngStyle]="{'background-image': 'url(' + bg + ')'}">
+  <div class="login">
+    <img src="/assets/img/logo.png" class="logo" alt="logo">
+    <div class="inner">
+      <form #loginForm="ngForm" method="post" autocomplete="off">
+        <div class="error-wrapper">
+            <span class="error" *ngIf="formErr">ログインできません。</span>
+          </div>
+
+        <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" #idField required>
+        <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required>
+        <button (click)="onSubmit()" class="submit" [disabled]="!loginForm.form.valid" [class.submit-disabled]="!loginForm.form.valid">ログイン</button>
+      </form>
+    </div>
+    <a class="newuser" [routerLink]="['/signup']">Timelineに登録する</a>
+  </div>
+</div>

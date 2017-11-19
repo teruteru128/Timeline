@@ -3,27 +3,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login.component';
-import { UserService } from '../../services/rest/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { StorageService } from '../../services/storage/storage.service';
-import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
+import { RandomImageService } from '../random-image/random-image.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   declarations: [
     LoginComponent
   ],
   exports: [
     LoginComponent
-  ],
-  providers: [
-    {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
-    UserService,
-    StorageService
   ]
 })
 export class LoginModule { }
