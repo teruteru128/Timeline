@@ -1,19 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { RandomImageService } from './random-image.service';
-import { ElementRef } from '@angular/core';
-
-export class MockElementRef extends ElementRef {
-  constructor() { super(null); }
-}
 
 describe('RandomImageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        RandomImageService,
-        { provide: ElementRef, useClass: MockElementRef }
-      ]
+      providers: [RandomImageService]
     });
   });
 
