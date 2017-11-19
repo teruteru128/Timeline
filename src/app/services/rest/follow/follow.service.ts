@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
 import { Observable } from 'rxjs/Observable';
-import { UsersResponse } from '../models';
+import { UsersResponse, LoginCallback } from '../models';
 
 @Injectable()
 export class FollowService {
@@ -17,7 +17,8 @@ export class FollowService {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        const token = this.storageService.fetch('user')['sessionToken'];
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        const token = storageData.sessionToken;
         headers.append('Authorization', 'Bearer ' + token);
 
         this.http.put(this.config.apiEndpoint + '/v1/follow/' + displayName, null, {headers: headers})
@@ -33,7 +34,8 @@ export class FollowService {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        const token = this.storageService.fetch('user')['sessionToken'];
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        const token = storageData.sessionToken;
         headers.append('Authorization', 'Bearer ' + token);
 
         this.http.put(this.config.apiEndpoint + '/v1/unfollow/' + displayName, null, {headers: headers})
@@ -49,24 +51,24 @@ export class FollowService {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        const token = this.storageService.fetch('user')['sessionToken'];
-        const id = this.storageService.fetch('user')['id'];
-        const displayName = this.storageService.fetch('user')['userId'];
-
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        const token = storageData.sessionToken;
+        const id = storageData.id;
+        const displayName = storageData.userId;
         this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/following/' + displayName + '?token=' + token)
         .subscribe((resp: UsersResponse) => {
 
           if (resp.users === null) {
             observer.next(false);
-            return;
+          } else {
+            resp.users.map(user => {
+              if (user.displayName === to) {
+                observer.next(true);
+                return;
+              }
+              observer.next(false);
+            });
           }
-          resp.users.map(user => {
-            if (user.displayName === to) {
-              observer.next(true);
-              return;
-            }
-            observer.next(false);
-          });
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
         });
@@ -77,21 +79,23 @@ export class FollowService {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        const token = this.storageService.fetch('user')['sessionToken'];
-        const id = this.storageService.fetch('user')['id'];
-
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        const id = storageData.id;
+        const token = storageData.sessionToken;
+        
         this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/follower/' + displayName + '?token=' + token)
         .subscribe(resp => {
           if (resp.users === null) {
             observer.next(false);
-            return;
+          } else {
+            resp.users.map(user => {
+              if (user.id === id) {
+                observer.next(true);
+                return;
+              }
+              observer.next(false);
+            });
           }
-          resp.users.map(user => {
-            if (user.id === id) {
-              observer.next(true);
-            }
-          });
-          observer.next(false);
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
         });

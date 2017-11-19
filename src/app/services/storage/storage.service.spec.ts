@@ -33,4 +33,21 @@ describe('StorageService', () => {
   it('should be created', inject([StorageService], (service: StorageService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('fetch', inject([StorageService], (service: StorageService) => {
+    const v = {'key': 'value'};
+    const sv = JSON.stringify(v);
+    localStorage.setItem('key', sv);
+    const r = service.fetch('key');
+    expect(JSON.stringify(r)).toBe(sv);
+  }));
+
+  it('fetch', inject([StorageService], (service: StorageService) => {
+    const v = {'key': 'value'};
+    const sv = JSON.stringify(v);
+    localStorage.setItem('key', sv);
+    service.delete('key');
+    const r = localStorage.getItem('key');
+    expect(r).toBe(null);
+  }));
 });

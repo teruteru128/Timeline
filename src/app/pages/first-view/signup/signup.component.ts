@@ -53,8 +53,4 @@ export class SignupComponent implements OnInit {
       });
   }
 
-  onInputBlur(val) {
-    console.log(val);
-  }
-
 }

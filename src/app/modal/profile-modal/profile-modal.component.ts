@@ -22,26 +22,38 @@ export class ProfileModalComponent implements OnInit {
     private followService: FollowService) { }
 
   ngOnInit() {
+    this.own = this.isOwnPost();
+    this.getFollowState().subscribe(state => this.followState = state);
+  }
+
+  isOwnPost(): boolean {
     const id = this.storageService.fetch('user')['userId'];
-
     if (this.data.userId === id) {
-      this.own = true;
+      return true;
     }
+    return false;
+  }
 
-    this.followService.checkFollowing(this.data.user.userId)
-    .subscribe(resp => {
-      switch (resp) {
-        case true:
-        this.followState = 'Remove';
-        break;
-        case false:
-        this.followState = 'Follow';
-        break;
-      }
+  checkFollow(): Observable<boolean> {
+    return new Observable<boolean>(obs => {
+      this.followService.checkFollowing(this.data.user.userId)
+        .subscribe(resp => {
+          obs.next(resp);
+        }, err => {
+          obs.error(err);
+        });
     });
   }
 
-  followClick() {
+  getFollowState(): Observable<string> {
+    return new Observable<string>(obs => {
+      this.checkFollow().subscribe(isFollow => {
+        if (isFollow) {
+          obs.next('Remove');
+          return;
+        }
+        obs.next('Follow');
+      });
+    });
   }
-
 }
