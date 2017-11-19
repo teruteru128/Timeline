@@ -18,8 +18,6 @@ import { Router } from '@angular/router';
 })
 export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() stream: string;
-
   modalSize: ModalSize;
 
   posts: Post[] = [];
@@ -38,25 +36,21 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    switch (this.stream) {
-      case 'sample':
-      this.postService.listen()
-      .subscribe((post: Post) => {
-        this.posts.unshift(post);
-      }, err => {
-        if (err === 'invalid jwt token' || 'not found') {
-          console.error('認可情報が確認できなかったため、ご利用できません。');
-          this.redirectLogin();
-        } else {
-          console.error('リアルタイムタイムラインAPIへの接続でエラーが発生しました。');
-        }
-      });
-    }
   }
 
-  redirectLogin() {
-    this.router.navigate(['login']);
-  }
+  checkStream() {
+    this.postService.listen()
+    .subscribe((post: Post) => {
+      this.posts.unshift(post);
+    }, err => {
+      if (err === 'invalid jwt token' || 'not found') {
+        console.error('認可情報が確認できなかったため、ご利用できません。');
+        this.router.navigate(['login']);
+      } else {
+        console.error('リアルタイムタイムラインAPIへの接続でエラーが発生しました。');
+      }
+    });
+}
 
   ngOnDestroy() {
     this.sio.disconnect();

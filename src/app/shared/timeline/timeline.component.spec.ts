@@ -10,6 +10,10 @@ import { APP_DI_CONFIG, APP_CONFIG } from '../../app.config';
 import { StorageService } from '../../services/storage/storage.service';
 import { NewPostComponent } from '../new-post/new-post.component';
 import { ButtonModule } from '../button/button.module';
+import { Observable } from 'rxjs/Observable';
+import { Post, User } from '../../services/rest/models';
+import { ModalModule } from '../modal/modal.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TimelineComponent', () => {
   let component: TimelineComponent;
@@ -20,7 +24,10 @@ describe('TimelineComponent', () => {
       imports: [
         PostCardModule,
         FormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        ModalModule,
+        ButtonModule,
+        RouterTestingModule
       ],
       declarations: [
         TimelineComponent,
@@ -29,7 +36,7 @@ describe('TimelineComponent', () => {
       providers: [
         SocketIOService,
         {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
-        PostService,
+        {provide: PostService, useClass: PostServiceMock},
         StorageService
       ]
     })
@@ -41,4 +48,37 @@ describe('TimelineComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  it('checkStream', async(() => {
+    component.checkStream();
+    fixture.detectChanges();
+    expect(component.posts.length).toBe(1);
+  }));
+
+  class PostServiceMock extends PostService {
+    listen(): Observable<Post> {
+      return new Observable(observer => {
+        const user: User = {
+          id: '1',
+          userId: 'testuser',
+          displayName: 'Test User',
+          postsCount: 0,
+          location: '',
+          following: [],
+          followers: [],
+          websiteUrl: '',
+          avatarUrl: '/assets/img/logo.png',
+          official: false
+        };
+        const post: Post = {
+          userId: 'Test User',
+          postId: '1',
+          text: 'Text',
+          createdDate: new Date('2017/01/01 00:00:00'),
+          user: user
+        };
+        observer.next(post);
+      });
+    }
+  }
 });

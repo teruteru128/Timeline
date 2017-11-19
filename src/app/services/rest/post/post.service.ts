@@ -45,7 +45,7 @@ export class PostService {
       const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.sessionToken);
       const body = {'text': text};
       this.http.post(this.config.apiEndpoint + '/v1/posts', body, {headers: header})
-      .subscribe(resp => {
+      .subscribe((resp: Post) => {
         obs.next(resp);
       }, (err: HttpErrorResponse) => {
         obs.error(err.error);
