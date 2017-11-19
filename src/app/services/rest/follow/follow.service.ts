@@ -58,15 +58,15 @@ export class FollowService {
 
           if (resp.users === null) {
             observer.next(false);
-            return;
+          } else {
+            resp.users.map(user => {
+              if (user.displayName === to) {
+                observer.next(true);
+                return;
+              }
+              observer.next(false);
+            });
           }
-          resp.users.map(user => {
-            if (user.displayName === to) {
-              observer.next(true);
-              return;
-            }
-            observer.next(false);
-          });
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
         });
@@ -84,14 +84,15 @@ export class FollowService {
         .subscribe(resp => {
           if (resp.users === null) {
             observer.next(false);
-            return;
+          } else {
+            resp.users.map(user => {
+              if (user.id === id) {
+                observer.next(true);
+                return;
+              }
+              observer.next(false);
+            });
           }
-          resp.users.map(user => {
-            if (user.id === id) {
-              observer.next(true);
-            }
-          });
-          observer.next(false);
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
         });

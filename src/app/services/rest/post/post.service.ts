@@ -11,10 +11,6 @@ export class PostService {
 
   private authenticated = false;
 
-  private url(): string {
-    return this.config.apiEndpoint + '/v1/posts/sample_stream';
-  }
-
   constructor(
     private http: HttpClient,
     private sio: SocketIOService,
@@ -23,7 +19,7 @@ export class PostService {
 
   listen(): Observable<any> {
     return new Observable(observer => {
-      this.sio.connect(this.url());
+      this.sio.connect(this.config.apiEndpoint);
       const token = this.storageService.fetch('user')['sessionToken'];
       const id = this.storageService.fetch('user')['id'];
       this.sio.emit('authenticate', token);

@@ -10,21 +10,23 @@ export class DateService {
     const diff = new Date().getTime() - date.getTime();
     const d = new Date(diff);
 
-    const uy = date.getUTCFullYear();
-    const umo = date.getUTCMonth();
-    const ud = date.getUTCDay();
-    const uh = date.getUTCHours();
-    const umi = date.getUTCMinutes();
-    const us = date.getUTCSeconds();
+    const uy = date.getUTCFullYear() + 1;
+    const umo = d.getUTCMonth() + 1;
+    const ud = d.getUTCDay() + 1;
+    const uh = d.getUTCHours();
+    const umi = d.getUTCMinutes();
+    const us = d.getUTCSeconds();
 
     const umiStr = this.zeroPadding(parseInt(umi.toString(), 10));
     const usStr = this.zeroPadding(parseInt(us.toString(), 10));
 
     if (d.getUTCFullYear() - 1970) {
       return `${uy}/${umo}/${ud} ${uh}:${umiStr}:${usStr}`;
-    } else if (d.getUTCDate() - 1) {
+    } else if (!d.getUTCFullYear() && d.getUTCMonth()) {
       return `${umo}/${ud} ${uh}:${umiStr}:${usStr}`;
-    } else if (d.getUTCHours()) {
+    }
+
+    if (d.getUTCHours()) {
       return d.getUTCHours() + '時間前';
     } else if (d.getUTCMinutes()) {
       return d.getUTCMinutes() + '分前';
