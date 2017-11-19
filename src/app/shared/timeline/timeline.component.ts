@@ -36,6 +36,7 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.checkStream();
   }
 
   checkStream() {
