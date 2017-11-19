@@ -16,6 +16,7 @@ export class PostCardComponent implements OnInit {
   constructor(private dateService: DateService) { }
 
   ngOnInit() {
+    this.notProvidedImage();
   }
 
   updateDate() {

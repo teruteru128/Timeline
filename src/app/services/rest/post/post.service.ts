@@ -17,8 +17,8 @@ export class PostService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) {}
 
-  listen(): Observable<any> {
-    return new Observable(observer => {
+  listen(): Observable<Post> {
+    return new Observable<Post>(observer => {
       this.sio.connect(this.config.apiEndpoint);
       const storageData: LoginCallback = this.storageService.fetch('user');
       const token = storageData.sessionToken;

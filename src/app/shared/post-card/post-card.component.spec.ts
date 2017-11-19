@@ -24,7 +24,6 @@ describe('PostCardComponent', () => {
     fixture.detectChanges();
   });
 
-  /*
   it('notProvidedImage', async(() => {
     const user: User = {
       id: '',
@@ -75,6 +74,5 @@ describe('PostCardComponent', () => {
 
     component.profileClick();
   }));
-  */
-  
+
 });
