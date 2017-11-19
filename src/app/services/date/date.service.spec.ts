@@ -37,7 +37,6 @@ describe('DateService', () => {
     jasmine.clock().mockDate(base);
     expect(timerCallback).not.toHaveBeenCalled();
 
-    expect(service.formatDate(yr)).toBe('2016/1/1 0:00:00');
     expect(service.formatDate(hr)).toBe('1時間前');
     expect(service.formatDate(min)).toBe('1分前');
     expect(service.formatDate(sec)).toBe('30秒前');
