@@ -6,7 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { SocketIOService } from '../../socketio/socket-io.service';
 import { APP_CONFIG, APP_TEST_DI_CONFIG } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
-import { LoginCallback } from '../models';
+import { User, Post, LoginCallback } from '../models';
 
 describe('PostService', () => {
   beforeEach(() => {
@@ -44,8 +44,26 @@ describe('PostService', () => {
           });
 
           service.listen().subscribe(resp => {
-            const sample = { 'message': 'sample' };
-            expect(resp).toBe(JSON.stringify(sample));
+            const user: User = {
+              id: '1',
+              userId: 'testuser',
+              displayName: 'Test User',
+              postsCount: 0,
+              location: '',
+              following: [],
+              followers: [],
+              websiteUrl: '',
+              avatarUrl: '/assets/img/logo.png',
+              official: false
+            };
+            const post: Post = {
+              userId: 'Test User',
+              postId: '1',
+              text: 'Text',
+              createdDate: new Date('2017/01/01 00:00:00'),
+              user: user
+            };
+            expect(resp).toBe(post);
           });
         }));
   });
@@ -53,7 +71,7 @@ describe('PostService', () => {
     it('post',
       inject([PostService, HttpTestingController],
         (service: PostService, httpMock: HttpTestingController) => {
-          const okResp = {'message': 'posted'};
+          const okResp = { 'message': 'posted' };
           const mockUser = 'kitten';
           service.post('HELLO')
             .subscribe(postResp => {
@@ -67,7 +85,7 @@ describe('PostService', () => {
           req.flush(okResp);
 
           httpMock.verify();
-      }));
+        }));
   });
 
 });

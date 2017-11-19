@@ -21,60 +21,60 @@ describe('PostCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PostCardComponent);
     component = fixture.componentInstance;
+    const user: User = {
+      id: '1',
+      userId: 'testuser',
+      displayName: 'Test User',
+      postsCount: 0,
+      location: '',
+      following: [],
+      followers: [],
+      websiteUrl: '',
+      avatarUrl: '',
+      official: false
+    };
+    const post: Post = {
+      userId: 'Test User',
+      postId: '1',
+      text: 'Text',
+      createdDate: new Date('2017/01/01 00:00:00'),
+      user: user
+    };
+    component.post = post;
     fixture.detectChanges();
   });
 
-  /*
   it('notProvidedImage', async(() => {
+    component.notProvidedImage();
     const user: User = {
-      id: '',
-      userId: '',
-      displayName: '',
+      id: '1',
+      userId: 'testuser',
+      displayName: 'Test User',
       postsCount: 0,
       location: '',
       following: [],
       followers: [],
       websiteUrl: '',
-      avatarUrl: '',
+      avatarUrl: '/assets/img/logo.png',
       official: false
     };
     const post: Post = {
-      userId: '',
-      postId: '',
-      text: '',
-      createdDate: new Date(),
+      userId: 'Test User',
+      postId: '1',
+      text: 'Text',
+      createdDate: new Date('2017/01/01 00:00:00'),
       user: user
     };
+    const compPost = component.post;
 
-    component.post = post;
-    component.notProvidedImage();
-    expect(component.post.user.avatarUrl).toBe('/assets/img/logo.png');
+    expect(JSON.stringify(compPost)).toBe(JSON.stringify(post));
   }));
 
   it('profileClick', async(() => {
-    const user: User = {
-      id: '',
-      userId: '',
-      displayName: '',
-      postsCount: 0,
-      location: '',
-      following: [],
-      followers: [],
-      websiteUrl: '',
-      avatarUrl: '',
-      official: false
-    };
-    const post: Post = {
-      userId: '',
-      postId: '',
-      text: '',
-      createdDate: new Date(),
-      user: user
-    };
-    component.post = post;
-
     component.profileClick();
+    component.profileClicked.subscribe(post => {
+      expect(post).toBe(component.post);
+    });
   }));
-  */
-  
+
 });

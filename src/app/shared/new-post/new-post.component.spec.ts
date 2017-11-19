@@ -58,7 +58,7 @@ describe('NewPostComponent', () => {
 
   it('submit', async(() => {
     component.inputText = 'aaa';
-    fixture.detectChanges();    
+    fixture.detectChanges();
     component.submit();
     fixture.detectChanges();
     expect(component.inputText).toBe('');
