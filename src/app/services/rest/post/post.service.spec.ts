@@ -80,7 +80,7 @@ describe('PostService', () => {
               expect(err).toBeUndefined();
             });
 
-          const req = httpMock.expectOne('/v1/posts');
+          const req = httpMock.expectOne('/1.0/posts');
 
           req.flush(okResp);
 

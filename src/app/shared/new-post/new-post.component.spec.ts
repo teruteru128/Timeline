@@ -21,7 +21,7 @@ describe('NewPostComponent', () => {
         ButtonModule,
         HttpClientTestingModule
       ],
-      declarations: [ NewPostComponent ],
+      declarations: [],
       providers: [
         {provide: PostService, useClass: PostServiceMock},
         SocketIOService,

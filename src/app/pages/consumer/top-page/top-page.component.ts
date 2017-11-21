@@ -9,7 +9,16 @@ export class TopPageComponent implements OnInit {
 
   constructor() { }
 
+  spMenuOpened = false;
+
   ngOnInit() {
   }
 
+  openSpMenu() {
+    this.spMenuOpened = true;
+  }
+
+  closeSpMenu() {
+    this.spMenuOpened = false;
+  }
 }

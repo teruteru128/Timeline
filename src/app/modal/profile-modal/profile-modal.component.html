@@ -1,18 +1,22 @@
 <div class="modal">
-    <img [src]="data.user.avatarUrl" class="avatar" [alt]="data.userId">
+  <i class="close material-icons" (click)="closeModal()">close</i>
+  <div class="avatar-wrapper">
+      <img [src]="user.avatarUrl" class="avatar" [alt]="user.userId">
+      <img class="sp-official"  src="/assets/img/icons/official.svg" alt="official">  
+  </div>
     
     <div class="top">
       <h3 class="displayName">
-        {{data.user.displayName}}
-        <img src="/assets/img/icons/official.svg" alt="official">  
+        {{user.displayName}}
+        <img class="pc-official" *ngIf="user.official" src="/assets/img/icons/official.svg" alt="official">  
       </h3>
       <span class="meta">
-        @{{data.user.userId}}<br>
-        {{data.user.location}}
+        @{{user.userId}}<br>
+        {{user.location}}
       </span>
 
       <div class="links">
-        <a [href]="data.user.websiteUrl" *ngIf="data.user.websiteUrl !== ''">
+        <a [href]="user.websiteUrl" *ngIf="user.websiteUrl !== ''">
             <img src="./assets/img/icons/website.svg">            
         </a>
       </div>
@@ -20,18 +24,18 @@
     <div class="bottom">
       <div class="ff">
         <div class="following">
-          <span class="count">{{data.user.following.length}}</span>
+          <span class="count">{{user.following.length}}</span>
           <span class="label">FOLLOWING</span>          
         </div>
         <div class="follower">
-            <span class="count">{{data.user.followers.length}}</span>
+            <span class="count">{{user.followers.length}}</span>
             <span class="label">FOLLOWERS</span>
         </div>
       </div>
 
       <!-- 後で分割 -->
       <div class="actions" *ngIf="!own">
-        <button class="large-btn follow" [disabled]="data.sample" [class.btn-disabled]="data.sample" [class.btn-warn]="followState === 'Remove'" (click)="followClick()">
+        <button class="large-btn follow" [disabled]="user.sample" [class.btn-disabled]="user.sample" [class.btn-warn]="followState === 'Remove'" (click)="followClick()">
           {{followState}}
         </button>  
       </div>

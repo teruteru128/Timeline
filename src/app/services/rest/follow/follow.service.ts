@@ -21,7 +21,7 @@ export class FollowService {
         const token = storageData.sessionToken;
         headers.append('Authorization', 'Bearer ' + token);
 
-        this.http.put(this.config.apiEndpoint + '/v1/follow/' + displayName, null, {headers: headers})
+        this.http.put(this.config.apiEndpoint + '/1.0/friendships/create.json', null, {headers: headers})
         .subscribe(resp => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -38,7 +38,7 @@ export class FollowService {
         const token = storageData.sessionToken;
         headers.append('Authorization', 'Bearer ' + token);
 
-        this.http.put(this.config.apiEndpoint + '/v1/unfollow/' + displayName, null, {headers: headers})
+        this.http.put(this.config.apiEndpoint + '/1.0/unfollow/' + displayName, null, {headers: headers})
         .subscribe(resp => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -55,7 +55,7 @@ export class FollowService {
         const token = storageData.sessionToken;
         const id = storageData.id;
         const displayName = storageData.userId;
-        this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/following/' + displayName + '?token=' + token)
+        this.http.get<UsersResponse>(this.config.apiEndpoint + '/1.0/following/' + displayName + '?token=' + token)
         .subscribe((resp: UsersResponse) => {
 
           if (resp.users === null) {
@@ -83,7 +83,7 @@ export class FollowService {
         const id = storageData.id;
         const token = storageData.sessionToken;
         
-        this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/follower/' + displayName + '?token=' + token)
+        this.http.get<UsersResponse>(this.config.apiEndpoint + '/1.0/follower/' + displayName + '?token=' + token)
         .subscribe(resp => {
           if (resp.users === null) {
             observer.next(false);

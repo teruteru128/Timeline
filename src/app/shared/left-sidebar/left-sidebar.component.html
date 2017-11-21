@@ -1,2 +1,26 @@
-<aside>
+<aside *ngIf="initialized">
+  <div class="inner">
+    <div class="profile">
+        <input type="file" id="upload-avatar" #fileTag (change)="uploadAvatar($event)" class="file" accept="image/*">            
+      <img src="{{user.avatarUrl}}" alt="you" class="avatar">
+      <input type="text" id="upload-avatar-url">      
+      <div class="name">
+        <span class="display">{{user.displayName}}</span>
+        <span class="id">@{{user.userId}}</span>
+      </div>
+    </div>
+    <ul class="menu" (click)="onMenuClicked()">
+      <li class="menu-item" [routerLink]="['/']" routerLinkActive="active-item">
+        <i class="material-icons icon">filter_list</i>
+        <span class="menu-title">タイムライン</span>
+      </li>
+    </ul>
+    <span class="category">見つける</span>
+    <ul class="menu" (click)="onMenuClicked()">
+      <li class="menu-item" [routerLink]="['/finduser']" routerLinkActive="active-item">
+        <i class="material-icons icon">person</i>
+        <span class="menu-title">ユーザー</span>
+      </li>
+    </ul>
+  </div>
 </aside>

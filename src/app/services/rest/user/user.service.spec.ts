@@ -34,7 +34,7 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   }));
 
-  describe('GET /v1/user/kitten', () => {
+  describe('GET /1.0/user/kitten', () => {
   it('Get user by UserName',
     inject([UserService, HttpTestingController],
       (service: UserService, httpMock: HttpTestingController) => {
@@ -64,7 +64,7 @@ describe('UserService', () => {
         expect(err).toBeUndefined();
       });
 
-      const req = httpMock.expectOne('/v1/users/kitten');
+      const req = httpMock.expectOne('/1.0/users/kitten');
       expect(req.request.method).toEqual('GET');
 
       req.flush(mockResponse);
@@ -81,7 +81,7 @@ describe('UserService', () => {
         expect(err['error']).toBe('error');
       });
 
-      const req = httpMock.expectOne('/v1/users/kotten');
+      const req = httpMock.expectOne('/1.0/users/kotten');
       expect(req.request.method).toEqual('GET');
 
       req.flush(mockErrorResponse, {status: 404, statusText: 'NOT FOUND'});
@@ -90,7 +90,7 @@ describe('UserService', () => {
     }));
   });
 
-  describe('POST /v1/login', () => {
+  describe('POST /1.0/login', () => {
     const nowDate = new Date();
     // tslint:disable-next-line:max-line-length
     const jwtToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUaW55S2l0dGVuIFRpbWVsaW5lIiwic3ViIjoia2l0dGVuIiwiYXVkIjoid2ViIiwiaWF0IjoxNTA5Njc5NzY3LCJleHAiOjE1MDk5Mzg5Njd9.bKb5yMJfukjWY17-nghPQDCaMkz1da7oivQMgA3wUBTN6tXKggetnR_-ZUKasWbySC8_WtxepPUsshUXUhgCVx3ud_V8qyDnCvG8MZBKUlOB6dRN7CfdhctwBLBTplzi6fUgn_2LiWWgK9Q-n8urhC36POhHzDyDPJXDyKm10e_9xpFwkYnezQ0tPGv72YSa34_6e5ZNylsNy6gw8mC5ZAqWh9f1ufyWRWOBd2i927J6x4cBjCU5lunyDz1Tr90wgMCkuDQ-CxZoCKc9z4U0cZmJ3GUebkuTgWI0v8UrNXOOUi8XRynxpd9xRgNdL-p7xWoyTZzb9AA-XnKJoIWmG63rX8n_SiL7crMGYrHR0WAXsQr9_kKXJj08nliP5RK1sSe-Qr2mDRJwbSNpudGvHCDJUZ8PlQkTO2OVhkfmHViwk3KZDeUEBRnLqyafXiWZlr4gs2Vcc2ez19Vd8tBBXDkRcFf6PLrAQIHYFPWSLZ8eOo3NXbYs2R1nhylhKr0Y0fTkK5q6Shq7n3RjxNuAdH6JjbytH1i5_OJ263VjDoKazcPG94xVfi6yCJdKvDhH-PWsZ1rGUzL-UOAMJw3hKg2ir8rY8A99W2d9NUaBnTzBWEwK0TbZccKK7WCAD4aepm44-S16t82baLQN3fW5FD5fowusdFOA5_tFp5iGHkY';
@@ -115,7 +115,7 @@ describe('UserService', () => {
         expect(err).toBeUndefined();
       });
 
-      const req = httpMock.expectOne('/v1/login');
+      const req = httpMock.expectOne('/1.0/login');
       expect(req.request.method).toEqual('POST');
 
       req.flush(mockResponse);
@@ -132,7 +132,7 @@ describe('UserService', () => {
           expect(err['error']).toBe('error');
         });
 
-        const req = httpMock.expectOne('/v1/login');
+        const req = httpMock.expectOne('/1.0/login');
         expect(req.request.method).toEqual('POST');
 
         req.flush(mockErrorResponse, {status: 409, statusText: 'CONFLICT'});
@@ -150,7 +150,7 @@ describe('UserService', () => {
         expect(err).toBeUndefined();
       });
 
-      const req = httpMock.expectOne('/v1/signup');
+      const req = httpMock.expectOne('/1.0/signup');
       expect(req.request.method).toEqual('POST');
 
       req.flush(mockCreatedResponse, {status: 201, statusText: 'CREATED'});
@@ -167,7 +167,7 @@ describe('UserService', () => {
           expect(err['error']).toBe('error');
         });
 
-        const req = httpMock.expectOne('/v1/signup');
+        const req = httpMock.expectOne('/1.0/signup');
         expect(req.request.method).toEqual('POST');
 
         req.flush(mockErrorResponse, {status: 500, statusText: 'INTERNAL SERVER ERROR'});
@@ -184,7 +184,7 @@ describe('UserService', () => {
             expect(err['error']).toBe('error');
           });
 
-          const req = httpMock.expectOne('/v1/signup');
+          const req = httpMock.expectOne('/1.0/signup');
           expect(req.request.method).toEqual('POST');
 
           req.flush(mockErrorResponse, {status: 409, statusText: 'CONFLICT'});

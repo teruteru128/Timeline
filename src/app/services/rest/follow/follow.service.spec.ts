@@ -23,7 +23,7 @@ describe('FollowService', () => {
       expect(service).toBeTruthy();
     }));
 
-    describe('PUT /v1/follow/USER_NAME', () => {
+    describe('PUT /1.0/follow/USER_NAME', () => {
       it('Follow user',
         inject([FollowService, HttpTestingController],
           (service: FollowService, httpMock: HttpTestingController) => {
@@ -37,7 +37,7 @@ describe('FollowService', () => {
                 expect(err).toBeUndefined();
               });
 
-            const req = httpMock.expectOne('/v1/follow/' + mockUser);
+            const req = httpMock.expectOne('/1.0/follow/' + mockUser);
 
             req.flush(mockResponse);
 
@@ -57,7 +57,7 @@ describe('FollowService', () => {
               expect(err).toBeUndefined();
             });
 
-          const req = httpMock.expectOne('/v1/unfollow/' + mockUser);
+          const req = httpMock.expectOne('/1.0/unfollow/' + mockUser);
           expect(req.request.method).toEqual('PUT');
 
           req.flush(mockResponse);
@@ -91,7 +91,7 @@ describe('FollowService', () => {
             expect(err).toBeUndefined();
           });
 
-        const req = httpMock.expectOne('/v1/following/' + mockUser + '?token=TOKEN');
+        const req = httpMock.expectOne('/1.0/following/' + mockUser + '?token=TOKEN');
         expect(req.request.method).toEqual('GET');
 
         req.flush(okResp);
@@ -124,7 +124,7 @@ describe('FollowService', () => {
             expect(err).toBeUndefined();
           });
 
-        const req = httpMock.expectOne('/v1/follower/' + mockUser + '?token=TOKEN');
+        const req = httpMock.expectOne('/1.0/follower/' + mockUser + '?token=TOKEN');
         expect(req.request.method).toEqual('GET');
 
         req.flush(okResp);

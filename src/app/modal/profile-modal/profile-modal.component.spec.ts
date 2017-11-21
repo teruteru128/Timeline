@@ -7,6 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
 import { User, Post } from '../../services/rest/models';
 import { Observable } from 'rxjs/Observable';
+import { ModalService } from '../../shared/modal/modal.service';
 
 describe('ProfileModalComponent', () => {
   let component: ProfileModalComponent;
@@ -22,7 +23,8 @@ describe('ProfileModalComponent', () => {
         FollowService,
         { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
         { provide: StorageService, useClass: StorageServiceMock },
-        { provide: FollowService, useClass: FollowServiceMock }
+        { provide: FollowService, useClass: FollowServiceMock },
+        ModalService
       ]
     })
       .compileComponents();
@@ -50,7 +52,7 @@ describe('ProfileModalComponent', () => {
       createdDate: new Date(),
       user: user
     };
-    component.data = post;
+    component.user = post.user;
     fixture.detectChanges();
   });
 
@@ -80,7 +82,7 @@ describe('ProfileModalComponent', () => {
       createdDate: new Date(),
       user: user
     };
-    component.data = post;
+    component.user = post.user;
     fixture.detectChanges();
     const b = component.isOwnPost();
     expect(b).toBe(false);
