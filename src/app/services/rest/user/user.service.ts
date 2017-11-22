@@ -13,6 +13,7 @@ export class UserService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) { }
 
+    // 未実装
   allUser(): Observable<User[]> {
     return new Observable(obs => {
       this.http.get<User[]>(this.config.apiEndpoint + '/1.0/users/')
@@ -26,7 +27,8 @@ export class UserService {
 
   getUserById(userId: string): Observable<User> {
     return new Observable(obs => {
-      this.http.get<User>(this.config.apiEndpoint + '/1.0/users/' + userId)
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      this.http.get<User>(this.config.apiEndpoint + '/1.0/users/show.json?token=' + storageData.session_token + '&screen_name=' + userId)
         .subscribe(resp => {
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -38,9 +40,9 @@ export class UserService {
   login(userId: string, password: string): Observable<LoginCallback> {
     const claim = { id: userId, password: password };
     return new Observable<LoginCallback>(obs => {
-      this.http.post<LoginCallback>(this.config.apiEndpoint + '/1.0/login', claim)
+      this.http.post<LoginCallback>(this.config.apiEndpoint + '/1.0/account/login.json', claim)
         .subscribe((resp: LoginCallback) => {
-          if (resp.id === undefined && resp.sessionToken === undefined) {
+          if (resp.id === undefined && resp.session_token === undefined) {
             obs.error();
             return;
           }
@@ -56,7 +58,7 @@ export class UserService {
   signup(userId: string, email: string, password: string): Observable<MessageResponse> {
     const claim = { id: userId, email: email, password: password };
     return new Observable<MessageResponse>(obs => {
-      this.http.post<MessageResponse>(this.config.apiEndpoint + '/1.0/signup', claim)
+      this.http.post<MessageResponse>(this.config.apiEndpoint + '/1.0/account/create.json', claim)
         .subscribe((resp: MessageResponse) => {
           obs.next(resp);
         }, (err: HttpErrorResponse) => {

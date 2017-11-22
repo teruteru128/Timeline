@@ -32,13 +32,14 @@ export class LeftSidebarComponent implements OnInit {
 
   getProfile() {
     const storage = this.storageService.fetch('user') as LoginCallback;
-    const userId = storage.userId;
+    const userId = storage.screen_name;
     this.userService.getUserById(userId).subscribe(user => {
       this.user = user;
-      if (this.user.avatarUrl === '') {
-        this.user.avatarUrl = '/assets/img/logo.png';
+      if (this.user.profile_image_url === '') {
+        this.user.profile_image_url = '/assets/img/logo.png';
         this.initialized = true;
       }
+      this.initialized = true;
     });
   }
 

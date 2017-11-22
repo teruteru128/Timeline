@@ -5,7 +5,7 @@ export interface AppConfig {
 }
 
 export const APP_DI_CONFIG: AppConfig = {
-    apiEndpoint: 'https://tlstag.ddns.net:4000'
+    apiEndpoint: 'https://API:4000'
 };
 
 export const APP_TEST_DI_CONFIG: AppConfig = {

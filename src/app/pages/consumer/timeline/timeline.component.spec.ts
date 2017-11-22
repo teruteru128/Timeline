@@ -36,7 +36,6 @@ describe('TimelineComponent', () => {
       providers: [
         SocketIOService,
         {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
-        {provide: PostService, useClass: PostServiceMock},
         StorageService
       ]
     })
@@ -48,35 +47,4 @@ describe('TimelineComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('checkStream', async(() => {
-    expect(component.posts.length).toBe(1);
-  }));
-
-  class PostServiceMock extends PostService {
-    listen(): Observable<Post> {
-      return new Observable(observer => {
-        const user: User = {
-          id: '1',
-          userId: 'testuser',
-          displayName: 'Test User',
-          postsCount: 0,
-          location: '',
-          following: [],
-          followers: [],
-          websiteUrl: '',
-          avatarUrl: '/assets/img/logo.png',
-          official: false
-        };
-        const post: Post = {
-          userId: 'Test User',
-          postId: '1',
-          text: 'Text',
-          createdDate: new Date('2017/01/01 00:00:00'),
-          user: user
-        };
-        observer.next(post);
-      });
-    }
-  }
 });

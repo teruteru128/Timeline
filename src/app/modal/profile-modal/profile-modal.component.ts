@@ -28,9 +28,9 @@ export class ProfileModalComponent implements OnInit {
   }
 
   isOwnPost(): boolean {
-    const id = this.storageService.fetch('user')['userId'];
+    const id = this.storageService.fetch('user')['screen_name'];
 
-    if (this.user.userId === id) {
+    if (this.user.screen_name === id) {
 
       return true;
     }
@@ -39,7 +39,7 @@ export class ProfileModalComponent implements OnInit {
 
   checkFollow(): Observable<boolean> {
     return new Observable<boolean>(obs => {
-      this.followService.checkFollowing(this.user.userId)
+      this.followService.checkFollowing(this.user.screen_name)
         .subscribe(resp => {
           obs.next(resp);
         }, err => {

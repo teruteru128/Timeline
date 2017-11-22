@@ -1,22 +1,22 @@
 <div class="modal">
   <i class="close material-icons" (click)="closeModal()">close</i>
   <div class="avatar-wrapper">
-      <img [src]="user.avatarUrl" class="avatar" [alt]="user.userId">
+      <img [src]="user.profile_image_url" class="avatar" [alt]="user.screen_name">
       <img class="sp-official"  src="/assets/img/icons/official.svg" alt="official">  
   </div>
     
     <div class="top">
       <h3 class="displayName">
-        {{user.displayName}}
+        {{user.name}}
         <img class="pc-official" *ngIf="user.official" src="/assets/img/icons/official.svg" alt="official">  
       </h3>
       <span class="meta">
-        @{{user.userId}}<br>
+        @{{user.screen_name}}<br>
         {{user.location}}
       </span>
 
       <div class="links">
-        <a [href]="user.websiteUrl" *ngIf="user.websiteUrl !== ''">
+        <a [href]="user.url" *ngIf="user.url !== ''">
             <img src="./assets/img/icons/website.svg">            
         </a>
       </div>
@@ -24,7 +24,7 @@
     <div class="bottom">
       <div class="ff">
         <div class="following">
-          <span class="count">{{user.following.length}}</span>
+          <span class="count">{{user.friends.length}}</span>
           <span class="label">FOLLOWING</span>          
         </div>
         <div class="follower">

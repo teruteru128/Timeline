@@ -35,8 +35,8 @@ export class FindUserComponent implements OnInit {
     this.userService.allUser()
       .subscribe(users => {
         users = users.map(user => {
-          if (user.avatarUrl === '') {
-            user.avatarUrl = '/assets/img/logo.png';
+          if (user.profile_image_url === '') {
+            user.profile_image_url = '/assets/img/logo.png';
           }
           return user;
         });

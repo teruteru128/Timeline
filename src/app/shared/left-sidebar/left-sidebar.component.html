@@ -2,11 +2,11 @@
   <div class="inner">
     <div class="profile">
         <input type="file" id="upload-avatar" #fileTag (change)="uploadAvatar($event)" class="file" accept="image/*">            
-      <img src="{{user.avatarUrl}}" alt="you" class="avatar">
+      <img src="{{user.profile_image_url}}" alt="you" class="avatar">
       <input type="text" id="upload-avatar-url">      
       <div class="name">
-        <span class="display">{{user.displayName}}</span>
-        <span class="id">@{{user.userId}}</span>
+        <span class="display">{{user.name}}</span>
+        <span class="id">@{{user.screen_name}}</span>
       </div>
     </div>
     <ul class="menu" (click)="onMenuClicked()">
