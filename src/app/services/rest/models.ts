@@ -8,7 +8,7 @@ export interface User {
     followers: string[];
     url: string;
     official: boolean;
-    profile_image_url: string;    
+    profile_image_url: string;
 }
 
 export interface LoginCallback {
@@ -21,7 +21,7 @@ export interface LoginCallback {
     followers: string[];
     url: string;
     official: boolean;
-    profile_image_url: string;    
+    profile_image_url: string;
     session_token: string;
 }
 

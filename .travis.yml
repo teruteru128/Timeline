@@ -10,7 +10,4 @@ before_script:
   - yarn global add karma
   - yarn
   - ng build --aot
-  - dredd
 script: yarn test-ci
-before_install:
-  - npm install -g dredd@4.7.0
