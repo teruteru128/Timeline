@@ -17,20 +17,19 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit() {
     this.notProvidedImage();
+    this.updateDate();
   }
 
   updateDate() {
-    if (this.post !== undefined) {
-      this.date = this.dateService.formatDate(this.post.createdDate);
-      setInterval(() => {
-        this.date = this.dateService.formatDate(this.post.createdDate);
-      }, 30000);
-    }
-  }
+    this.date = this.dateService.formatDate(this.post.created_at);
+    setInterval(() => {
+      this.date = this.dateService.formatDate(this.post.created_at);
+    }, 30000);
+}
 
   notProvidedImage() {
-    if (this.post.user.avatarUrl === '') {
-      this.post.user.avatarUrl = '/assets/img/logo.png';
+    if (this.post.user.profile_image_url === '') {
+      this.post.user.profile_image_url = '/assets/img/logo.png';
     }
   }
 

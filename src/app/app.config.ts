@@ -5,7 +5,7 @@ export interface AppConfig {
 }
 
 export const APP_DI_CONFIG: AppConfig = {
-    apiEndpoint: 'http://localhost:4000'
+    apiEndpoint: 'https://localhost:4000'
 };
 
 export const APP_TEST_DI_CONFIG: AppConfig = {

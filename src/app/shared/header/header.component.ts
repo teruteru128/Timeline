@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tl-header',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  @Output()hamburgerClicked = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  clicked() {
+    this.hamburgerClicked.emit();
   }
 
 }

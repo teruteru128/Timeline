@@ -21,9 +21,9 @@ describe('NewPostComponent', () => {
         ButtonModule,
         HttpClientTestingModule
       ],
-      declarations: [ NewPostComponent ],
+      declarations: [],
       providers: [
-        {provide: PostService, useClass: PostServiceMock},
+        PostService,
         SocketIOService,
         StorageService,
         {provide: APP_CONFIG, useValue: APP_DI_CONFIG}
@@ -37,36 +37,4 @@ describe('NewPostComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('characters count', async(() => {
-    component.inputText = '';
-    expect(component.checkPostable()).toBe(false);
-
-    // tslint:disable-next-line:max-line-length
-    component.inputText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma';
-    fixture.detectChanges();
-    expect(component.checkPostable()).toBe(false);
-
-    component.inputText = 'a';
-    fixture.detectChanges();
-    expect(component.checkPostable()).toBe(true);
-  }));
-
-  it('submit', async(() => {
-    component.inputText = 'aaa';
-    fixture.detectChanges();
-    component.submit();
-    fixture.detectChanges();
-    expect(component.inputText).toBe('');
-  }));
 });
-
-class PostServiceMock extends PostService {
-  post(text: string): Observable<boolean> {
-    return new Observable(obs => obs.next(true));
-  }
-}

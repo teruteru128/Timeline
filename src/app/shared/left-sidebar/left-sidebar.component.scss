@@ -1,5 +1,73 @@
 aside {
-    background: #EEEEEE;
-    width: 240px;
-    height: 100%;   
+    border-right: 1.25px solid #eee;
+    width: 210px;
+    height: calc(100% - 48px);
+}
+
+.inner {
+    padding-top: 18px;    
+    margin-left: 18px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    .avatar {
+        width: 48px;
+        height: 48px;
+        justify-content: center;
+        align-items: center;
+        margin-right: 14px;
+        object-fit: scale-down;        
+    }
+    .display {
+        font-size: 1.2rem;
+    }
+    .id {
+        font-size: .9rem;
+        color: #aaa;
+    }
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+    .menu-item {
+        cursor: pointer;
+        margin-left: 4px;
+        display: flex;
+        align-items: center;
+        color: #555;
+
+        .menu-title {
+            margin-left: 12px;
+        }
+    }
+    .menu-item.active-item {
+        font-weight: bold;
+        color: #333;
+    }    
+
+}
+
+
+.category {
+    display: block;
+    margin: 1.5rem 0;
+    font-size: .9rem;
+    color: #ccc;
+    font-weight: bold;
+}
+
+#upload-avatar, #upload-avatar-url {
+    display: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }

@@ -1,6 +1,5 @@
 <section class="timeline">
-  
-  <tl-modal [size]="modalSize" (followClicked)="followClickedHandler($event)"></tl-modal>
+  <tl-modal [size]="modalSize"></tl-modal>
   <tl-new-post></tl-new-post>
   <div class="posts">
     <tl-post-card *ngFor="let post of posts" [post]="post" (profileClicked)="openProfile($event)"></tl-post-card>

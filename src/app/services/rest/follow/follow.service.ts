@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
 import { Observable } from 'rxjs/Observable';
-import { UsersResponse, LoginCallback } from '../models';
+import { LoginCallback, User } from '../models';
 
 @Injectable()
 export class FollowService {
@@ -18,10 +18,13 @@ export class FollowService {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
-        const token = storageData.sessionToken;
+        const token = storageData.session_token;
         headers.append('Authorization', 'Bearer ' + token);
+        const body = {
+          'user_id': storageData.id
+        };
 
-        this.http.put(this.config.apiEndpoint + '/v1/follow/' + displayName, null, {headers: headers})
+        this.http.put(this.config.apiEndpoint + '/1.0/friendships/create.json', body, {headers: headers})
         .subscribe(resp => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -35,10 +38,13 @@ export class FollowService {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
-        const token = storageData.sessionToken;
+        const token = storageData.session_token;
         headers.append('Authorization', 'Bearer ' + token);
+        const body = {
+          'user_id': storageData.id
+        };
 
-        this.http.put(this.config.apiEndpoint + '/v1/unfollow/' + displayName, null, {headers: headers})
+        this.http.put(this.config.apiEndpoint + '/1.0/friendships/destroy.json', body, {headers: headers})
         .subscribe(resp => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -52,17 +58,17 @@ export class FollowService {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
-        const token = storageData.sessionToken;
+        const token = storageData.session_token;
         const id = storageData.id;
-        const displayName = storageData.userId;
-        this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/following/' + displayName + '?token=' + token)
-        .subscribe((resp: UsersResponse) => {
+        const displayName = storageData.screen_name;
+        this.http.get<User[]>(this.config.apiEndpoint + '/1.0/friends/list.json?token=' + token + '&screen_name=' + to)
+        .subscribe((resp: User[]) => {
 
-          if (resp.users === null) {
+          if (resp.length === 0) {
             observer.next(false);
           } else {
-            resp.users.map(user => {
-              if (user.displayName === to) {
+            resp.map(user => {
+              if (user.screen_name === to) {
                 observer.next(true);
                 return;
               }
@@ -81,14 +87,14 @@ export class FollowService {
         headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
         const id = storageData.id;
-        const token = storageData.sessionToken;
-        
-        this.http.get<UsersResponse>(this.config.apiEndpoint + '/v1/follower/' + displayName + '?token=' + token)
-        .subscribe(resp => {
-          if (resp.users === null) {
+        const token = storageData.session_token;
+
+        this.http.get<User[]>(this.config.apiEndpoint + '/1.0/followers/list.json?token=' + token + '&screen_name=' + displayName)
+        .subscribe((resp: User[]) => {
+          if (resp.length === 0) {
             observer.next(false);
           } else {
-            resp.users.map(user => {
+            resp.map(user => {
               if (user.id === id) {
                 observer.next(true);
                 return;

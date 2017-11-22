@@ -1,12 +1,12 @@
 <div class="card">
     <div class="post-top">
         <div class="left">
-          <img (click)="profileClick()" [src]="post.user.avatarUrl" class="avatar" [alt]="post.userId">
+          <img (click)="profileClick()" [src]="post.user.profile_image_url" class="avatar" [alt]="post.user.screen_name">
         </div>
         <div class="right">
-          <span class="name">{{post.user.displayName}}</span>
+          <span class="name">{{post.user.name}}</span>
           <span class="meta">
-            @{{post.user.userId}}&nbsp;
+            @{{post.user.screen_name}}&nbsp;
             {{date}}
           </span>
         </div>
@@ -15,8 +15,8 @@
       {{post.text}}
   </span>
   <div class="post-bottom">
-      <i class="icon reply"></i>
-      <i class="icon share"></i>
-      <i class="icon like"></i>
-    </div>
+    <i class="reaction material-icons">thumb_up</i>      
+    <i class="reaction material-icons">reply</i>
+    <i class="reaction material-icons">share</i>
+  </div>
 </div>

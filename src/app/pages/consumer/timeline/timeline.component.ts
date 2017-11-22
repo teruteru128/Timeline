@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { PostService } from '../../services/rest/post/post.service';
-import { Post } from '../../services/rest/models';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
-import { SocketIOService } from '../../services/socketio/socket-io.service';
-import { ProfileModalComponent } from '../../modal/profile-modal/profile-modal.component';
-import { ModalSize } from '../modal/modal.component';
-import { ModalService } from '../modal/modal.service';
 import { Router } from '@angular/router';
+import { ModalSize } from '../../../shared/modal/modal.component';
+import { Post, User } from '../../../services/rest/models';
+import { PostService } from '../../../services/rest/post/post.service';
+import { SocketIOService } from '../../../services/socketio/socket-io.service';
+import { ModalService } from '../../../shared/modal/modal.service';
+import { ProfileModalComponent } from '../../../modal/profile-modal/profile-modal.component';
 
 @Component({
   selector: 'tl-timeline',
@@ -58,11 +58,7 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   openProfile(event: Post) {
-    this.modal.open(ProfileModalComponent, event);
-  }
-
-  followClickedHandler(event: Post) {
-    console.log(event);
+    this.modal.open<User>(ProfileModalComponent, event.user);
   }
 
 }

@@ -11,14 +11,14 @@ export class ModalService {
 
   constructor(private resolver: ComponentFactoryResolver) { }
 
-  open(data: any, arg: any): void {
-    if (!data) {
+  open<T>(comp: any, arg: T): void {
+    if (!comp) {
       return;
     }
 
-    const factory = this.resolver.resolveComponentFactory(data);
+    const factory = this.resolver.resolveComponentFactory(comp);
     const component = this.vcr.createComponent(factory);
-    component.instance['data'] = arg;
+    component.instance['user'] = arg;
 
     // if other modal container is created
     if (this.currentComponent) {

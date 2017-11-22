@@ -1,30 +1,47 @@
 export interface User {
-    id: string;                 // 恒久ID
-    userId: string;             // ユーザ名(@kitten)
-    displayName: string;        // 表示名(Kitten)
-    postsCount: number;         // 投稿
-    location: string;           // 居住地(グンマー)
-    following: string[];     // フォローしている数(0-)
-    followers: string[];     // フォローされている数(0-)
-    websiteUrl: string;         // ウェブサイトのURL(http://example.com)
-    avatarUrl: string;          // プロフィール画像(http://static_cdn/profile_images/0.png)
-    official: boolean;          // 公式
+    id: string;                 // 恒久ID (0-)
+    screen_name: string;             // ユーザ名(@kitten)
+    name: string;          // ユーザ登録日時
+    posts_count: number;          // 最終更新日
+    location: string;       // JWTセッショントークン(RS256_JWT_TOKEN)
+    friends: string[];
+    followers: string[];
+    url: string;
+    official: boolean;
+    profile_image_url: string;
 }
 
 export interface LoginCallback {
     id: string;                 // 恒久ID (0-)
-    userId: string;             // ユーザ名(@kitten)
-    createdDate: Date;          // ユーザ登録日時
-    updatedDate: Date;          // 最終更新日
-    sessionToken: string;       // JWTセッショントークン(RS256_JWT_TOKEN)
+    screen_name: string;             // ユーザ名(@kitten)
+    name: string;          // ユーザ登録日時
+    posts_count: number;          // 最終更新日
+    location: string;       // JWTセッショントークン(RS256_JWT_TOKEN)
+    friends: string[];
+    followers: string[];
+    url: string;
+    official: boolean;
+    profile_image_url: string;
+    session_token: string;
+}
+
+export interface PostEntity {
+    urls: string[];
+    hashtags: string[];
+    user_mentions: Post[];
 }
 
 export interface Post {
-    userId: string;             // ユーザID
-    postId: string;             // 投稿ID
-    text: string;               // 投稿内容
-    createdDate: Date;          // 投稿日時
+    favorited: boolean;             // ユーザID
+    created_at: Date;             // 投稿ID
+    id: string;               // 投稿内容
+    entities: PostEntity[];          // 投稿日時
     user: User;                 // 投稿ユーザ情報
+    in_reply_to_user_id: string;
+    text: string;
+    shared: boolean;
+    shared_count: boolean;
+    in_reply_to_screen_name: string;
 }
 
 export interface ErrorResponse {
@@ -33,8 +50,4 @@ export interface ErrorResponse {
 
 export interface MessageResponse {
   message: string;
-}
-
-export interface UsersResponse {
-    users: User[];
 }

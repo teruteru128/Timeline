@@ -21,7 +21,7 @@ export class PostService {
     return new Observable<Post>(observer => {
       this.sio.connect(this.config.apiEndpoint);
       const storageData: LoginCallback = this.storageService.fetch('user');
-      const token = storageData.sessionToken;
+      const token = storageData.session_token;
       const id = storageData.id;
       this.sio.emit('authenticate', token);
       this.sio.on('authenticated').subscribe(() => {
@@ -42,9 +42,9 @@ export class PostService {
   post(text: string): Observable<any> {
     return new Observable(obs => {
       const storageData: LoginCallback = this.storageService.fetch('user');
-      const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.sessionToken);
-      const body = {'text': text};
-      this.http.post(this.config.apiEndpoint + '/v1/posts', body, {headers: header})
+      const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
+      const body = {'status': text};
+      this.http.post(this.config.apiEndpoint + '/1.0/statuses/update.json', body, {headers: header})
       .subscribe((resp: Post) => {
         obs.next(resp);
       }, (err: HttpErrorResponse) => {

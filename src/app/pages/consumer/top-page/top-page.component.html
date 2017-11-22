@@ -1,0 +1,6 @@
+<tl-header (hamburgerClicked)="openSpMenu()"></tl-header>
+<main>
+        <div class="overlay" (click)="closeSpMenu()" *ngIf="spMenuOpened"></div>
+        <tl-left-sidebar [class.spMenuOpen]="spMenuOpened" (onMenuClick)="closeSpMenu()"></tl-left-sidebar>
+        <router-outlet></router-outlet>
+</main>
