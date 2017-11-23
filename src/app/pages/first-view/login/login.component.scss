@@ -1,136 +1,3 @@
-@media screen and (min-width: 961px) {
-  #page {
-    background: #555; // Fallback
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: #444444;
-    position: relative;
-  }
-  #page:before {
-    content: '';
-    background: inherit;
-    position: absolute;
-    background: rgba(0, 0, 0, .5);
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .login {
-    z-index: 1;
-    background: #fff;
-    box-shadow: 2px 2px 24px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 32px 0;
-    .inner {
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-    }
-    .logo {
-      width: 35%;
-      height: auto;
-      object-fit: scale-down;
-      margin-bottom: 32px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      input[type=text],
-      input[type=password],
-      .submit {
-        margin: .5rem 0;
-        border: none;
-        background: none;
-        font-size: 1rem;
-        transition: 0.25s;
-      }
-
-      input[type=text]:hover,
-      input[type=password]:hover {
-        transition: .25s;
-        border-bottom: 2px solid #888;
-      }
-      .ng-invalid.ng-dirty:focus {
-        border-bottom: 2px solid crimson;
-      }
-      .ng-invalid.ng-dirty {
-        transition: .25s;
-        border-bottom: 2px solid crimson;
-      }
-      input[type=text],
-      input[type=password] {
-        outline: 0;
-        height: 2rem;
-        padding: 4px 24px;
-        border-bottom: 2px solid #eee;
-      }
-      input[type=text]:focus,
-      input[type=password]:focus {
-        transition: .25s;
-        border-bottom: 2px solid #888;
-      }
-      .submit {
-        margin-top: 1.5rem;
-        background: #01c4f6;
-        /* fallback for old browsers */
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        color: #fff;
-        font-weight: 100;
-        padding: 14px 24px;
-      }
-      .submit:hover {
-        transform: .25s;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-      }        
-      .submit:active {
-        transition: .25s;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
-      }
-      .submit-disabled {
-        transition: .25s;
-        background: #aaa;
-      }
-      .error-wrapper {
-        height: 1.5rem;
-        text-align: center;        
-        .error {
-          text-align: center;
-          transition: .25s;
-          color: #ef6277;
-          line-height: 1.5rem;
-          margin-bottom: 1rem;
-        }  
-      }
-    }
-  }
-  .newuser {
-    font-size: .9rem;
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-    color: #888;
-    line-height: 1.2rem;
-    text-decoration: none;
-    font-weight: bold;
-    a {
-      color: #888;
-    }
-  }
-}
-
-@media screen and (max-width: 640px) {
   #page {
     width: 100%;
     height: 100%;
@@ -261,5 +128,136 @@
         color: #888;
       }
     }  
+  }
+
+@media screen and (min-width: 800px) {
+  #page {
+    background: #555; // Fallback
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #444444;
+    position: relative;
+  }
+  #page:before {
+    content: '';
+    background: inherit;
+    position: absolute;
+    background: rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .login {
+    z-index: 1;
+    background: #fff;
+    box-shadow: 2px 2px 24px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 32px 0;
+    .inner {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+    }
+    .logo {
+      width: 35%;
+      height: auto;
+      object-fit: scale-down;
+      margin-bottom: 32px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      input[type=text],
+      input[type=password],
+      .submit {
+        margin: .5rem 0;
+        border: none;
+        background: none;
+        font-size: 1rem;
+        transition: 0.25s;
+      }
+
+      input[type=text]:hover,
+      input[type=password]:hover {
+        transition: .25s;
+        border-bottom: 2px solid #888;
+      }
+      .ng-invalid.ng-dirty:focus {
+        border-bottom: 2px solid crimson;
+      }
+      .ng-invalid.ng-dirty {
+        transition: .25s;
+        border-bottom: 2px solid crimson;
+      }
+      input[type=text],
+      input[type=password] {
+        outline: 0;
+        height: 2rem;
+        padding: 4px 24px;
+        border-bottom: 2px solid #eee;
+      }
+      input[type=text]:focus,
+      input[type=password]:focus {
+        transition: .25s;
+        border-bottom: 2px solid #888;
+      }
+      .submit {
+        margin-top: 1.5rem;
+        background: #01c4f6;
+        /* fallback for old browsers */
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        color: #fff;
+        font-weight: 100;
+        padding: 14px 24px;
+      }
+      .submit:hover {
+        transform: .25s;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+      }        
+      .submit:active {
+        transition: .25s;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+      }
+      .submit-disabled {
+        transition: .25s;
+        background: #aaa;
+      }
+      .error-wrapper {
+        height: 1.5rem;
+        text-align: center;        
+        .error {
+          text-align: center;
+          transition: .25s;
+          color: #ef6277;
+          line-height: 1.5rem;
+          margin-bottom: 1rem;
+        }  
+      }
+    }
+  }
+  .newuser {
+    font-size: .9rem;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #888;
+    line-height: 1.2rem;
+    text-decoration: none;
+    font-weight: bold;
+    a {
+      color: #888;
+    }
   }
 }

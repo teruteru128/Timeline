@@ -1,0 +1,19 @@
+    .timeline {
+        padding-bottom: 32px;
+    }
+    
+@media screen and (min-width: 800px) {
+    .timeline {
+        width: 80vw;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: scroll;
+        padding-top: 32px;
+    }
+
+    .timeline::-webkit-scrollbar {
+        display: none;
+    }
+}

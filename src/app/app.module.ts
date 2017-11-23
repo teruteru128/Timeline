@@ -12,9 +12,9 @@ import { FirstViewModule } from './pages/first-view/first-view.module';
 import { APP_CONFIG, APP_DI_CONFIG } from './app.config';
 import { StorageService } from './services/storage/storage.service';
 import { RouterModule } from '@angular/router';
-import { FindUserModule } from './pages/consumer/find-user/find-user.module';
 import { ConsumerModule } from './pages/consumer/consumer.module';
 import { TopPageModule } from './pages/consumer/top-page/top-page.module';
+import { UnionModule } from './pages/consumer/union/union.module';
 
 @NgModule({
   declarations: [
@@ -26,8 +26,7 @@ import { TopPageModule } from './pages/consumer/top-page/top-page.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     FirstViewModule,
-    TopPageModule,
-    FindUserModule
+    TopPageModule
   ],
   providers: [
     AuthGuard,

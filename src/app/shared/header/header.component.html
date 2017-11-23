@@ -1,6 +1,40 @@
 <header>
   <i class="menu material-icons" (click)="clicked()">menu</i>
   <div class="title">
-      <h1>Timeline Alpha</h1>      
+    <h1>Timeline Alpha</h1>
+  </div>
+
+  <div class="search-wrapper">
+    <div class="search-input-wrapper">
+      <input type="text" class="search-pc" placeholder="ユーザー検索" (blur)="onSearchBlured()" (focus)="onSearchFocused()" [(ngModel)]="searchQuery">
+    </div>
+    <i class="search-btn material-icons">search</i>
   </div>
 </header>
+<div class="search-results-wrapper" *ngIf="isUserTyping">
+  <ul class="search-results">
+    <li *ngIf="searchQuery.length === 0">
+      <span class="tips">ここに検索結果が表示されます。</span>
+    </li>
+    <li>
+      <img src="/assets/img/logo.png" alt="avatar">
+      <div class="meta">
+        <span class="name">Georges Nagaoka</span>
+        <span class="screen_name">@georgesnagaoka</span>
+        <div class="state">
+          フォローされています
+        </div>
+      </div>
+    </li>
+    <li>
+      <img src="/assets/img/logo.png" alt="avatar">
+      <div class="meta">
+        <span class="name">ｺﾞｳﾞｨｯｼｮﾇ</span>
+        <span class="screen_name">@govisshonu</span>
+        <div class="state">
+          フォローされています
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

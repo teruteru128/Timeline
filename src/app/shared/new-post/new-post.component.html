@@ -1,8 +1,8 @@
-<div class="newpost">
+<div class="newpost" *ngIf="initialized">
     <div class="post-top">
             <div class="left">
                     <!-- API -->
-                    <img src="/assets/img/logo.png" class="my-avatar" alt="USER_NAME">
+                    <img [src]="me.profile_image_url" class="avatar" [alt]="me.screen_name">
             </div>
             <div class="right">
                     <textarea
@@ -13,6 +13,7 @@
             </div>
     </div>
     <div class="post-bottom">
+        <span class="fatal">{{postError}}</span>
       <span class="inputLength" [class.tooLong]="inputText.length > 140">{{inputText.length}}</span>
       <tl-button text="投稿" [disabled]="!checkPostable()" (click)="submit()"></tl-button>
     </div>

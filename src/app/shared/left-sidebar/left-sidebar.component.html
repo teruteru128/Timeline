@@ -10,17 +10,18 @@
       </div>
     </div>
     <ul class="menu" (click)="onMenuClicked()">
-      <li class="menu-item" [routerLink]="['/']" routerLinkActive="active-item">
+      <li class="menu-item" [routerLink]="['/']" [routerLinkActiveOptions]="{exact:
+        true}" routerLinkActive="active-item">
         <i class="material-icons icon">filter_list</i>
         <span class="menu-title">タイムライン</span>
+      </li>
+      <li class="menu-item" [routerLink]="['/union']" routerLinkActive="active-item">
+        <i class="material-icons icon">call_merge</i>
+        <span class="menu-title">ユニオン</span>
       </li>
     </ul>
     <span class="category">見つける</span>
     <ul class="menu" (click)="onMenuClicked()">
-      <li class="menu-item" [routerLink]="['/finduser']" routerLinkActive="active-item">
-        <i class="material-icons icon">person</i>
-        <span class="menu-title">ユーザー</span>
-      </li>
     </ul>
   </div>
 </aside>

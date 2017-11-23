@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
+import { NewPostComponent } from './new-post.component';
+import { ButtonModule } from '../button/button.module';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    ButtonModule,
     FormsModule
   ],
   declarations: [
-    HeaderComponent
+    NewPostComponent
   ],
   exports: [
-    HeaderComponent
+    NewPostComponent
   ]
 })
-export class HeaderModule { }
+export class NewPostModule { }

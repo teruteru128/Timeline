@@ -9,6 +9,7 @@ import { PostCardModule } from '../../../shared/post-card/post-card.module';
 import { PostService } from '../../../services/rest/post/post.service';
 import { ModalService } from '../../../shared/modal/modal.service';
 import { SocketIOService } from '../../../services/socketio/socket-io.service';
+import { NewPostModule } from '../../../shared/new-post/new-post.module';
 
 @NgModule({
   imports: [
@@ -16,11 +17,11 @@ import { SocketIOService } from '../../../services/socketio/socket-io.service';
     PostCardModule,
     FormsModule,
     ButtonModule,
-    ModalModule
+    ModalModule,
+    NewPostModule
   ],
   declarations: [
-    TimelineComponent,
-    NewPostComponent
+    TimelineComponent
   ],
   exports: [
     TimelineComponent

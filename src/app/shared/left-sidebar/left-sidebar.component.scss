@@ -42,14 +42,17 @@ aside {
         display: flex;
         align-items: center;
         color: #555;
+        margin-bottom: 8px;
+        width: 85%;
+        height: 2rem;
 
         .menu-title {
             margin-left: 12px;
         }
     }
     .menu-item.active-item {
-        font-weight: bold;
-        color: #333;
+        color: #008FFE;
+        filter: drop-shadow(0 0 2px rgba(0, 143, 254, .25));
     }    
 
 }
@@ -71,3 +74,9 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+@media screen and (min-width: 800px) {
+    aside {
+        margin-top: 0;        
+    }
+}    

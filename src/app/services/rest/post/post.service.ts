@@ -17,28 +17,49 @@ export class PostService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) {}
 
-  listen(): Observable<Post> {
-    return new Observable<Post>(observer => {
-      this.sio.connect(this.config.apiEndpoint);
-      const storageData: LoginCallback = this.storageService.fetch('user');
-      const token = storageData.session_token;
-      const id = storageData.id;
-      this.sio.emit('authenticate', token);
-      this.sio.on('authenticated').subscribe(() => {
-        console.log('Streaming API connected');
-        this.sio.on(id).subscribe((dat: string) => observer.next(JSON.parse(dat)));
+    listen(): Observable<Post> {
+      return new Observable<Post>(observer => {
+        this.sio.connect(this.config.apiEndpoint);
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        const token = storageData.session_token;
+        const id = storageData.id;
+        this.sio.emit('authenticate', token);
+        this.sio.on('authenticated').subscribe(() => {
+          console.log('Streaming API connected');
+          this.sio.on(id).subscribe((dat: string) => observer.next(JSON.parse(dat)));
+        });
+        this.sio.on('unauthorized').subscribe((err) => {
+          console.error('Socket unauthorized: ' + JSON.stringify(err));
+          if (err === 'invalid jwt token' || err === 'not found') {
+            // 利用資格がないため認可情報を消去
+            this.storageService.delete('user');
+          }
+          observer.error(err);
+        });
       });
-      this.sio.on('unauthorized').subscribe((err) => {
-        console.error('Socket unauthorized: ' + JSON.stringify(err));
-        if (err === 'invalid jwt token' || err === 'not found') {
-          // 利用資格がないため認可情報を消去
-          this.storageService.delete('user');
-        }
-        observer.error(err);
+    }
+    listenUnion(): Observable<Post> {
+      return new Observable<Post>(observer => {
+        this.sio.connect(this.config.apiEndpoint);
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        const token = storageData.session_token;
+        const id = storageData.id;
+        this.sio.emit('authenticate', token);
+        this.sio.on('authenticated').subscribe(() => {
+          console.log('UNION Streaming API connected');
+          this.sio.on('union').subscribe((dat: string) => observer.next(JSON.parse(dat)));
+        });
+        this.sio.on('unauthorized').subscribe((err) => {
+          console.error('Socket unauthorized: ' + JSON.stringify(err));
+          if (err === 'invalid jwt token' || err === 'not found') {
+            // 利用資格がないため認可情報を消去
+            this.storageService.delete('user');
+          }
+          observer.error(err);
+        });
       });
-    });
-  }
-
+    }
+    
   post(text: string): Observable<any> {
     return new Observable(obs => {
       const storageData: LoginCallback = this.storageService.fetch('user');

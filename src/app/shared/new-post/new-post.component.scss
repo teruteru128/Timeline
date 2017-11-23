@@ -3,7 +3,7 @@
   width: 100%;
   .left {
     margin-right: 8px;
-    .my-avatar {
+    .avatar {
       display: block;
       width: 48px;
       height: 48px;
@@ -41,7 +41,22 @@
   color: red;
 }
 
-@media screen and (min-width: 961px) {
+.fatal {
+  font-weight: bold;
+  color: crimson;
+}
+
+.newpost {
+  width: 75vw;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 12px 24px;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
+  margin-top: 8px;
+}
+
+@media screen and (min-width: 800px) {
   .newpost {
     width: 50vw;
     max-width: 90%;
@@ -49,20 +64,5 @@
     padding: 12px 24px;
     background: #fff;
     box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
-  }
-}
-
-@media only screen and (min-width: 641px) and (max-width: 960px) {
-}
-
-@media screen and (max-width: 640px) {
-  .newpost {
-    width: 75vw;
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 12px 24px;
-    background: #fff;
-    box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
-    margin-top: 8px;
   }
 }

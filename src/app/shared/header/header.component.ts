@@ -9,6 +9,11 @@ export class HeaderComponent implements OnInit {
 
   @Output()hamburgerClicked = new EventEmitter();
 
+  spSearchOpened = false;
+  isUserTyping = false;
+
+  searchQuery = '';
+
   constructor() { }
 
   ngOnInit() {
@@ -16,6 +21,14 @@ export class HeaderComponent implements OnInit {
 
   clicked() {
     this.hamburgerClicked.emit();
+  }
+
+  onSearchFocused() {
+    this.isUserTyping = true;
+  }
+
+  onSearchBlured() {
+    this.isUserTyping = false;
   }
 
 }
