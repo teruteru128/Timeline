@@ -81,12 +81,12 @@ export class FollowService {
       });
     }
 
-    checFollowup(displayName: string): Observable<boolean> {
+    checkFollowup(displayName: string): Observable<boolean> {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
-        const id = storageData.id;
+        const myId = storageData.id;
         const token = storageData.session_token;
 
         this.http.get<User[]>(this.config.apiEndpoint + '/1.0/followers/list.json?token=' + token + '&screen_name=' + displayName)
@@ -95,7 +95,7 @@ export class FollowService {
             observer.next(false);
           } else {
             resp.map(user => {
-              if (user.id === id) {
+              if (user.id === myId) {
                 observer.next(true);
                 return;
               }

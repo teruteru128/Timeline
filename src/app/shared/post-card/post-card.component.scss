@@ -33,37 +33,18 @@
 .post-bottom {
   margin-top: 1rem;
   .icon {
-    margin-right: 24px;
+    margin-right: 18px;
     &:last-child {
       margin-right: 0;
     }
   }
 }
 
-// TODO: 後で分離
-.icon {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-}
-
-.reply {
-  background: url('/assets/img/icons/reply.svg') no-repeat 100%;
-}
-
-.share {
-  background: url('/assets/img/icons/share.svg') no-repeat 100%;
-}
-
-.like {
-  background: url('/assets/img/icons/like.svg') no-repeat 100%;
-}
-
 .card {
   width: 75vw;
   max-width: 90%;
   margin: 18px auto 0 auto;
-  padding: 12px 24px;
+  padding: 12px 18px;
   background: #fff;
   box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
   .post-top {
@@ -103,15 +84,18 @@
 }
 
 .reaction {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
   transition: .25s;
   cursor: pointer;
-  color: #888;
-  margin-right: 4px;
+  fill: #888;
+  margin-right: 6px;
 }
 
 .reaction:hover {
   transition: .25s;
-  color: #333;
+  fill: #333;
 }
 
 .reaction:active {
@@ -124,7 +108,7 @@
     width: 50vw;
     max-width: 90%;
     margin: 32px auto 0 auto;
-    padding: 12px 24px;
+    padding: 12px 18px;
     background: #fff;
     box-shadow: rgba(0, 0, 0, .25) 0 4px 8px;
   }

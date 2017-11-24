@@ -30,6 +30,9 @@ export class UserService {
       const storageData: LoginCallback = this.storageService.fetch('user');
       this.http.get<User>(this.config.apiEndpoint + '/1.0/users/show.json?token=' + storageData.session_token + '&screen_name=' + userId)
         .subscribe(resp => {
+          if (resp.profile_image_url === '') {
+            resp.profile_image_url = '/assets/img/logo.png';
+          }
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err.error);
@@ -63,6 +66,26 @@ export class UserService {
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err.error);
+        });
+    });
+  }
+
+  searchUser(query): Observable<User[]> {
+    return new Observable<User[]>(obs => {
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      this.http.get<User[]>(this.config.apiEndpoint + '/1.0/search/user.json?token=' + storageData.session_token + '&query=' + query)
+      .subscribe((resp: User[]) => {
+          if (resp.length !== 0) {
+            resp = resp.map(user => {
+              if (user.profile_image_url === '') {
+                user.profile_image_url = '/assets/img/logo.png';
+                return user;
+              }
+              obs.next(resp);
+            });
+          }
+        }, (err: HttpErrorResponse) => {
+          obs.error(err);
         });
     });
   }

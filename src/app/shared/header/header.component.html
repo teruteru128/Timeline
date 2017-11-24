@@ -1,4 +1,4 @@
-<header>
+<header *ngIf="initialized">
   <i class="menu material-icons" (click)="clicked()">menu</i>
   <div class="title">
     <h1>Timeline Alpha</h1>
@@ -6,34 +6,27 @@
 
   <div class="search-wrapper">
     <div class="search-input-wrapper">
-      <input type="text" class="search-pc" placeholder="ユーザー検索" (blur)="onSearchBlured()" (focus)="onSearchFocused()" [(ngModel)]="searchQuery">
+      <input type="text" class="search-pc" placeholder="ユーザー検索"
+      (blur)="onSearchBlured()" (focus)="onSearchFocused()"
+      [(ngModel)]="searchQuery" (ngModelChange)="onQueryChange($event)">
     </div>
     <i class="search-btn material-icons">search</i>
   </div>
 </header>
 <div class="search-results-wrapper" *ngIf="isUserTyping">
   <ul class="search-results">
-    <li *ngIf="searchQuery.length === 0">
+    <li *ngIf="foundUsers.length === 0">
       <span class="tips">ここに検索結果が表示されます。</span>
     </li>
-    <li>
-      <img src="/assets/img/logo.png" alt="avatar">
+    <li *ngFor="let user of foundUsers; let i = index" (click)="navigateProfile(user.screen_name)">
+      <img [src]="user.profile_image_url" class="avatar" [alt]="user.screen_name">
       <div class="meta">
-        <span class="name">Georges Nagaoka</span>
-        <span class="screen_name">@georgesnagaoka</span>
-        <div class="state">
-          フォローされています
-        </div>
-      </div>
-    </li>
-    <li>
-      <img src="/assets/img/logo.png" alt="avatar">
-      <div class="meta">
-        <span class="name">ｺﾞｳﾞｨｯｼｮﾇ</span>
-        <span class="screen_name">@govisshonu</span>
-        <div class="state">
-          フォローされています
-        </div>
+        <span class="name">{{user.name}}</span>
+        <span class="screen_name">@{{user.screen_name}}</span>
+        <div class="state" *ngIf="myData.screen_name !== user.screen_name">
+            <span *ngIf="userFollowing[i]; else notFollowing">フォローされています</span>
+            <ng-template #notFollowing>フォローされていません</ng-template>
+          </div>
       </div>
     </li>
   </ul>

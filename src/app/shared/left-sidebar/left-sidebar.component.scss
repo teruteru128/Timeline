@@ -1,7 +1,7 @@
 aside {
     border-right: 1.25px solid #eee;
     width: 210px;
-    height: calc(100% - 48px);
+    height: 100%;
 }
 
 .inner {
@@ -21,13 +21,18 @@ aside {
         margin-right: 14px;
         object-fit: scale-down;        
     }
-    .display {
-        font-size: 1.2rem;
+    .name {
+        display: flex;
+        flex-direction: column;
+        .display {
+            font-size: 1.2rem;
+        }
+        .id {
+            font-size: .9rem;
+            color: #aaa;
+        }
     }
-    .id {
-        font-size: .9rem;
-        color: #aaa;
-    }
+
 }
 
 .menu {

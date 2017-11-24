@@ -35,10 +35,6 @@ export class LeftSidebarComponent implements OnInit {
     const userId = storage.screen_name;
     this.userService.getUserById(userId).subscribe(user => {
       this.user = user;
-      if (this.user.profile_image_url === '') {
-        this.user.profile_image_url = '/assets/img/logo.png';
-        this.initialized = true;
-      }
       this.initialized = true;
     });
   }
