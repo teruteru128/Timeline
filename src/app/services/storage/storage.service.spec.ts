@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { StorageService } from './storage.service';
+import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
 
 describe('StorageService', () => {
   const STORAGE_KEY = 'sessionToken';
@@ -8,7 +9,10 @@ describe('StorageService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [StorageService]
+      providers: [
+        StorageService,
+        { provide: APP_CONFIG, useValue: APP_DI_CONFIG }
+      ]
     });
 
     let store = {};
@@ -37,7 +41,7 @@ describe('StorageService', () => {
   it('fetch', inject([StorageService], (service: StorageService) => {
     const v = {'key': 'value'};
     const sv = JSON.stringify(v);
-    localStorage.setItem('key', sv);
+    service.store('key', v);
     const r = service.fetch('key');
     expect(JSON.stringify(r)).toBe(sv);
   }));

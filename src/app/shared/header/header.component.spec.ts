@@ -7,6 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
 import { StorageService } from '../../services/storage/storage.service';
 import { FollowService } from '../../services/rest/follow/follow.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -16,7 +17,8 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule
       ],
       declarations: [ HeaderComponent ],
       providers: [

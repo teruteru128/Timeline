@@ -1,6 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
+import { PostCardModule } from '../../../shared/post-card/post-card.module';
+import { UserService } from '../../../services/rest/user/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_CONFIG, APP_DI_CONFIG } from '../../../app.config';
+import { StorageService } from '../../../services/storage/storage.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PostService } from '../../../services/rest/post/post.service';
+import { SocketIOService } from '../../../services/socketio/socket-io.service';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -8,7 +16,19 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
+      imports: [
+        PostCardModule,
+        HttpClientModule,
+        RouterTestingModule
+      ],
+      declarations: [ ProfileComponent ],
+      providers: [
+        { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
+        UserService,
+        StorageService,
+        PostService,
+        SocketIOService
+      ]
     })
     .compileComponents();
   }));
@@ -17,9 +37,5 @@ describe('ProfileComponent', () => {
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../../../services/rest/models';
 import { Router } from '@angular/router';
 import { SocketIOService } from '../../../services/socketio/socket-io.service';
 import { PostService } from '../../../services/rest/post/post.service';
-import { AfterViewInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'tl-union',

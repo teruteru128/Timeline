@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TimelineComponent } from './timeline.component';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '../../../shared/button/button.module';
-import { ModalModule } from '../../../shared/modal/modal.module';
 import { PostCardModule } from '../../../shared/post-card/post-card.module';
 import { PostService } from '../../../services/rest/post/post.service';
-import { ModalService } from '../../../shared/modal/modal.service';
 import { NewPostModule } from '../../../shared/new-post/new-post.module';
 import {SocketIOService} from '../../../services/socketio/socket-io.service';
 
@@ -16,7 +14,6 @@ import {SocketIOService} from '../../../services/socketio/socket-io.service';
     PostCardModule,
     FormsModule,
     ButtonModule,
-    ModalModule,
     NewPostModule
   ],
   declarations: [
@@ -27,8 +24,7 @@ import {SocketIOService} from '../../../services/socketio/socket-io.service';
   ],
   providers: [
     PostService,
-    SocketIOService,
-    ModalService
+    SocketIOService
   ]
 })
 export class TimelineModule { }

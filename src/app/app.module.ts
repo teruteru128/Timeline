@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth/auth.guard';
-import { ProfileModalComponent } from './modal/profile-modal/profile-modal.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FirstViewModule } from './pages/first-view/first-view.module';
 import { APP_CONFIG, APP_DI_CONFIG } from './app.config';
@@ -13,8 +12,7 @@ import { TopPageModule } from './pages/consumer/top-page/top-page.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProfileModalComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +26,6 @@ import { TopPageModule } from './pages/consumer/top-page/top-page.module';
     {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
     StorageService
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    ProfileModalComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

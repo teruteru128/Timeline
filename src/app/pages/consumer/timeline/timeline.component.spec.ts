@@ -12,7 +12,6 @@ import { NewPostComponent } from '../../../shared/new-post/new-post.component';
 import { ButtonModule } from '../../../shared/button/button.module';
 import { Observable } from 'rxjs/Observable';
 import { Post, User } from '../../../services/rest/models';
-import { ModalModule } from '../../../shared/modal/modal.module';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TimelineComponent', () => {
@@ -25,7 +24,6 @@ describe('TimelineComponent', () => {
         PostCardModule,
         FormsModule,
         HttpClientTestingModule,
-        ModalModule,
         ButtonModule,
         RouterTestingModule
       ],

@@ -4,6 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { StorageService } from '../../services/storage/storage.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
 
 describe('AuthGuard Not Logged in', () => {
   const router = {
@@ -17,7 +18,8 @@ describe('AuthGuard Not Logged in', () => {
       providers: [
         AuthGuard,
         {provide: Router, useValue: router},
-        {provide: StorageService, useClass: StorageServiceMock}
+        {provide: StorageService, useClass: StorageServiceMock},
+        { provide: APP_CONFIG, useValue: APP_DI_CONFIG }
       ]
     });
   });
@@ -52,7 +54,8 @@ describe('AuthGuard Already Logged in', () => {
       providers: [
         AuthGuard,
         {provide: Router, useValue: router},
-        {provide: StorageService, useClass: StorageServiceMock}
+        {provide: StorageService, useClass: StorageServiceMock},
+        { provide: APP_CONFIG, useValue: APP_DI_CONFIG }
       ]
     });
   });
@@ -66,7 +69,7 @@ describe('AuthGuard Already Logged in', () => {
   it('login || signup', inject([AuthGuard], (guard: AuthGuard) => {
     expect(guard.checkLogin('/login')).toBe(false);
     expect(guard.checkLogin('/signup')).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['']);
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   }));
   class StorageServiceMock extends StorageService {
     fetch(user: string): Object[] {

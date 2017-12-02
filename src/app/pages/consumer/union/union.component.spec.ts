@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UnionComponent } from './union.component';
-import { ModalModule } from '../../../shared/modal/modal.module';
 import { PostCardModule } from '../../../shared/post-card/post-card.module';
 import { NewPostModule } from '../../../shared/new-post/new-post.module';
 import { PostService } from '../../../services/rest/post/post.service';
@@ -19,7 +18,6 @@ describe('UnionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        ModalModule,
         NewPostModule,
         PostCardModule,
         HttpClientTestingModule,
