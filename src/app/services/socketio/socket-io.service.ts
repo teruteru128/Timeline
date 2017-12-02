@@ -8,7 +8,7 @@ export class SocketIOService {
 
   private socket;
 
-  constructor(@Inject(APP_CONFIG) private config: AppConfig) { }
+  constructor() { }
 
   connect(url: string) {
     this.socket = io(url);

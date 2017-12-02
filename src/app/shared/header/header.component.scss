@@ -34,6 +34,7 @@ header {
   text-align: center;
   h1 {
     text-align: center;
+    cursor: pointer;
   }
 }
 
@@ -145,7 +146,7 @@ header {
     }
     .search-btn {
       margin-left: -1.5rem;
-    }    
+    }
   }
   .search-results-wrapper {
     position: absolute;
@@ -186,7 +187,7 @@ header {
           color: #aaa;
         }
         img {
-          object-fit: contain;                  
+          object-fit: contain;
           width: 48px;
           height: 48px;
           margin-right: 12px;

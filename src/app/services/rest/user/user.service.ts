@@ -13,18 +13,6 @@ export class UserService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) { }
 
-    // 未実装
-  allUser(): Observable<User[]> {
-    return new Observable(obs => {
-      this.http.get<User[]>(this.config.apiEndpoint + '/1.0/users/')
-        .subscribe(resp => {
-          obs.next(resp['users']);
-        }, (err: HttpErrorResponse) => {
-          obs.error(err.error);
-        });
-    });
-  }
-
   getUserById(userId: string): Observable<User> {
     return new Observable(obs => {
       const storageData: LoginCallback = this.storageService.fetch('user');
@@ -50,7 +38,7 @@ export class UserService {
             return;
           }
 
-          this.storageService.store('user', JSON.stringify(resp));
+          this.storageService.store('user', resp);
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err.error);
@@ -73,7 +61,8 @@ export class UserService {
   searchUser(query): Observable<User[]> {
     return new Observable<User[]>(obs => {
       const storageData: LoginCallback = this.storageService.fetch('user');
-      this.http.get<User[]>(this.config.apiEndpoint + '/1.0/search/user.json?token=' + storageData.session_token + '&query=' + query)
+      const url = this.config.apiEndpoint + '/1.0/search/user.json?token=' + storageData.session_token + '&query=' + query;
+      this.http.get<User[]>(url)
       .subscribe((resp: User[]) => {
           if (resp.length !== 0) {
             resp = resp.map(user => {
@@ -81,8 +70,8 @@ export class UserService {
                 user.profile_image_url = '/assets/img/logo.png';
                 return user;
               }
-              obs.next(resp);
             });
+            obs.next(resp);
           }
         }, (err: HttpErrorResponse) => {
           obs.error(err);

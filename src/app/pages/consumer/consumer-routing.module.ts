@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../../guards/auth/auth.guard';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TopPageComponent } from './top-page/top-page.component';
 import { UnionComponent } from './union/union.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
     {
         path: '',
-        canActivate: [AuthGuard],
         component: TopPageComponent,
         children: [
             {
@@ -18,6 +16,10 @@ const routes: Routes = [
             {
                 path: 'union',
                 component: UnionComponent
+            },
+            {
+                path: 'profile/:id',
+                component: ProfileComponent
             }
         ]
     }

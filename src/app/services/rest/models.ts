@@ -1,14 +1,15 @@
 export interface User {
-    id: string;                 // 恒久ID (0-)
-    screen_name: string;             // ユーザ名(@kitten)
-    name: string;          // ユーザ登録日時
-    posts_count: number;          // 最終更新日
-    location: string;       // JWTセッショントークン(RS256_JWT_TOKEN)
-    friends: string[];
-    followers: string[];
-    url: string;
-    official: boolean;
-    profile_image_url: string;
+  description: string;
+  followers: number[];
+  friends: number[];
+  id: string;
+  location: string;
+  name: string;
+  official: boolean;
+  posts_count: number;
+  profile_image_url: string;
+  url: string;
+  screen_name: string;
 }
 
 export interface LoginCallback {

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { RandomImageService } from '../random-image/random-image.service';
 import { UserService } from '../../../services/rest/user/user.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import { MessageResponse } from '../../../services/rest/models';
 
 @Component({
   selector: 'tl-signup',
@@ -39,10 +41,10 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.service.signup(this.form.id, this.form.mail, this.form.password)
-      .subscribe(res => {
+      .subscribe((res: MessageResponse) => {
         this.formErr = false;
-        this.router.navigate(['/login']);
-      }, err => {
+        this.router.navigate(['/login', res]);
+      }, (err: HttpErrorResponse) => {
         this.formErr = true;
         this.idField.nativeElement.focus();
         this.form = {

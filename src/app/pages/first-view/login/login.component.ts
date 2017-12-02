@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@an
 import { Router } from '@angular/router';
 import { RandomImageService } from '../random-image/random-image.service';
 import { UserService } from '../../../services/rest/user/user.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'tl-login',
@@ -38,10 +39,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.service.login(this.form.id, this.form.password)
-    .subscribe(res => {
+    .subscribe(_ => {
       this.formErr = false;
       this.router.navigate(['']);
-    }, err => {
+    }, (err: HttpErrorResponse) => {
       this.formErr = true;
       this.idField.nativeElement.focus();
       this.form = {

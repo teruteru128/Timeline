@@ -4,6 +4,7 @@ import { User, LoginCallback } from '../../services/rest/models';
 import { StorageService } from '../../services/storage/storage.service';
 import { FollowService } from '../../services/rest/follow/follow.service';
 import { Observable } from 'rxjs/Observable';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'tl-header',
@@ -14,7 +15,6 @@ export class HeaderComponent implements OnInit {
 
   @Output()hamburgerClicked = new EventEmitter();
 
-  spSearchOpened = false;
   isUserTyping = false;
   initialized = false;
 
@@ -28,7 +28,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private storageService: StorageService,
-    private followService: FollowService) { }
+    private followService: FollowService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.myData = this.storageService.fetch('user');
@@ -44,19 +46,24 @@ export class HeaderComponent implements OnInit {
   }
 
   onSearchBlured() {
-    this.isUserTyping = false;
+    // すぐ閉じるとユーザがクリックできない
+    setTimeout(() => {
+      this.isUserTyping = false;
+      this.searchQuery = '';
+    }, 200);
   }
 
   onQueryChange(text: string) {
-    if (text.length === 0) {
+    if (this.searchQuery.length === 0) {
       this.foundUsers = [];
+      return;
     }
     this.userService.searchUser(text)
       .subscribe(users => {
         this.foundUsers = users;
 
         users.map((user, idx) => {
-          this.followService.checkFollowup(user.screen_name).subscribe((flag: boolean) => {
+          this.followService.checkFollowup(user.name).subscribe((flag: boolean) => {
             this.userFollowing[idx] = flag;
           });
         });
@@ -65,16 +72,9 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  isFollow(screenName: string): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      this.followService.checkFollowup(screenName).subscribe((flag: boolean) => {
-        observer.next(flag);
-      });
-    });
-  }
-
   navigateProfile(screenName: string) {
-    
+    this.router.navigate(['/profile/' + screenName]);
+
   }
 
 }
