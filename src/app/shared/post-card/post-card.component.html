@@ -14,6 +14,7 @@
     {{post.text}}
   </span>
   <div class="post-bottom">
+    <!-- 返信アイコン -->
     <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       viewBox="0 0 512 512" class="reaction" xml:space="preserve">
       <g>
@@ -21,7 +22,9 @@
             c7.132,0,14.331,0,21.578,0c95.305,0,227.772-2.396,237.359,100.701C541.847,322.408,501.086,168.968,292.497,168.968z"></path>
       </g>
     </svg>
-    <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" class="reaction" xml:space="preserve">
+    <!-- シェアアイコン -->
+    <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      viewBox="0 0 512 512" class="reaction" xml:space="preserve">
       <g>
         <path class="st0" d="M509.86,267.434c-2.785-4.717-7.858-7.613-13.338-7.613h-43.677v-108.21
           c0.014-19.402-7.962-37.293-20.698-49.971c-12.678-12.738-30.57-20.721-49.973-20.699l-194.482-0.007
@@ -36,14 +39,25 @@
           c-0.015,19.402,7.961,37.294,20.698,49.972c12.678,12.737,30.57,20.714,49.972,20.69l194.476,0.008
           c6.086,0,11.73-3.222,14.818-8.472c3.087-5.251,3.177-11.738,0.222-17.07L321.791,373.873z" style="fill: rgb(131, 138, 138);"></path>
       </g>
-      </svg>
-          <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-      viewBox="0 0 512 512" class="reaction" xml:space="preserve">
+    </svg>
+    <!-- いいねアイコン -->
+    <svg (click)="like()" *ngIf="!post.favorited; else liked" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px" y="0px" viewBox="0 0 512 512" class="reaction" xml:space="preserve">
       <g id="reply">
         <path class="st0" d="M473.984,74.248c-50.688-50.703-132.875-50.703-183.563,0c-17.563,17.547-29.031,38.891-34.438,61.391
             c-5.375-22.5-16.844-43.844-34.406-61.391c-50.688-50.703-132.875-50.703-183.563,0c-50.688,50.688-50.688,132.875,0,183.547
             l217.969,217.984l218-217.984C524.672,207.123,524.672,124.936,473.984,74.248z"></path>
       </g>
     </svg>
+    <ng-template #liked>
+        <svg (click)="dislike()" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px" y="0px" viewBox="0 0 512 512" class="reaction liked" xml:space="preserve">
+        <g id="reply">
+          <path class="st0" d="M473.984,74.248c-50.688-50.703-132.875-50.703-183.563,0c-17.563,17.547-29.031,38.891-34.438,61.391
+            c-5.375-22.5-16.844-43.844-34.406-61.391c-50.688-50.703-132.875-50.703-183.563,0c-50.688,50.688-50.688,132.875,0,183.547
+            l217.969,217.984l218-217.984C524.672,207.123,524.672,124.936,473.984,74.248z"></path>
+        </g>
+      </svg>  
+    </ng-template>
   </div>
 </div>

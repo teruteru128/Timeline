@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
 import { Observable } from 'rxjs/Observable';
-import { LoginCallback, User } from '../models';
+import { LoginCallback, User, Post } from '../models';
 
 @Injectable()
 export class FollowService {
@@ -13,7 +13,7 @@ export class FollowService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) {}
 
-    follow(displayName: string): Observable<any> {
+    follow(displayName: string): Observable<Post> {
       return new Observable(observer => {
         const storageData: LoginCallback = this.storageService.fetch('user');
         const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
@@ -22,7 +22,7 @@ export class FollowService {
         };
 
         this.http.post(this.config.apiEndpoint + '/1.0/friendships/create.json', body, {headers: header})
-        .subscribe(resp => {
+        .subscribe((resp: Post) => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
@@ -30,7 +30,7 @@ export class FollowService {
       });
     }
 
-    unfollow(displayName: string): Observable<any> {
+    unfollow(displayName: string): Observable<Post> {
       return new Observable(observer => {
         const storageData: LoginCallback = this.storageService.fetch('user');
         const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
@@ -39,7 +39,7 @@ export class FollowService {
         };
 
         this.http.post(this.config.apiEndpoint + '/1.0/friendships/destroy.json', body, {headers: header})
-        .subscribe(resp => {
+        .subscribe((resp: Post) => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);

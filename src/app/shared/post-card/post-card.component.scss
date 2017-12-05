@@ -98,9 +98,12 @@
   fill: #333;
 }
 
-.reaction:active {
-  transition: .25s;
-  color: #008FFE;
+.liked {
+  fill: crimson;  
+}
+
+.liked:hover {
+  fill: #F44336;  
 }
 
 @media screen and (min-width: 800px) {

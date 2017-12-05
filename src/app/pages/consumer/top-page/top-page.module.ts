@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FollowService } from '../../../services/rest/follow/follow.service';
-import { StorageService } from '../../../services/storage/storage.service';
 import { RouterModule } from '@angular/router';
 import { TopPageComponent } from './top-page.component';
 import { HeaderModule } from '../../../shared/header/header.module';
@@ -22,8 +20,6 @@ import { TimelineModule } from '../timeline/timeline.module';
   exports: [
   ],
   providers: [
-    FollowService,
-    StorageService
   ]
 })
 export class TopPageModule { }

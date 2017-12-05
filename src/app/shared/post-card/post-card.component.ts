@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Post } from '../../services/rest/models';
 import { DateService } from '../../services/date/date.service';
+import { LikeService } from '../../services/rest/like/like.service';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Component({
   selector: 'tl-post-card',
@@ -13,7 +15,10 @@ export class PostCardComponent implements OnInit {
   date: string;
   @Output() profileClicked: EventEmitter<Post> = new EventEmitter();
 
-  constructor(private dateService: DateService) { }
+  constructor(
+    private dateService: DateService,
+    private likeService: LikeService
+  ) { }
 
   ngOnInit() {
     this.updateDate();
@@ -30,5 +35,23 @@ export class PostCardComponent implements OnInit {
 
   profileClick() {
     this.profileClicked.emit(this.post);
+  }
+
+  like() {
+    this.likeService.like(this.post.id)
+      .subscribe((resp: Post) => {
+        this.post.favorited = true;
+      }, (err: HttpErrorResponse) => {
+        console.error(err);
+      });
+  }
+
+  dislike() {
+    this.likeService.dislike(this.post.id)
+      .subscribe((resp: Post) => {
+        this.post.favorited = false;
+      }, (err: HttpErrorResponse) => {
+        console.error(err);
+      });
   }
 }

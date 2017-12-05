@@ -18,7 +18,7 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private postService: PostService,
     private storageService: StorageService,
-    private router: Router) { }
+    private router: Router) {}
 
   ngOnInit() {
     const user: LoginCallback = this.storageService.fetch('user');

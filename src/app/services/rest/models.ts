@@ -33,7 +33,7 @@ export interface PostEntity {
 }
 
 export interface Post {
-    favorited: boolean;             // ユーザID
+    favorited_ids: string[];             // ユーザID
     created_at: Date;             // 投稿ID
     id: string;               // 投稿内容
     entities: PostEntity[];          // 投稿日時
@@ -43,6 +43,7 @@ export interface Post {
     shared: boolean;
     shared_count: boolean;
     in_reply_to_screen_name: string;
+    favorited: boolean;
 }
 
 export interface ErrorResponse {

@@ -7,6 +7,7 @@ import { StorageService } from '../../storage/storage.service';
 import {observable} from 'rxjs/symbol/observable';
 import {Subject} from 'rxjs/Subject';
 import { WebSocketService } from '../../websocket/web-socket.service';
+import { LikeService } from '../like/like.service';
 
 @Injectable()
 export class PostService {
@@ -17,7 +18,8 @@ export class PostService {
     private http: HttpClient,
     @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService,
-    private wsService: WebSocketService) {
+    private wsService: WebSocketService,
+    private likeService: LikeService) {
     }
 
     private url(endpoint: string): string {
@@ -34,6 +36,9 @@ export class PostService {
           if (post.user.profile_image_url === '') {
             post.user.profile_image_url = '/assets/img/logo.png';
           }
+
+          post.favorited = this.likeService.isLiked(post);
+
           observer.next(post);
         });
       });
@@ -46,6 +51,9 @@ export class PostService {
           if (post.user.profile_image_url === '') {
             post.user.profile_image_url = '/assets/img/logo.png';
           }
+
+          post.favorited = this.likeService.isLiked(post);
+
           observer.next(post);
       });
     });
@@ -77,6 +85,9 @@ export class PostService {
               if (post.user.profile_image_url === '') {
                 post.user.profile_image_url = '/assets/img/logo.png';
               }
+
+              post.favorited = this.likeService.isLiked(post);
+
               return post;
             }).reverse();
           }
@@ -98,6 +109,9 @@ export class PostService {
               if (post.user.profile_image_url === '') {
                 post.user.profile_image_url = '/assets/img/logo.png';
               }
+
+              post.favorited = this.likeService.isLiked(post);
+
               return post;
             });
           }

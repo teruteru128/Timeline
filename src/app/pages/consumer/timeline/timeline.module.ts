@@ -4,7 +4,6 @@ import { TimelineComponent } from './timeline.component';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '../../../shared/button/button.module';
 import { PostCardModule } from '../../../shared/post-card/post-card.module';
-import { PostService } from '../../../services/rest/post/post.service';
 import { NewPostModule } from '../../../shared/new-post/new-post.module';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { NewPostModule } from '../../../shared/new-post/new-post.module';
     TimelineComponent
   ],
   providers: [
-    PostService
   ]
 })
 export class TimelineModule { }

@@ -7,6 +7,7 @@ import { APP_CONFIG, APP_TEST_DI_CONFIG } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
 import { User, Post, LoginCallback } from '../models';
 import { WebSocketService } from '../../websocket/web-socket.service';
+import { LikeService } from '../like/like.service';
 
 describe('PostService', () => {
   beforeEach(() => {
@@ -18,7 +19,8 @@ describe('PostService', () => {
         { provide: APP_CONFIG, useValue: APP_TEST_DI_CONFIG },
         PostService,
         StorageService,
-        WebSocketService
+        WebSocketService,
+        LikeService
       ]
     });
   });
