@@ -7,9 +7,20 @@
       <span class="meta">{{user.description}}</span>
     </div>
 
-    <div class="header-badge badge-edit">
+    <div class="header-badge badge-edit"
+    *ngIf="myname === user.screen_name; else otherUser">
       <i class="material-icons">edit</i>
     </div>
+    <ng-template #otherUser>
+      <div class="header-badge badge-follow" (click)="follow()" *ngIf="!isFollow; else following">
+          <i class="material-icons">add</i>          
+      </div>
+      <ng-template #following>
+          <div class="header-badge badge-follow" (click)="unfollow()">
+              <i class="material-icons">remove</i>          
+          </div>    
+      </ng-template>          
+    </ng-template>
   </header>
 
   <section class="timeline" *ngIf="initialized">

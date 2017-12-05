@@ -37,13 +37,13 @@ tl-left-sidebar {
         width: 100%;
         height: calc(100% - 48px);
         margin-top: 0;
-        margin-left: 210px;     
       }
 
       tl-left-sidebar {
-        position: fixed;
+        position: initial;
         left: 0;
         top: 48px;
+        margin-right: 210px;
         background: #fff;
         height: 100%;
     }    

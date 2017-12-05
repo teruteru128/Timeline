@@ -15,16 +15,13 @@ export class FollowService {
 
     follow(displayName: string): Observable<any> {
       return new Observable(observer => {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
-        const token = storageData.session_token;
-        headers.append('Authorization', 'Bearer ' + token);
+        const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
         const body = {
-          'user_id': storageData.id
+          'screen_name': displayName
         };
 
-        this.http.put(this.config.apiEndpoint + '/1.0/friendships/create.json', body, {headers: headers})
+        this.http.post(this.config.apiEndpoint + '/1.0/friendships/create.json', body, {headers: header})
         .subscribe(resp => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -35,16 +32,13 @@ export class FollowService {
 
     unfollow(displayName: string): Observable<any> {
       return new Observable(observer => {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
         const storageData: LoginCallback = this.storageService.fetch('user');
-        const token = storageData.session_token;
-        headers.append('Authorization', 'Bearer ' + token);
+        const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
         const body = {
-          'user_id': storageData.id
+          'screen_name': displayName
         };
 
-        this.http.put(this.config.apiEndpoint + '/1.0/friendships/destroy.json', body, {headers: headers})
+        this.http.post(this.config.apiEndpoint + '/1.0/friendships/destroy.json', body, {headers: header})
         .subscribe(resp => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -61,10 +55,9 @@ export class FollowService {
         const token = storageData.session_token;
         const id = storageData.id;
         const displayName = storageData.screen_name;
-        this.http.get<User[]>(this.config.apiEndpoint + '/1.0/friends/list.json?token=' + token + '&screen_name=' + to)
+        this.http.get<User[]>(this.config.apiEndpoint + '/1.0/friends/list.json?token=' + token + '&screen_name=' + storageData.screen_name)
         .subscribe((resp: User[]) => {
-
-          if (resp.length === 0) {
+          if (resp === null) {
             observer.next(false);
           } else {
             resp.map(user => {
@@ -81,7 +74,7 @@ export class FollowService {
       });
     }
 
-    checkFollowup(displayName: string): Observable<boolean> {
+    checkFollowers(displayName: string): Observable<boolean> {
       return new Observable(observer => {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
@@ -91,8 +84,8 @@ export class FollowService {
 
         this.http.get<User[]>(this.config.apiEndpoint + '/1.0/followers/list.json?token=' + token + '&screen_name=' + displayName)
         .subscribe((resp: User[]) => {
-          if (resp.length === 0) {
-            observer.next(false);
+          if (resp === null) {
+          observer.next(false);
           } else {
             resp.map(user => {
               if (user.id === myId) {

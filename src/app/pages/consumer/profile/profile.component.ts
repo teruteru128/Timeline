@@ -1,8 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import { UserService } from '../../../services/rest/user/user.service';
-import {Post, User} from '../../../services/rest/models';
+import {Post, User, LoginCallback} from '../../../services/rest/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostService} from '../../../services/rest/post/post.service';
+import { StorageService } from '../../../services/storage/storage.service';
+import { FollowService } from '../../../services/rest/follow/follow.service';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Component({
   selector: 'tl-profile',
@@ -15,12 +18,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private postService: PostService
+    private postService: PostService,
+    private storageService: StorageService,
+    private followService: FollowService
   ) { }
 
   user: User;
   posts: Post[] = [];
   initialized = false;
+  myname: string;
+  isFollow: boolean;
 
   ngOnInit() {
     this.route.paramMap
@@ -30,6 +37,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .subscribe(user => {
             this.user = user;
             this.getPosts(user.screen_name);
+
+            const storage = this.storageService.fetch('user') as LoginCallback;
+            this.myname = storage.screen_name;
+
+            this.followService.checkFollowing(id)
+              .subscribe((flag: boolean) => {
+                this.isFollow = flag;
+              });
             this.initialized = true;
           });
       });
@@ -48,6 +63,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   openProfile(event: Post) {
     this.router.navigate(['/profile/' + event.user.screen_name]);
+  }
+
+  follow() {
+    this.followService.follow(this.user.screen_name)
+      .subscribe(resp => {
+        this.isFollow = !this.isFollow;
+      }, (err: HttpErrorResponse) => {
+        console.error(err);
+      });
+  }
+
+  unfollow() {
+    this.followService.unfollow(this.user.screen_name)
+      .subscribe(resp => {
+        this.isFollow = !this.isFollow;
+      }, (err: HttpErrorResponse) => {
+        console.error(err);
+      });
   }
 
 }

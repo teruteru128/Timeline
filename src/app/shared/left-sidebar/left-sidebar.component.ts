@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class LeftSidebarComponent implements OnInit {
 
   user: User;
-  @ViewChild('fileTag') filetag: ElementRef;
   path: string;
 
   @Output()onMenuClick = new EventEmitter();

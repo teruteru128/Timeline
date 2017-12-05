@@ -1,9 +1,7 @@
 <aside *ngIf="initialized">
   <div class="inner">
     <div class="profile">
-        <input type="file" id="upload-avatar" #fileTag (change)="uploadAvatar($event)" class="file" accept="image/*">            
       <img src="{{user.profile_image_url}}" alt="you" class="avatar">
-      <input type="text" id="upload-avatar-url">      
       <div class="name">
         <span class="display">{{user.name}}</span>
         <span class="id">@{{user.screen_name}}</span>

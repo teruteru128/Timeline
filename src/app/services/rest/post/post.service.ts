@@ -70,14 +70,37 @@ export class PostService {
       const storageData: LoginCallback = this.storageService.fetch('user');
       this.http.get<Post[]>(this.config.apiEndpoint +
           '/1.0/statuses/list.json?token=' + storageData.session_token +
-          '&screen_name=' + storageData.id)
+          '&screen_name=' + screenName)
         .subscribe((posts: Post[]) => {
-          posts = posts.map(post => {
-            if (post.user.profile_image_url === '') {
-              post.user.profile_image_url = '/assets/img/logo.png';
-            }
-            return post;
-          }).reverse();
+          if (posts !== null) {
+            posts = posts.map(post => {
+              if (post.user.profile_image_url === '') {
+                post.user.profile_image_url = '/assets/img/logo.png';
+              }
+              return post;
+            }).reverse();
+          }
+          observer.next(posts);
+        }, (err: HttpErrorResponse) => {
+          observer.error(err);
+        });
+    });
+  }
+
+  getHomePosts(): Observable<Post[]> {
+    return new Observable<Post[]>(observer => {
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      this.http.get<Post[]>(this.config.apiEndpoint +
+          '/1.0/statuses/home.json?token=' + storageData.session_token)
+        .subscribe((posts: Post[]) => {
+          if (posts !== null) {
+            posts = posts.map(post => {
+              if (post.user.profile_image_url === '') {
+                post.user.profile_image_url = '/assets/img/logo.png';
+              }
+              return post;
+            });
+          }
           observer.next(posts);
         }, (err: HttpErrorResponse) => {
           observer.error(err);

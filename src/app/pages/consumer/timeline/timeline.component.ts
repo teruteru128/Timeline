@@ -22,7 +22,7 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     const user: LoginCallback = this.storageService.fetch('user');
-    this.postService.getPosts(user.screen_name)
+    this.postService.getHomePosts()
       .subscribe((posts: Post[]) => {
         this.posts = posts;
       });

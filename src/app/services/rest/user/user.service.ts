@@ -71,8 +71,8 @@ export class UserService {
                 return user;
               }
             });
-            obs.next(resp);
           }
+          obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err);
         });
