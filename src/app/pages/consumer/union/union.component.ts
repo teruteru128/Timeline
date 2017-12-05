@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../../../services/rest/models';
 import { Router } from '@angular/router';
-import { SocketIOService } from '../../../services/socketio/socket-io.service';
 import { PostService } from '../../../services/rest/post/post.service';
 
 @Component({
@@ -35,7 +34,6 @@ export class UnionComponent implements OnInit, OnDestroy {
   }
 
     ngOnDestroy() {
-      this.postService.disconnect();
     }
 
     openProfile(event: Post) {

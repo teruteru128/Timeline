@@ -3,7 +3,6 @@ import { UserService } from '../../../services/rest/user/user.service';
 import {Post, User} from '../../../services/rest/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostService} from '../../../services/rest/post/post.service';
-import {SocketIOService} from '../../../services/socketio/socket-io.service';
 
 @Component({
   selector: 'tl-profile',
@@ -16,8 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private postService: PostService,
-    private sio: SocketIOService
+    private postService: PostService
   ) { }
 
   user: User;
@@ -38,7 +36,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sio.disconnect();
   }
 
   getPosts(screenName: string) {

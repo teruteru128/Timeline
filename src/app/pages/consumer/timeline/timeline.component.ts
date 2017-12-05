@@ -43,7 +43,6 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnDestroy() {
-    this.postService.disconnect();
   }
 
   openProfile(event: Post) {

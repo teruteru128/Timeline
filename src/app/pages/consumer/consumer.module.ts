@@ -6,6 +6,7 @@ import { TopPageModule } from './top-page/top-page.module';
 import { RouterModule } from '@angular/router';
 import { UnionModule } from './union/union.module';
 import { ProfileModule } from './profile/profile.module';
+import { WebSocketService } from '../../services/websocket/web-socket.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,9 @@ import { ProfileModule } from './profile/profile.module';
   declarations: [
   ],
   exports: [
+  ],
+  providers: [
+    WebSocketService
   ]
 })
 export class ConsumerModule { }

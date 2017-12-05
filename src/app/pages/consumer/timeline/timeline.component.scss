@@ -5,12 +5,13 @@
 @media screen and (min-width: 800px) {
   .timeline {
     width: 80vw;
-    height: 100%;
+    height: calc(100% - 48px);
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
     padding-top: 32px;
+    padding-bottom: 0;
   }
   .posts {
     padding-bottom: 64px;

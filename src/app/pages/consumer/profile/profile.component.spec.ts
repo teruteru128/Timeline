@@ -8,7 +8,6 @@ import { APP_CONFIG, APP_DI_CONFIG } from '../../../app.config';
 import { StorageService } from '../../../services/storage/storage.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PostService } from '../../../services/rest/post/post.service';
-import { SocketIOService } from '../../../services/socketio/socket-io.service';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -26,8 +25,7 @@ describe('ProfileComponent', () => {
         { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
         UserService,
         StorageService,
-        PostService,
-        SocketIOService
+        PostService
       ]
     })
     .compileComponents();

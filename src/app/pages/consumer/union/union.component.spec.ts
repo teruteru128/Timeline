@@ -5,7 +5,6 @@ import { PostCardModule } from '../../../shared/post-card/post-card.module';
 import { NewPostModule } from '../../../shared/new-post/new-post.module';
 import { PostService } from '../../../services/rest/post/post.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SocketIOService } from '../../../services/socketio/socket-io.service';
 import { APP_DI_CONFIG, APP_CONFIG } from '../../../app.config';
 import { StorageService } from '../../../services/storage/storage.service';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -26,7 +25,6 @@ describe('UnionComponent', () => {
       declarations: [ UnionComponent ],
       providers: [
         PostService,
-        SocketIOService,
         {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
         StorageService,
         UserService

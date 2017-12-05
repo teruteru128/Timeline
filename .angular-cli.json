@@ -21,8 +21,7 @@
       "prefix": "tl",
       "styles": [
         "styles.scss",
-        "reset.scss",
-        "tl-theme.scss"
+        "reset.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
