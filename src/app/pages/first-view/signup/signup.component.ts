@@ -12,7 +12,7 @@ import { MessageResponse } from '../../../services/rest/models';
 })
 export class SignupComponent implements OnInit {
 
-  @ViewChild('idField') idField: ElementRef;
+  @ViewChild('emailField') emailField: ElementRef;
 
   form = {
     id: '',
@@ -29,6 +29,7 @@ export class SignupComponent implements OnInit {
   ];
 
   formErr = false;
+  errMsg = '';
 
   constructor(
     private service: UserService,
@@ -43,15 +44,34 @@ export class SignupComponent implements OnInit {
     this.service.signup(this.form.id, this.form.mail, this.form.password)
       .subscribe((res: MessageResponse) => {
         this.formErr = false;
-        this.router.navigate(['/login', res]);
+        this.router.navigate(['/login', {callback: JSON.stringify(res)}]);
       }, (err: HttpErrorResponse) => {
         this.formErr = true;
-        this.idField.nativeElement.focus();
+        this.emailField.nativeElement.focus();
         this.form = {
           id: '',
           mail: '',
           password: ''
         };
+
+        switch (err.status) {
+          case 400: {
+            this.errMsg = '情報が正しく入力されていません。';
+            break;
+          }
+          case 409: {
+            this.errMsg = 'すでに登録されています。';
+            break;
+          }
+          case 500: {
+            this.errMsg = 'サーバー内部エラーです。';
+            break;
+          }
+          default: {
+            this.errMsg = '不明なエラーです。';
+            break;
+          }
+        }
       });
   }
 

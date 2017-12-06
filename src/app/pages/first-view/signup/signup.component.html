@@ -4,10 +4,10 @@
         <div class="inner">
             <form #loginForm="ngForm" method="post" autocomplete="off">
                 <div class="error-wrapper">
-                        <span class="error" *ngIf="formErr">エラーが発生しました。</span>                        
+                        <span class="error" *ngIf="formErr">{{errMsg}}</span>                        
                 </div>
-                <input type="email" value="" name="email" placeholder="Email" [(ngModel)]="form.mail" email required [autofocus]>
-                <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" #idField required [autofocus]>
+                <input type="email" value="" name="email" placeholder="Email" [(ngModel)]="form.mail" #emailField email required [autofocus]>
+                <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" required [autofocus]>
                 <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required [autofocus]>
                 <button (click)="onSubmit()" class="submit" [disabled]="!loginForm.form.valid" [class.submit-disabled]="!loginForm.form.valid">登録</button>
             </form>

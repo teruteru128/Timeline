@@ -11,6 +11,8 @@ import { StorageService } from '../../../services/storage/storage.service';
 import { MessageResponse } from '../../../services/rest/models';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
+import { HttpClient } from '@angular/common/http';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -63,6 +65,8 @@ describe('SignupComponent', () => {
 describe('SignupComponent Error', () => {
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
+  let httpClient: HttpClient;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -79,6 +83,7 @@ describe('SignupComponent Error', () => {
       ]
     })
     .compileComponents();
+    httpClient = TestBed.get(HttpClient);
   }));
 
   beforeEach(() => {
@@ -88,15 +93,17 @@ describe('SignupComponent Error', () => {
   });
 
   it('onSubmit', () => {
-    component.onSubmit();
-    expect(component.form.id).toBe('');
-    expect(component.form.mail).toBe('');
-    expect(component.form.password).toBe('');
+    httpClient.get('/1.0/account/signup.json').subscribe(null, (_: HttpErrorResponse) => {
+      component.onSubmit();
+      expect(component.form.id).toBe('');
+      expect(component.form.mail).toBe('');
+      expect(component.form.password).toBe('');
+    });
   });
 
   class UserServiceMock extends UserService {
-    signup(userId: string, email: string, password: string): Observable<MessageResponse> {
-      return new Observable<MessageResponse>(observer => {
+    signup(userId: string, email: string, password: string): Observable<HttpErrorResponse> {
+      return new Observable<HttpErrorResponse>(observer => {
         observer.error();
       });
     }

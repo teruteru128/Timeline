@@ -4,7 +4,7 @@
     <div class="inner">
       <form #loginForm="ngForm" method="post" autocomplete="off">
         <div class="error-wrapper">
-            <span class="error" *ngIf="formErr">ログインできません。</span>
+            <span class="error" *ngIf="formErr">{{errMsg}}</span>
           </div>
 
         <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" #idField required>
