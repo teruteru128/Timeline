@@ -6,6 +6,7 @@ import {PostService} from '../../../services/rest/post/post.service';
 import { StorageService } from '../../../services/storage/storage.service';
 import { FollowService } from '../../../services/rest/follow/follow.service';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'tl-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   user: User;
   posts: Post[] = [];
   initialized = false;
+  err = '';
   myname: string;
   isFollow: boolean;
 
@@ -46,6 +48,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.isFollow = flag;
               });
             this.initialized = true;
+          }, (err: HttpErrorResponse) => {
+            switch (err.status) {
+              case 404: {
+                this.err = 'ユーザーが見つかりません。';
+                break;
+              }
+              default: {
+                this.err = 'サーバー内部エラーです。';
+                break;
+              }
+            }
           });
       });
   }

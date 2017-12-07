@@ -5,38 +5,39 @@ import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class WebSocketService {
-  private subject: Subject < MessageEvent >;
+  private subject: Subject<MessageEvent>;
+  private ws: WebSocket;
 
-  connect(url: string): Subject < MessageEvent > {
+  connect(url: string): Subject<MessageEvent> {
     if (!this.subject) {
       this.subject = this.create(url);
     }
     return this.subject;
   }
 
-  private create(url: string): Subject < MessageEvent > {
-    const ws = new WebSocket(url);
+  private create(url: string): Subject<MessageEvent> {
+    this.ws = new WebSocket(url);
 
-    const observable = Observable.create((obs: Observer < MessageEvent >) => {
-      ws.onmessage = obs
+    const observable = Observable.create((obs: Observer <MessageEvent>) => {
+      this.ws.onmessage = obs
         .next
         .bind(obs);
-      ws.onerror = obs
+      this.ws.onerror = obs
         .error
         .bind(obs);
-      ws.onclose = obs
+      this.ws.onclose = obs
         .complete
         .bind(obs);
 
-      return ws
+      return this.ws
         .close
-        .bind(ws);
+        .bind(this.ws);
     });
 
     const observer = {
       next: (data: Object) => {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify(data));
+        if (this.ws.readyState === WebSocket.OPEN) {
+          this.ws.send(JSON.stringify(data));
         }
       }
     };

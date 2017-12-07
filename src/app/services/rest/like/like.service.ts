@@ -51,13 +51,15 @@ export class LikeService {
   isLiked(post: Post): boolean {
     const storageData: LoginCallback = this.storageService.fetch('user');
     let favorited = false;
-    post.favorited_ids.map((id: string) => {
-      if (storageData.id === id) {
-        favorited = true;
-      }
-    });
-
-    return favorited;
+    if (post.favorited_ids !== null) {
+      post.favorited_ids.map((id: string) => {
+        if (storageData.id === id) {
+          favorited = true;
+        }
+      });
+      return favorited;
+    }
+    return false;
   }
 
 }

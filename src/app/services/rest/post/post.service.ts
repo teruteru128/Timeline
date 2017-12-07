@@ -10,7 +10,7 @@ import { WebSocketService } from '../../websocket/web-socket.service';
 import { LikeService } from '../like/like.service';
 
 @Injectable()
-export class PostService {
+export class PostService extends WebSocketService {
 
   private authenticated = false;
 
@@ -20,12 +20,17 @@ export class PostService {
     private storageService: StorageService,
     private wsService: WebSocketService,
     private likeService: LikeService) {
+      super();
     }
 
     private url(endpoint: string): string {
       const storageData: LoginCallback = this.storageService.fetch('user');
       const token = storageData.session_token;
     return this.config.wsEndpoint + '/statuses/' + endpoint + '.json' + '?token=' + token;
+    }
+
+    private demoUrl(endpoint: string): string {
+    return this.config.wsEndpoint + '/demo/' + endpoint + '.json';
     }
 
     listen(): Observable<any> {
@@ -58,6 +63,19 @@ export class PostService {
       });
     });
   }
+  listenSample(): Observable<Post> {
+    return new Observable<Post>(observer => {
+      this.wsService.connect(this.demoUrl('stream'))
+      .subscribe((response: MessageEvent) => {
+        const post = JSON.parse(response.data) as Post;
+        if (post.user.profile_image_url === '') {
+          post.user.profile_image_url = '/assets/img/sample.svg';
+        }
+
+        observer.next(post);
+    });
+  });
+}
 
   post(text: string): Observable<any> {
     return new Observable(obs => {

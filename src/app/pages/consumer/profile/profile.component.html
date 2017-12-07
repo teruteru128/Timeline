@@ -1,4 +1,4 @@
-<div class="page" *ngIf="initialized">
+<div class="page" *ngIf="initialized && err === ''; else error">
   <header>
     <div class="cover">
       <img src="/assets/img/logo.png" alt="avatar" class="avatar">
@@ -29,3 +29,9 @@
     </div>
   </section>
 </div>
+
+<ng-template #error>
+  <div class="page error-page">
+    <h1>{{err}}</h1>
+  </div>
+</ng-template>

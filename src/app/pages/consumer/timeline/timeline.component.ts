@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import {LoginCallback, Post} from '../../../services/rest/models';
 import { PostService } from '../../../services/rest/post/post.service';
 import {StorageService} from '../../../services/storage/storage.service';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'tl-timeline',
@@ -13,7 +15,8 @@ import {StorageService} from '../../../services/storage/storage.service';
 })
 export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  posts: Post[];
+  posts: Post[] = [];
+  private sub: Subscription;
 
   constructor(
     private postService: PostService,
@@ -24,12 +27,14 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
     const user: LoginCallback = this.storageService.fetch('user');
     this.postService.getHomePosts()
       .subscribe((posts: Post[]) => {
-        this.posts = posts;
+        if (posts !== null) {
+          this.posts = posts;
+        }
       });
   }
 
   getStream() {
-    this.postService.listen()
+    this.sub = this.postService.listen()
       .subscribe((post: Post) => {
         this.posts.unshift(post);
       }, err => {
@@ -43,6 +48,7 @@ export class TimelineComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   openProfile(event: Post) {

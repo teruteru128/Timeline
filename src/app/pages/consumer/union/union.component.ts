@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../../../services/rest/models';
 import { Router } from '@angular/router';
 import { PostService } from '../../../services/rest/post/post.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'tl-union',
@@ -13,6 +14,7 @@ export class UnionComponent implements OnInit, OnDestroy {
     posts: Post[] = [];
 
     initialized = false;
+    private sub: Subscription;
 
     constructor(
       private postService: PostService,
@@ -24,7 +26,7 @@ export class UnionComponent implements OnInit, OnDestroy {
     }
 
     checkStream() {
-      this.postService.listenUnion()
+      this.sub = this.postService.listenUnion()
       .subscribe((post: Post) => {
         this.posts.unshift(post);
         this.initialized = true;
@@ -34,6 +36,7 @@ export class UnionComponent implements OnInit, OnDestroy {
   }
 
     ngOnDestroy() {
+      this.sub.unsubscribe();
     }
 
     openProfile(event: Post) {
