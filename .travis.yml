@@ -9,4 +9,4 @@ before_script:
   - npm install -g karma
   - npm install
   - ng build --aot
-script: npm test-ci
+script: npm run test-ci
