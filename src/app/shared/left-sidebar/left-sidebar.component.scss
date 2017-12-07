@@ -3,10 +3,11 @@ aside {
     border-right: 1.25px solid #eee;
     width: 210px;
     height: 100%;
+    background: white;
 }
 
 .inner {
-    padding-top: 18px;    
+    padding-top: 48px;    
     margin-left: 18px;
 }
 
@@ -87,5 +88,8 @@ a {
 @media screen and (min-width: 800px) {
     aside {
         margin-top: 0;        
+    }
+    .inner {
+        padding-top: 18px;        
     }
 }    
