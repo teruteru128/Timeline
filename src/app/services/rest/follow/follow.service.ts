@@ -1,16 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { StorageService } from '../../storage/storage.service';
 import { Observable } from 'rxjs/Observable';
 import { LoginCallback, User, Post } from '../models';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class FollowService {
 
   constructor(
     private http: HttpClient,
-    @Inject(APP_CONFIG) private config: AppConfig,
     private storageService: StorageService) {}
 
     follow(displayName: string): Observable<Post> {
@@ -21,7 +20,7 @@ export class FollowService {
           'screen_name': displayName
         };
 
-        this.http.post(this.config.apiEndpoint + '/1.0/friendships/create.json', body, {headers: header})
+        this.http.post(environment.apiEndpoint + '/friendships/create.json', body, {headers: header})
         .subscribe((resp: Post) => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -38,7 +37,7 @@ export class FollowService {
           'screen_name': displayName
         };
 
-        this.http.post(this.config.apiEndpoint + '/1.0/friendships/destroy.json', body, {headers: header})
+        this.http.post(environment.apiEndpoint + '/friendships/destroy.json', body, {headers: header})
         .subscribe((resp: Post) => {
           observer.next(resp);
         }, (err: HttpErrorResponse) => {
@@ -55,7 +54,7 @@ export class FollowService {
         const token = storageData.session_token;
         const id = storageData.id;
         const displayName = storageData.screen_name;
-        this.http.get<User[]>(this.config.apiEndpoint + '/1.0/friends/list.json?token=' + token + '&screen_name=' + storageData.screen_name)
+        this.http.get<User[]>(environment.apiEndpoint + '/friends/list.json?token=' + token + '&screen_name=' + storageData.screen_name)
         .subscribe((resp: User[]) => {
           if (resp === null) {
             observer.next(false);
@@ -82,7 +81,7 @@ export class FollowService {
         const myId = storageData.id;
         const token = storageData.session_token;
 
-        this.http.get<User[]>(this.config.apiEndpoint + '/1.0/followers/list.json?token=' + token + '&screen_name=' + displayName)
+        this.http.get<User[]>(environment.apiEndpoint + '/followers/list.json?token=' + token + '&screen_name=' + displayName)
         .subscribe((resp: User[]) => {
           if (resp === null) {
           observer.next(false);

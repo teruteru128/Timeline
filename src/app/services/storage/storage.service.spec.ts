@@ -1,7 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { StorageService } from './storage.service';
-import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
 
 describe('StorageService', () => {
   const STORAGE_KEY = 'sessionToken';
@@ -10,8 +9,7 @@ describe('StorageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        StorageService,
-        { provide: APP_CONFIG, useValue: APP_DI_CONFIG }
+        StorageService
       ]
     });
 

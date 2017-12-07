@@ -4,7 +4,6 @@ import { AuthGuard } from './auth.guard';
 import { StorageService } from '../../services/storage/storage.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { APP_CONFIG, APP_DI_CONFIG } from '../../app.config';
 
 describe('AuthGuard Not Logged in', () => {
   const router = {
@@ -18,8 +17,7 @@ describe('AuthGuard Not Logged in', () => {
       providers: [
         AuthGuard,
         {provide: Router, useValue: router},
-        {provide: StorageService, useClass: StorageServiceMock},
-        { provide: APP_CONFIG, useValue: APP_DI_CONFIG }
+        {provide: StorageService, useClass: StorageServiceMock}
       ]
     });
   });
@@ -54,8 +52,7 @@ describe('AuthGuard Already Logged in', () => {
       providers: [
         AuthGuard,
         {provide: Router, useValue: router},
-        {provide: StorageService, useClass: StorageServiceMock},
-        { provide: APP_CONFIG, useValue: APP_DI_CONFIG }
+        {provide: StorageService, useClass: StorageServiceMock}
       ]
     });
   });

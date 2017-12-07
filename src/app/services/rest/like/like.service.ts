@@ -3,15 +3,14 @@ import { Observable } from 'rxjs/Observable';
 import { Post, LoginCallback } from '../models';
 import { StorageService } from '../../storage/storage.service';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { APP_CONFIG, AppConfig } from '../../../app.config';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class LikeService {
 
   constructor(
     private storageService: StorageService,
-    private http: HttpClient,
-    @Inject(APP_CONFIG) private config: AppConfig
+    private http: HttpClient
   ) { }
 
   like(postID: string): Observable<Post> {
@@ -22,7 +21,7 @@ export class LikeService {
         'id': postID
       };
 
-      this.http.post(this.config.apiEndpoint + '/1.0/like/create.json', body, {headers: header})
+      this.http.post(environment.apiEndpoint + '/like/create.json', body, {headers: header})
       .subscribe((resp: Post) => {
         observer.next(resp);
       }, (err: HttpErrorResponse) => {
@@ -39,7 +38,7 @@ export class LikeService {
         'id': postID
       };
 
-      this.http.post(this.config.apiEndpoint + '/1.0/like/destroy.json', body, {headers: header})
+      this.http.post(environment.apiEndpoint + '/like/destroy.json', body, {headers: header})
       .subscribe((resp: Post) => {
         observer.next(resp);
       }, (err: HttpErrorResponse) => {

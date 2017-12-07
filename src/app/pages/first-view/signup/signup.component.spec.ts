@@ -6,7 +6,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RandomImageService } from '../random-image/random-image.service';
 import { UserService } from '../../../services/rest/user/user.service';
-import { APP_CONFIG, APP_DI_CONFIG } from '../../../app.config';
 import { StorageService } from '../../../services/storage/storage.service';
 import { MessageResponse } from '../../../services/rest/models';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +25,6 @@ describe('SignupComponent', () => {
       ],
       declarations: [ SignupComponent ],
       providers: [
-        {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
         {provide: UserService, useClass: UserServiceMock},
         StorageService,
         RandomImageService
@@ -76,7 +74,6 @@ describe('SignupComponent Error', () => {
       ],
       declarations: [ SignupComponent ],
       providers: [
-        {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
         {provide: UserService, useClass: UserServiceMock},
         StorageService,
         RandomImageService
@@ -93,7 +90,7 @@ describe('SignupComponent Error', () => {
   });
 
   it('onSubmit', () => {
-    httpClient.get('/1.0/account/signup.json').subscribe(null, (_: HttpErrorResponse) => {
+    httpClient.get('/account/signup.json').subscribe(null, (_: HttpErrorResponse) => {
       component.onSubmit();
       expect(component.form.id).toBe('');
       expect(component.form.mail).toBe('');

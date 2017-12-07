@@ -4,7 +4,6 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { UserService } from './user.service';
 import { StorageService } from '../../storage/storage.service';
 import { User, LoginCallback, ErrorResponse, MessageResponse } from '../models';
-import { APP_CONFIG, APP_TEST_DI_CONFIG } from '../../../app.config';
 
 const mockErrorResponse: ErrorResponse = {
   error: 'error'
@@ -21,7 +20,6 @@ describe('UserService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        {provide: APP_CONFIG, useValue: APP_TEST_DI_CONFIG},
         UserService,
         StorageService
       ]

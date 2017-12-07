@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StorageService } from '../../services/storage/storage.service';
 import { UserService } from '../../services/rest/user/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { APP_CONFIG, APP_TEST_DI_CONFIG } from '../../app.config';
 
 describe('LeftSidebarComponent', () => {
   let component: LeftSidebarComponent;
@@ -20,8 +19,7 @@ describe('LeftSidebarComponent', () => {
       declarations: [ LeftSidebarComponent ],
       providers: [
         StorageService,
-        UserService,
-        {provide: APP_CONFIG, useValue: APP_TEST_DI_CONFIG}        
+        UserService
       ]
     })
     .compileComponents();

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FirstViewModule } from './pages/first-view/first-view.module';
-import { APP_CONFIG, APP_DI_CONFIG } from './app.config';
 import { StorageService } from './services/storage/storage.service';
 import { TopPageModule } from './pages/consumer/top-page/top-page.module';
 
@@ -23,7 +22,6 @@ import { TopPageModule } from './pages/consumer/top-page/top-page.module';
   ],
   providers: [
     AuthGuard,
-    {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
     StorageService
   ],
   bootstrap: [AppComponent]

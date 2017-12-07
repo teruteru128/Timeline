@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
       return;
     }
     this.userService.searchUser(text)
-      .subscribe(users => {
+      .subscribe((users: User[]) => {
         this.foundUsers = users;
 
         users.map((user, idx) => {

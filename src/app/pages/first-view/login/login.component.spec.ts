@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { RandomImageService } from '../random-image/random-image.service';
 import { StorageService } from '../../../services/storage/storage.service';
 import { UserService } from '../../../services/rest/user/user.service';
-import { APP_DI_CONFIG, APP_CONFIG } from '../../../app.config';
 import { Observable } from 'rxjs/Observable';
 import { LoginCallback } from '../../../services/rest/models';
 import { Router } from '@angular/router';
@@ -25,7 +24,6 @@ describe('LoginComponent', () => {
       ],
       declarations: [ LoginComponent ],
       providers: [
-        {provide: APP_CONFIG, useValue: APP_DI_CONFIG},
         UserService,
         StorageService,
         RandomImageService
