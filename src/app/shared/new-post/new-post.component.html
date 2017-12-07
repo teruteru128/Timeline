@@ -5,6 +5,7 @@
             </div>
             <div class="right">
                     <textarea
+                    (keyup)="onKeyup($event)"
                     class="post-body"
                     placeholder="今何してる？"
                     [(ngModel)]="inputText"></textarea>

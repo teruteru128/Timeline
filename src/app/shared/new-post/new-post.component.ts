@@ -18,6 +18,8 @@ export class NewPostComponent implements OnInit {
 
   me: User;
 
+  private pressedKeys = [];
+
   constructor(
     private postService: PostService,
     private userService: UserService,
@@ -52,5 +54,19 @@ export class NewPostComponent implements OnInit {
         this.postError = 'サーバーエラーです。';
         this.inputText = '';
       });
+  }
+
+  onKeyup(evt) {
+    if (this.pressedKeys.length > 2) {
+      this.pressedKeys = [];
+    }
+
+    this.pressedKeys.push(evt.code);
+
+    if (this.pressedKeys[0] === 'Enter' && this.pressedKeys[1] === 'ControlLeft') {
+      this.submit();
+    } else if (this.pressedKeys[0] === 'ControlLeft' && this.pressedKeys[1] === 'Enter') {
+      this.submit();
+    }
   }
 }
