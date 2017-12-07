@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import { UserService } from '../../../services/rest/user/user.service';
-import {Post, User, LoginCallback} from '../../../services/rest/models';
+import {Post, User, LoginCallback, EditableProfile} from '../../../services/rest/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostService} from '../../../services/rest/post/post.service';
 import { StorageService } from '../../../services/storage/storage.service';
@@ -30,7 +30,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   err = '';
   myname: string;
   isFollow: boolean;
+  editing = false;
 
+  private uploadPendingImage = '';
+
+  private currentProfile: EditableProfile;
+  newProfile: EditableProfile;
+  
   ngOnInit() {
     this.route.paramMap
       .subscribe(params => {
@@ -39,6 +45,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .subscribe(user => {
             this.user = user;
             this.getPosts(user.screen_name);
+
+            this.newProfile = {
+              name: user.name,
+              url: user.url,
+              description: user.description,
+              location: user.location
+            };
 
             const storage = this.storageService.fetch('user') as LoginCallback;
             this.myname = storage.screen_name;
@@ -94,6 +107,37 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }, (err: HttpErrorResponse) => {
         console.error(err);
       });
+  }
+
+  commitProfile() {
+    this.userService.updateProfile(this.newProfile)
+      .subscribe((resp: User) => {
+        this.user = resp;
+      }, (err: HttpErrorResponse) => {
+        console.error(err);
+      });
+      if (this.uploadPendingImage !== '') {
+        this.userService.updateProfileImage(this.uploadPendingImage)
+          .subscribe((resp: User) => {
+            this.user.profile_image_url = resp.profile_image_url;
+          }, (err: HttpErrorResponse) => {
+            console.error(err);
+          });
+      }
+  }
+
+  imageChangeListener($event) {
+    this.uploadImage($event.target);
+  }
+
+  uploadImage(value: any) {
+    const file: File = value.files[0];
+    const r: FileReader = new FileReader();
+
+    r.onloadend = (e) => {
+      this.uploadPendingImage = r.result;
+    };
+    r.readAsDataURL(file);
   }
 
 }

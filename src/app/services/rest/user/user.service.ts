@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { StorageService } from '../../storage/storage.service';
-import { User, LoginCallback, MessageResponse } from '../models';
+import { User, LoginCallback, MessageResponse, EditableProfile } from '../models';
 import { AppConfig, APP_CONFIG } from '../../../app.config';
 
 @Injectable()
@@ -72,6 +72,35 @@ export class UserService {
               }
             });
           }
+          obs.next(resp);
+        }, (err: HttpErrorResponse) => {
+          obs.error(err);
+        });
+    });
+  }
+
+  updateProfile(newProfile: EditableProfile): Observable<User> {
+    return new Observable<User>(obs => {
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
+      this.http.post<User>(this.config.apiEndpoint + '/1.0/account/settings.json', newProfile, {headers: header})
+        .subscribe((resp: User) => {
+          obs.next(resp);
+        }, (err: HttpErrorResponse) => {
+          obs.error(err);
+        });
+    });
+  }
+
+  updateProfileImage(image: string): Observable<User> {
+    const body = {
+      image: image
+    };
+    return new Observable<User>(obs => {
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      const header = new HttpHeaders().set('Authorization', 'Bearer ' + storageData.session_token);
+      this.http.post<User>(this.config.apiEndpoint + '/1.0/account/update_profile_image.json', body, {headers: header})
+        .subscribe((resp: User) => {
           obs.next(resp);
         }, (err: HttpErrorResponse) => {
           obs.error(err);

@@ -19,6 +19,17 @@
             background: rgba(0,0,0,.5);
         }
 
+        .edit {
+            input[type="text"] {
+                width: 180px;
+                text-align: center;
+                color: #fff;
+                background: none;
+                border: none;
+                border-bottom: .75px solid rgba(255,255,255,.5);
+            }
+        }
+
         .avatar {
             width: 120px;
             height: 120px;
@@ -39,6 +50,11 @@
             font-size: .75rem;
             margin-top: .5rem;
         }
+        a.meta {
+            color: #fff;
+            text-decoration: none;
+        }
+
         .header-badge {
             transition: 0.5s;            
             position: absolute;
@@ -51,7 +67,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 2px 4px 8px rgba(0, 0, 0, .5);
-            right: 64px;
+            right: 32px;
             bottom: -36px;
             i {
                 user-select: none;
@@ -109,5 +125,11 @@
 @media screen and (min-width: 800px) {
     .page {
         width: 85vw;
+        header {
+            .header-badge {
+                right: 72px;                
+            }
+        }
     }
+    
 }

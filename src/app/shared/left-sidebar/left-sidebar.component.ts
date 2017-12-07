@@ -41,4 +41,9 @@ export class LeftSidebarComponent implements OnInit {
   onMenuClicked() {
     this.onMenuClick.emit();
   }
+
+
+  openProfile() {
+    this.router.navigate(['/profile/' + this.user.screen_name]);
+  }
 }

@@ -1,10 +1,10 @@
 <aside *ngIf="initialized">
   <div class="inner">
     <div class="profile">
-      <img src="{{user.profile_image_url}}" alt="you" class="avatar">
+      <img src="{{user.profile_image_url}}" (click)="openProfile()" alt="you" class="avatar">
       <div class="name">
-        <span class="display">{{user.name}}</span>
-        <span class="id">@{{user.screen_name}}</span>
+        <span class="display" (click)="openProfile()">{{user.name}}</span>
+        <span class="id" (click)="openProfile()">@{{user.screen_name}}</span>
       </div>
     </div>
     <ul class="menu" (click)="onMenuClicked()">

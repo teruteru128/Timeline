@@ -53,3 +53,10 @@ export interface ErrorResponse {
 export interface MessageResponse {
   message: string;
 }
+
+export interface EditableProfile {
+    name: string;
+    url: string;
+    description: string;
+    location: string;
+}
