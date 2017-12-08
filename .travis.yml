@@ -5,12 +5,13 @@ before_script:
   - 'export DISPLAY=:99.0'
   - sh -e /etc/init.d/xvfb start
   - sleep 3
-  - npm install -g @angular/cli
-  - npm install -g karma
-  - npm install
+  - export PATH="$PATH:`yarn global bin`"
+  - yarn global add @angular/cli
+  - yarn global add karma
+  - yarn
   - ng build --aot
-script: npm run test-ci
-after_success: npm run build
+script: yarn test-ci
+after_success: yarn build
 deploy:
   provider: pages
   skip_cleanup: true
