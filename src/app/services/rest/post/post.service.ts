@@ -10,16 +10,15 @@ import { LikeService } from '../like/like.service';
 import { environment } from '../../../../environments/environment';
 
 @Injectable()
-export class PostService extends WebSocketService {
+export class PostService {
 
   private authenticated = false;
-
+  
   constructor(
     private http: HttpClient,
     private storageService: StorageService,
     private wsService: WebSocketService,
     private likeService: LikeService) {
-      super();
     }
 
     private url(endpoint: string): string {
@@ -61,19 +60,6 @@ export class PostService extends WebSocketService {
           observer.next(post);
       });
     });
-  }
-  listenSample(): Observable<Post> {
-    return new Observable<Post>(observer => {
-      this.wsService.connect(this.demoUrl('stream'))
-      .subscribe((response: MessageEvent) => {
-        const post = JSON.parse(response.data) as Post;
-        if (post.user.profile_image_url === '') {
-          post.user.profile_image_url = '/assets/img/sample.svg';
-        }
-
-        observer.next(post);
-    });
-  });
 }
 
   post(text: string): Observable<any> {

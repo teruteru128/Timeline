@@ -15,6 +15,13 @@ export class WebSocketService {
     return this.subject;
   }
 
+  disconnect() {
+    if (this.subject) {
+      console.log(this.ws);
+      this.ws.close();
+    }
+  }
+
   private create(url: string): Subject<MessageEvent> {
     this.ws = new WebSocket(url);
 
