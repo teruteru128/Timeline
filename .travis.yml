@@ -10,3 +10,9 @@ before_script:
   - npm install
   - ng build --aot
 script: npm run test-ci
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
