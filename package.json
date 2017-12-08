@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build --aot --target=production",
     "test": "ng test --sourcemaps=false",
     "test-ci": "ng test --sourcemaps=false --code-coverage --single && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
