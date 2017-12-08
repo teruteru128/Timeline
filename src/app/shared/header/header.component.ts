@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
 
   searchQuery = '';
 
+  spSearching = false;
+
   constructor(
     private userService: UserService,
     private storageService: StorageService,
@@ -43,14 +45,6 @@ export class HeaderComponent implements OnInit {
 
   onSearchFocused() {
     this.isUserTyping = true;
-  }
-
-  onSearchBlured() {
-    // すぐ閉じるとユーザがクリックできない
-    setTimeout(() => {
-      this.isUserTyping = false;
-      this.searchQuery = '';
-    }, 200);
   }
 
   onQueryChange(text: string) {
@@ -73,6 +67,11 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateProfile(screenName: string) {
+    this.isUserTyping = false;
+    this.spSearching = false;
+    this.searchQuery = '';
+    this.foundUsers = [];
+
     this.router.navigate(['/profile/' + screenName]);
 
   }
