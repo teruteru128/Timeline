@@ -34,12 +34,12 @@
     font-size: 1.2rem;
     color: #555;
   }
+  .tooLong {
+    transition: 0.25s;
+    color: crimson;
+  }  
 }
 
-.tooLong {
-  transition: 0.25s;
-  color: red;
-}
 
 .fatal {
   font-weight: bold;
