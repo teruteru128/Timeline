@@ -1,23 +1,52 @@
 <header *ngIf="initialized">
   <i class="menu material-icons" (click)="clicked()">menu</i>
   <div class="title">
-    <h1 [routerLink]="['']">Timeline Alpha</h1>
+    <h1 [routerLink]="['']" *ngIf="!spSearching; else spSearchBox">Timeline Alpha</h1>
   </div>
 
-  <div class="search-wrapper">
+  <ng-template #spSearchBox>
     <div class="search-input-wrapper">
-      <input type="text" class="search-pc" placeholder="ユーザー検索"
+      <input type="text" class="search-box-sp" placeholder="ユーザー検索"
+      (focus)="onSearchFocused()"
+      [(ngModel)]="searchQuery" (ngModelChange)="onQueryChange($event)">
+    </div>
+  </ng-template>
+
+  <div class="search-wrapper search-pc">
+    <div class="search-input-wrapper">
+      <input type="text" placeholder="ユーザー検索"
       (blur)="onSearchBlured()" (focus)="onSearchFocused()"
       [(ngModel)]="searchQuery" (ngModelChange)="onQueryChange($event)">
     </div>
     <i class="search-btn material-icons">search</i>
   </div>
+
+  <div class="search-sp-wrapper">
+    <i class="search-btn material-icons" (click)="spSearching = !spSearching">search</i>    
+  </div>
 </header>
-<div class="search-results-wrapper" *ngIf="isUserTyping">
+
+<div class="search-results-wrapper " *ngIf="isUserTyping">
   <ul class="search-results">
     <li *ngIf="foundUsers.length === 0">
       <span class="tips">ここに検索結果が表示されます。</span>
     </li>
+    <li *ngFor="let user of foundUsers; let i = index" (click)="navigateProfile(user.screen_name)">
+      <img [src]="user.profile_image_url" class="avatar" [alt]="user.screen_name">
+      <div class="meta">
+        <span class="name">{{user.name}}</span>
+        <span class="screen_name">@{{user.screen_name}}</span>
+        <div class="state" *ngIf="myData.screen_name !== user.screen_name">
+            <span *ngIf="userFollowing[i]; else notFollowing">フォローされています</span>
+            <ng-template #notFollowing>フォローされていません</ng-template>
+          </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="sp-searching-wrapper" [class.sp-searching-opened]="spSearching">
+  <ul class="search-results-sp" *ngIf="spSearching">
     <li *ngFor="let user of foundUsers; let i = index" (click)="navigateProfile(user.screen_name)">
       <img [src]="user.profile_image_url" class="avatar" [alt]="user.screen_name">
       <div class="meta">

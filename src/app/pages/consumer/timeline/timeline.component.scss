@@ -4,7 +4,7 @@
 
 @media screen and (min-width: 800px) {
   .timeline {
-    width: 80vw;
+    width: calc(100vw - 210px);
     height: calc(100% - 34px);
     display: flex;
     flex-direction: column;
