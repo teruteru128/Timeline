@@ -36,7 +36,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private currentProfile: EditableProfile;
   newProfile: EditableProfile;
-  
   ngOnInit() {
     this.route.paramMap
       .subscribe(params => {
@@ -44,6 +43,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.userService.getUserById(id)
           .subscribe(user => {
             this.user = user;
+            this.followService.checkFollowing(id)
+            .subscribe((flag: boolean) => {
+              this.isFollow = flag;
+            });
             this.getPosts(user.screen_name);
 
             this.newProfile = {
@@ -56,10 +59,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             const storage = this.storageService.fetch('user') as LoginCallback;
             this.myname = storage.screen_name;
 
-            this.followService.checkFollowing(id)
-              .subscribe((flag: boolean) => {
-                this.isFollow = flag;
-              });
             this.initialized = true;
           }, (err: HttpErrorResponse) => {
             switch (err.status) {
