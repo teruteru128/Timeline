@@ -32,7 +32,7 @@ describe('AuthGuard Not Logged in', () => {
   }));
   it('root', inject([AuthGuard], (guard: AuthGuard) => {
     expect(guard.checkLogin('/')).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+    expect(router.navigate).toHaveBeenCalledWith(['/welcome']);
   }));
   it('login || signup', inject([AuthGuard], (guard: AuthGuard) => {
     expect(guard.checkLogin('/login')).toBe(true);
