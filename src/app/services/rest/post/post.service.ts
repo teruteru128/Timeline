@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
 export class PostService {
 
   private authenticated = false;
-  
+
   constructor(
     private http: HttpClient,
     private storageService: StorageService,

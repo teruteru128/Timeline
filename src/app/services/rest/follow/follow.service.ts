@@ -19,7 +19,6 @@ export class FollowService {
         const body = {
           'screen_name': displayName
         };
-
         this.http.post(environment.apiEndpoint + '/friendships/create.json', body, {headers: header})
         .subscribe((resp: Post) => {
           observer.next(resp);
