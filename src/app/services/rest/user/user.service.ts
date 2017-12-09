@@ -4,13 +4,15 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { StorageService } from '../../storage/storage.service';
 import { User, LoginCallback, MessageResponse, EditableProfile } from '../models';
 import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private router: Router) { }
 
     getUserByUserID(userID: string): Observable<User> {
       return new Observable(obs => {
@@ -124,6 +126,7 @@ export class UserService {
 
   logout() {
     this.storageService.delete('user');
+    this.router.navigate(['/login']);
   }
 
 }

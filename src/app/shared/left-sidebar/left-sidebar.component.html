@@ -23,8 +23,14 @@
         <span class="menu-title">ユニオン</span>
       </li>
     </ul>
-    <span class="category">開発中リリース</span>
+    <span class="category">アカウント</span>        
     <ul class="menu" (click)="onMenuClicked()">
+        <li class="menu-item" [routerLink]="['/logout']" routerLinkActive="active-item">
+          <i class="material-icons icon">exit_to_app</i>
+          <span class="menu-title">ログアウト</span>
+        </li>  
     </ul>
+
+    <span class="category">開発中リリース</span>    
   </div>
 </aside>
