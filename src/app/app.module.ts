@@ -9,6 +9,9 @@ import { FirstViewModule } from './pages/first-view/first-view.module';
 import { StorageService } from './services/storage/storage.service';
 import { TopPageModule } from './pages/consumer/top-page/top-page.module';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +21,8 @@ import { TopPageModule } from './pages/consumer/top-page/top-page.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     FirstViewModule,
-    TopPageModule
+    TopPageModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     AuthGuard,
