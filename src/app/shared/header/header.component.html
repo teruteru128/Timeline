@@ -15,7 +15,7 @@
   <div class="search-wrapper search-pc">
     <div class="search-input-wrapper">
       <input type="text" placeholder="ユーザー検索"
-      (blur)="onSearchBlured()" (focus)="onSearchFocused()"
+      (focus)="onSearchFocused()"
       [(ngModel)]="searchQuery" (ngModelChange)="onQueryChange($event)">
     </div>
     <i class="search-btn material-icons">search</i>
