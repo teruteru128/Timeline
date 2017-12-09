@@ -4,6 +4,7 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { UserService } from './user.service';
 import { StorageService } from '../../storage/storage.service';
 import { User, LoginCallback, ErrorResponse, MessageResponse } from '../models';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const mockErrorResponse: ErrorResponse = {
   error: 'error'
@@ -17,7 +18,8 @@ describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule
       ],
       providers: [
         UserService,
