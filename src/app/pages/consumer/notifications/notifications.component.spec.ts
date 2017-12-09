@@ -8,6 +8,7 @@ import { UserService } from '../../../services/rest/user/user.service';
 import { PostService } from '../../../services/rest/post/post.service';
 import { WebSocketService } from '../../../services/websocket/web-socket.service';
 import { LikeService } from '../../../services/rest/like/like.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NotificationsComponent', () => {
   let component: NotificationsComponent;
@@ -16,7 +17,8 @@ describe('NotificationsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule
       ],
       declarations: [ NotificationsComponent ],
       providers: [

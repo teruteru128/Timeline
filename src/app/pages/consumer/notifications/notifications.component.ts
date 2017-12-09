@@ -3,6 +3,7 @@ import {EventService} from '../../../services/rest/event/event.service';
 import {APIEvent, User, Post} from '../../../services/rest/models';
 import {UserService} from '../../../services/rest/user/user.service';
 import {PostService} from '../../../services/rest/post/post.service';
+import { Router } from '@angular/router';
 
 @Component({selector: 'tl-notifications', templateUrl: './notifications.component.html', styleUrls: ['./notifications.component.scss']})
 export class NotificationsComponent implements OnInit {
@@ -12,7 +13,8 @@ export class NotificationsComponent implements OnInit {
 
   constructor(private eventService: EventService,
     private userService: UserService,
-    private postService: PostService) {}
+    private postService: PostService,
+    private router: Router) {}
 
   ngOnInit() {
     this
@@ -67,5 +69,9 @@ export class NotificationsComponent implements OnInit {
         }
 
       });
+  }
+
+  profileClick(user: User) {
+    this.router.navigate(['/profile/' + user.screen_name]);
   }
 }
