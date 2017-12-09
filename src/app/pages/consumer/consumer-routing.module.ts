@@ -4,6 +4,7 @@ import { TopPageComponent } from './top-page/top-page.component';
 import { UnionComponent } from './union/union.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
             {
                 path: 'notify',
                 component: NotificationsComponent
+            },
+            {
+                path: 'logout',
+                component: LogoutComponent
             },
             {
                 path: 'profile/:id',

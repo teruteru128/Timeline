@@ -12,6 +12,7 @@ import { StorageService } from '../../services/storage/storage.service';
 import { PostService } from '../../services/rest/post/post.service';
 import { FollowService } from '../../services/rest/follow/follow.service';
 import { NotificationsModule } from './notifications/notifications.module';
+import { LogoutModule } from './logout/logout.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { NotificationsModule } from './notifications/notifications.module';
     RouterModule,
     UnionModule,
     ProfileModule,
-    NotificationsModule
+    NotificationsModule,
+    LogoutModule
   ],
   declarations: [
   ],

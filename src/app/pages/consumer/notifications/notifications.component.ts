@@ -63,7 +63,7 @@ export class NotificationsComponent implements OnInit {
           this.initialized = true;
           this.events = events;
         } else {
-          this.initialized = true;          
+          this.initialized = true;
         }
 
       });
