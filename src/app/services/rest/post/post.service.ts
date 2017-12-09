@@ -60,7 +60,7 @@ export class PostService {
           observer.next(post);
       });
     });
-}
+  }
 
   post(text: string): Observable<any> {
     return new Observable(obs => {
@@ -119,6 +119,24 @@ export class PostService {
             });
           }
           observer.next(posts);
+        }, (err: HttpErrorResponse) => {
+          observer.error(err);
+        });
+    });
+  }
+
+  getPost(postId: string): Observable<Post> {
+    return new Observable<Post>(observer => {
+      const storageData: LoginCallback = this.storageService.fetch('user');
+      this.http.get<Post>(environment.apiEndpoint +
+          '/statuses/single.json?token=' + storageData.session_token + '&id=' + postId)
+        .subscribe((post: Post) => {
+              if (post.user.profile_image_url === '') {
+                post.user.profile_image_url = '/assets/img/logo.png';
+              }
+
+              post.favorited = this.likeService.isLiked(post);
+          observer.next(post);
         }, (err: HttpErrorResponse) => {
           observer.error(err);
         });

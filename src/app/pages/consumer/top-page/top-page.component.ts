@@ -23,7 +23,7 @@ export class TopPageComponent implements OnInit {
     // ユーザーが存在するか確認する
     const storage = this.storageService.fetch('user') as LoginCallback;
     const userId = storage.screen_name;
-    this.userService.getUserById(userId).subscribe(user => {
+    this.userService.getUserByScreenName(userId).subscribe(user => {
     }, err => {
       // ユーザーが有効ではない
       console.error('アカウントが凍結されています。ご利用を続行できません。');

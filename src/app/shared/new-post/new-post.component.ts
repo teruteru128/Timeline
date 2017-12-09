@@ -28,7 +28,7 @@ export class NewPostComponent implements OnInit {
   ngOnInit() {
     const storage = this.storageService.fetch('user') as LoginCallback;
     const userId = storage.screen_name;
-    this.userService.getUserById(userId).subscribe(user => {
+    this.userService.getUserByScreenName(userId).subscribe(user => {
       this.me = user;
       this.initialized = true;
     });
