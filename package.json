@@ -41,7 +41,8 @@
     "ts-node": "~3.2.0",
     "uikit": "^3.0.0-beta.35",
     "web-animations-js": "^2.3.1",
-    "zone.js": "^0.8.18"
+    "zone.js": "^0.8.18",
+    "typescript": ">=2.4.2 <2.5.0"    
   },
   "devDependencies": {
     "@angular/cli": "^1.6.0",
@@ -61,7 +62,6 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "mock-socket": "^7.0.0",
     "protractor": "~5.1.2",
-    "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "tslint": "~5.7.0"
   }
 }

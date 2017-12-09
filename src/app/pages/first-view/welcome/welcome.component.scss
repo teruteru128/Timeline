@@ -33,9 +33,20 @@ header {
     header {
         padding-top: 18px;
         align-items: center;
-        justify-content: center;
-        .right {
+        justify-content: space-between;
+        .appname {
             display: none;
+        }
+
+        .right {
+            .login {
+                display: inline-block;
+                background: none;
+                padding: 8px;
+                border-radius: 1px;
+                cursor: pointer;
+                filter: drop-shadow(0 0 1px rgba(0, 143, 254, .25));
+            }    
         }
     }
 }
