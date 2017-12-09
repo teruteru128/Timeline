@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.paramMap
       .subscribe(params => {
         const id = params.get('id');
-        this.userService.getUserById(id)
+        this.userService.getUserByScreenName(id)
           .subscribe(user => {
             this.user = user;
             this.followService.checkFollowing(id)

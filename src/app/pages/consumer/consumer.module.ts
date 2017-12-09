@@ -11,6 +11,7 @@ import { LikeService } from '../../services/rest/like/like.service';
 import { StorageService } from '../../services/storage/storage.service';
 import { PostService } from '../../services/rest/post/post.service';
 import { FollowService } from '../../services/rest/follow/follow.service';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { FollowService } from '../../services/rest/follow/follow.service';
     ConsumerRouting,
     RouterModule,
     UnionModule,
-    ProfileModule
+    ProfileModule,
+    NotificationsModule
   ],
   declarations: [
   ],

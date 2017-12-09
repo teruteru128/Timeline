@@ -12,20 +12,34 @@ export class UserService {
     private http: HttpClient,
     private storageService: StorageService) { }
 
-  getUserById(userId: string): Observable<User> {
-    return new Observable(obs => {
-      const storageData: LoginCallback = this.storageService.fetch('user');
-      this.http.get<User>(environment.apiEndpoint + '/users/show.json?token=' + storageData.session_token + '&screen_name=' + userId)
-        .subscribe(resp => {
-          if (resp.profile_image_url === '') {
-            resp.profile_image_url = '/assets/img/logo.png';
-          }
-          obs.next(resp);
-        }, (err: HttpErrorResponse) => {
-          obs.error(err);
-        });
-    });
-  }
+    getUserByUserID(userID: string): Observable<User> {
+      return new Observable(obs => {
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        this.http.get<User>(environment.apiEndpoint + '/users/show.json?token=' + storageData.session_token + '&user_id=' + userID)
+          .subscribe(resp => {
+            if (resp.profile_image_url === '') {
+              resp.profile_image_url = '/assets/img/logo.png';
+            }
+            obs.next(resp);
+          }, (err: HttpErrorResponse) => {
+            obs.error(err);
+          });
+      });
+    }
+    getUserByScreenName(screenName: string): Observable<User> {
+      return new Observable(obs => {
+        const storageData: LoginCallback = this.storageService.fetch('user');
+        this.http.get<User>(environment.apiEndpoint + '/users/show.json?token=' + storageData.session_token + '&screen_name=' + screenName)
+          .subscribe(resp => {
+            if (resp.profile_image_url === '') {
+              resp.profile_image_url = '/assets/img/logo.png';
+            }
+            obs.next(resp);
+          }, (err: HttpErrorResponse) => {
+            obs.error(err);
+          });
+      });
+    }
 
   login(userId: string, password: string): Observable<LoginCallback> {
     const claim = { id: userId, password: password };

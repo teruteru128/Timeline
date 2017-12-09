@@ -32,7 +32,7 @@ export class LeftSidebarComponent implements OnInit {
   getProfile() {
     const storage = this.storageService.fetch('user') as LoginCallback;
     const userId = storage.screen_name;
-    this.userService.getUserById(userId).subscribe(user => {
+    this.userService.getUserByScreenName(userId).subscribe(user => {
       this.user = user;
       this.initialized = true;
     });

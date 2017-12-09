@@ -60,3 +60,21 @@ export interface EditableProfile {
     description: string;
     location: string;
 }
+
+export interface APIEvent {
+    // 0: フォローされた
+    // 1: フォローを外された
+    // 2: いいね
+    // 3: いいね取り消し
+    // 4: シェア
+    // 5: 返信
+    type: number;
+    type_str: string;
+    from_user_id: string;
+    to_user_id: string;
+    already_read: boolean;
+    created_at: Date;
+    user: User;
+    post_id: string;
+    post: Post;
+}
