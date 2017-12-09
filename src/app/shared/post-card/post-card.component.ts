@@ -16,21 +16,10 @@ export class PostCardComponent implements OnInit {
   @Output() profileClicked: EventEmitter<Post> = new EventEmitter();
 
   constructor(
-    private dateService: DateService,
     private likeService: LikeService
   ) { }
 
   ngOnInit() {
-    this.updateDate();
-  }
-
-  updateDate() {
-    /*
-    this.date = this.dateService.formatDate(this.post.created_at);
-    setInterval(() => {
-      this.date = this.dateService.formatDate(this.post.created_at);
-    }, 30000);
-    */
   }
 
   profileClick() {

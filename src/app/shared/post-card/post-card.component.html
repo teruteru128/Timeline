@@ -10,9 +10,7 @@
       </span>
     </div>
   </div>
-  <span class="post-body">
-    {{post.text}}
-  </span>
+  <span class="post-body" [innerHTML]="post.text | autolink"></span>
   <div class="post-bottom">
     <!-- 返信アイコン -->
     <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
