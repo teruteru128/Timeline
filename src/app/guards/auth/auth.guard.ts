@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
   checkLogin(url: string): boolean {
     const user = this.storageService.fetch('user') as LoginCallback;
 
-    if (url === '/login' || url === '/signup') {
+    if (url === '/login' || url === '/signup' || url === '/welcome') {
       if (user === null) { return true; }
 
       this.router.navigate(['/']);
@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
 
     if (user !== null) { return true; }
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/welcome']);
     return false;
   }
 }

@@ -4,12 +4,14 @@ import { SignupModule } from './signup/signup.module';
 import { LoginModule } from './login/login.module';
 import { UserService } from '../../services/rest/user/user.service';
 import { RandomImageService } from './random-image/random-image.service';
+import { WelcomeModule } from './welcome/welcome.module';
 
 @NgModule({
   imports: [
     CommonModule,
     LoginModule,
-    SignupModule
+    SignupModule,
+    WelcomeModule
   ],
   declarations: [],
   exports: [
