@@ -1,0 +1,126 @@
+header {
+    padding: 48px 48px 0 48px;
+    display: flex;
+    height: 48px;
+    justify-content: space-between;
+    .left {
+        opacity: .75;
+        display: flex;
+        align-items: center;
+        .logo {
+            width: 48px;
+            height: 48px;
+            margin-right: 12px;
+        }
+        .appname {
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+    }
+    
+    .right {
+        .login {
+            display: inline-block;
+            background: rgba(255, 255, 255, .5);
+            padding: 12px 24px;
+            border-radius: 32px;
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    header {
+        padding-top: 18px;
+        align-items: center;
+        justify-content: center;
+        .right {
+            display: none;
+        }
+    }
+}
+
+.page {
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(72,170,212,1);
+    background: -moz-linear-gradient(top, rgba(72,170,212,1) 0%, rgba(51,124,183,0.25) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(72,170,212,1)), color-stop(100%, rgba(51,124,183,0.25)));
+    background: -webkit-linear-gradient(top, rgba(72,170,212,1) 0%, rgba(51,124,183,0.25) 100%);
+    background: -o-linear-gradient(top, rgba(72,170,212,1) 0%, rgba(51,124,183,0.25) 100%);
+    background: -ms-linear-gradient(top, rgba(72,170,212,1) 0%, rgba(51,124,183,0.25) 100%);
+    background: linear-gradient(to bottom, rgba(72,170,212,1) 0%, rgba(51,124,183,0.25) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48aad4', endColorstr='#337cb7', GradientType=0 );
+    background-blend-mode: multiply;
+    color: #fff;
+
+    .inner {
+        width: 100%;
+        height: 100%;
+        margin-top: -96px;
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;        
+        text-align: center;
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        p {
+            line-height: 1.5rem;
+        }
+    }
+
+    .alphatest {
+        background: rgba(0, 143, 254, .75);
+        padding: 14px 18px;
+        margin-top: 32px;
+        border-radius: 24px;
+        text-decoration: none;
+        color: #fff;
+    }
+}
+
+#bgVideo {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+@media (max-width: 767px) {
+    .page {
+        .inner {
+            margin: 0 auto;
+            max-width: 80vw;
+            padding: 18px 0;
+        }
+        .content {
+            margin-top: -10vh;
+            h1 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: .7rem;
+                line-height: 1.15rem;
+            }
+        }
+
+        .alphatest {
+            font-size: 0.8rem;
+            padding: 18px 24px;            
+        }
+    }
+}    
