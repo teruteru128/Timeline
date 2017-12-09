@@ -20,3 +20,5 @@ deploy:
     branch: master
   local_dir: dist/
   fqdn: timeline.blue
+notifications:
+    slack: kittentl:moBQCRlnTw615glK6ogAaZ1w
