@@ -47,6 +47,10 @@ export class HeaderComponent implements OnInit {
     this.isUserTyping = true;
   }
 
+  onSearchBlured() {
+    this.isUserTyping = false;
+  }
+
   onQueryChange(text: string) {
     if (this.searchQuery.length === 0) {
       this.foundUsers = [];
