@@ -33,8 +33,8 @@ export class TopPageComponent implements OnInit {
 
   }
 
-  openSpMenu() {
-    this.spMenuOpened = true;
+  toggleSpMenu() {
+    this.spMenuOpened = !this.spMenuOpened;
   }
 
   closeSpMenu() {
