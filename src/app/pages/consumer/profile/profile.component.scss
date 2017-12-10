@@ -8,6 +8,7 @@
         background-size: cover;
         background-position: center;
         color: #fff;
+        z-index: -1;
         width: 100%;
 
         .cover {
@@ -54,59 +55,73 @@
             color: #fff;
             text-decoration: none;
         }
+    }
 
-        .header-badge {
-            transition: 0.5s;            
-            position: absolute;
-            cursor: pointer;
-            background: #333;
-            width: 72px;
-            height: 72px;
-            border-radius: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 2px 4px 8px rgba(0, 0, 0, .5);
-            right: 32px;
-            bottom: -36px;
-            i {
-                user-select: none;
-                font-size: 1.75rem;
-                line-height: 72px;
-            }
-            &:hover {
-                box-shadow: 2px 4px 21px rgba(0, 0, 0, .75);                
-            }
-            &:active {
-                box-shadow: 2px 4px 4px rgba(0, 0, 0, .5);                
-            }
+    .badge-wrapper {
+        position: relative;
+    }
+    .header-badge {
+        transition: 0.5s;            
+        position: absolute;
+        cursor: pointer;
+        background: #333;
+        width: 72px;
+        height: 72px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, .5);
+        top: -36px;
+        right: 32px;
+        color: #fff;
+                    
+        i {
+            user-select: none;
+            font-size: 1.75rem;
+            line-height: 72px;
         }
+        &:hover {
+            box-shadow: 2px 4px 21px rgba(0, 0, 0, .75);                
+        }
+        &:active {
+            box-shadow: 2px 4px 4px rgba(0, 0, 0, .5);                
+        }
+    }
 
-        .badge-edit {
-            background: #607D8B;            
-            box-shadow: 2px 4px 8px rgba(96, 125, 139, .5);        
-            &:hover {
-                box-shadow: 2px 4px 21px rgba(96, 125, 139, .75);                 
-            }    
-            &:active {
-                box-shadow: 2px 4px 4px rgba(96, 125, 139, .5);               
-            }
+    .badge-edit {
+        background: #607D8B;            
+        box-shadow: 2px 4px 8px rgba(96, 125, 139, .5);        
+        &:hover {
+            box-shadow: 2px 4px 21px rgba(96, 125, 139, .75);                 
+        }    
+        &:active {
+            box-shadow: 2px 4px 4px rgba(96, 125, 139, .5);               
         }
-        .badge-follow {
-            background: #008FFE;            
-            box-shadow: 2px 4px 8px rgba(0, 143, 254, .5);        
-            &:hover {
-                box-shadow: 2px 4px 21px rgba(0, 143, 254, .75);                 
-            }    
-            &:active {
-                box-shadow: 2px 4px 4px rgba(0, 143, 254, .5);               
-            }
-            font-size: 3rem;
+    }
+    .badge-follow {
+        background: #008FFE;            
+        box-shadow: 2px 4px 8px rgba(0, 143, 254, .5);        
+        &:hover {
+            box-shadow: 2px 4px 21px rgba(0, 143, 254, .75);                 
+        }    
+        &:active {
+            box-shadow: 2px 4px 4px rgba(0, 143, 254, .5);               
         }
+    }
+    .badge-unfollow {
+        background: #FF1744;
+        box-shadow: 2px 4px 8px rgba(255, 23, 68, .5);        
+        &:hover {
+            box-shadow: 2px 4px 21px rgba(255, 23, 68, .75);                 
+        }    
+        &:active {
+            box-shadow: 2px 4px 4px rgba(255, 23, 68, .5);               
+        }
+    }
 
-        .badge-follow i {
-            font-size: 2.5rem;
-        }
+    .badge-follow i {
+        font-size: 2.5rem;
     }
 }
 
