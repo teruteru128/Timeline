@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RandomImageService } from '../random-image/random-image.service';
 import { UserService } from '../../../services/rest/user/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import { MessageResponse } from '../../../services/rest/models';
+import { MessageResponse, LoginCallback } from '../../../services/rest/models';
 
 @Component({
   selector: 'tl-signup',
@@ -44,7 +44,10 @@ export class SignupComponent implements OnInit {
     this.service.signup(this.form.id, this.form.mail, this.form.password)
       .subscribe((res: MessageResponse) => {
         this.formErr = false;
-        this.router.navigate(['/login', {callback: JSON.stringify(res)}]);
+        this.service.login(this.form.id, this.form.password)
+          .subscribe(_ => {
+            this.router.navigate(['']);
+          });
       }, (err: HttpErrorResponse) => {
         this.formErr = true;
         this.emailField.nativeElement.focus();
