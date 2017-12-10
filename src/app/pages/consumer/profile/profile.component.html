@@ -1,57 +1,61 @@
 <div class="page" *ngIf="initialized && err === ''; else error">
-  <header>
-    <div class="cover" *ngIf="!editing; else edit">
-      <img [src]="user.profile_image_url" alt="avatar" class="avatar">
-      <span class="name">{{user.name}}</span>
-      <span class="screen-name">@{{user.screen_name}}</span>
-      <span class="meta">{{user.description}}</span>
-      <a [href]="user.url" class="meta">{{user.url}}</a>
-    </div>
-
-    <ng-template #edit>
-      <!-- 編集モード -->
-      <div class="cover edit">
-
-          <label>
-              <span class="btn btn-primary">
-                  <img [src]="user.profile_image_url" alt="avatar" class="avatar">
-                  <input type="file" style="display:none" accept="image/*" (change)="imageChangeListener($event)">
-              </span>
-          </label>
-          <input type="text" class="name" placeholder="表示名" [(ngModel)]="newProfile.name" [value]="user.name">
-          <span class="screen-name">@{{user.screen_name}}</span>
-          <input type="text" class="meta" [(ngModel)]="newProfile.description" placeholder="自己紹介文" [value]="user.description">     
-          <input type="text" class="meta" [(ngModel)]="newProfile.url" placeholder="URL" [value]="user.url">     
-        </div>
-    </ng-template>
-
-    <div class="header-badge badge-edit"
-    *ngIf="myname === user.screen_name; else otherUser">
-    <div class="edit-pending" *ngIf="!editing">
-        <i class="material-icons" (click)="editing = !editing">edit</i>        
-    </div>
-    <div class="commit-profile" *ngIf="editing">
-        <i class="material-icons" (click)="editing = !editing" (click)="commitProfile()">check</i>        
-    </div>
-  </div>
-    <ng-template #otherUser>
-      <div class="header-badge badge-follow" (click)="follow()" *ngIf="!isFollow; else following">
-          <i class="material-icons">add</i>          
-      </div>
-      <ng-template #following>
-          <div class="header-badge badge-follow" (click)="unfollow()">
-              <i class="material-icons">remove</i>          
+  <div class="header-wrapper">
+      <header>
+          <div class="cover" *ngIf="!editing; else edit">
+            <img [src]="user.profile_image_url" alt="avatar" class="avatar">
+            <span class="name">{{user.name}}</span>
+            <span class="screen-name">@{{user.screen_name}}</span>
+            <span class="meta">{{user.description}}</span>
+            <a [href]="user.url" class="meta">{{user.url}}</a>
+          </div>
+      
+          <ng-template #edit>
+            <!-- 編集モード -->
+            <div class="cover edit">
+      
+                <label>
+                    <span class="btn btn-primary">
+                        <img [src]="user.profile_image_url" alt="avatar" class="avatar">
+                        <input type="file" style="display:none" accept="image/*" (change)="imageChangeListener($event)">
+                    </span>
+                </label>
+                <input type="text" class="name" placeholder="表示名" [(ngModel)]="newProfile.name" [value]="user.name">
+                <span class="screen-name">@{{user.screen_name}}</span>
+                <input type="text" class="meta" [(ngModel)]="newProfile.description" placeholder="自己紹介文" [value]="user.description">     
+                <input type="text" class="meta" [(ngModel)]="newProfile.url" placeholder="URL" [value]="user.url">     
+              </div>
+          </ng-template>
+        </header>
+      
+        <div class="badge-wrapper">
+            <div class="header-badge badge-edit"
+            *ngIf="myname === user.screen_name; else otherUser">
+            <div class="edit-pending" *ngIf="!editing">
+                <i class="material-icons" (click)="editing = !editing">edit</i>        
+            </div>
+            <div class="commit-profile" *ngIf="editing">
+                <i class="material-icons" (click)="editing = !editing" (click)="commitProfile()">check</i>        
+            </div>
+          </div>
+            <ng-template #otherUser>
+              <div class="header-badge badge-follow" (click)="follow()" *ngIf="!isFollow; else following">
+                  <i class="material-icons">add</i>          
+              </div>
+              <ng-template #following>
+                  <div class="header-badge badge-unfollow" (click)="unfollow()">
+                      <i class="material-icons">remove</i>          
+                  </div>    
+              </ng-template>          
+            </ng-template>
+          
+            <section class="timeline" *ngIf="initialized">
+              <div class="posts">
+                <tl-post-card *ngFor="let post of posts" [post]="post" (profileClicked)="openProfile($event)"></tl-post-card>
+              </div>
+            </section>
           </div>    
-      </ng-template>          
-    </ng-template>
-  </header>
-
-  <section class="timeline" *ngIf="initialized">
-    <div class="posts">
-      <tl-post-card *ngFor="let post of posts" [post]="post" (profileClicked)="openProfile($event)"></tl-post-card>
-    </div>
-  </section>
-</div>
+        </div>
+  </div>
 
 <ng-template #error>
   <div class="page error-page">
