@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
         this.foundUsers = users;
 
         users.map((user, idx) => {
-          this.followService.checkFollowers(user.name).subscribe((flag: boolean) => {
+          this.followService.checkFollowers(user.screen_name).subscribe((flag: boolean) => {
             this.userFollowing[idx] = flag;
           });
         });

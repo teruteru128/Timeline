@@ -57,14 +57,16 @@ export class FollowService {
         .subscribe((resp: User[]) => {
           if (resp === null) {
             observer.next(false);
+            observer.complete();
           } else {
             resp.map(user => {
               if (user.screen_name === to) {
                 observer.next(true);
-                return;
-              }
+                observer.complete();
+                }
+              });
               observer.next(false);
-            });
+              observer.complete();
           }
         }, (err: HttpErrorResponse) => {
           observer.error(err.error);
@@ -84,13 +86,16 @@ export class FollowService {
         .subscribe((resp: User[]) => {
           if (resp === null) {
           observer.next(false);
+          observer.complete();
           } else {
             resp.map(user => {
               if (user.id === myId) {
                 observer.next(true);
+                observer.complete();
                 return;
               }
               observer.next(false);
+              observer.complete();
             });
           }
         }, (err: HttpErrorResponse) => {

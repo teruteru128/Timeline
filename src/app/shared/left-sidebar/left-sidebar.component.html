@@ -1,7 +1,9 @@
 <aside *ngIf="initialized">
   <div class="inner">
     <div class="profile">
-      <img src="{{user.profile_image_url}}" (click)="openProfile()" alt="you" class="avatar">
+      <div class="avatar-container">
+          <img src="{{user.profile_image_url}}" (click)="openProfile()" alt="you" class="avatar">          
+      </div>
       <div class="name">
         <span class="display" (click)="openProfile()">{{user.name}}</span>
         <span class="id" (click)="openProfile()">@{{user.screen_name}}</span>
