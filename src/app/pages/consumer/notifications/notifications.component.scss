@@ -11,8 +11,7 @@
     width: 100%;
     .left {
       margin-right: 8px;
-      .avatar {
-        display: block;
+      .avatar-container {
         width: 48px;
         height: 48px;
         cursor: pointer;
@@ -39,8 +38,9 @@
   }
 
   .target-card {
-    border: 1px solid #fcfcfc;
+    border: 1px solid #f0f0f0;
     margin: 8px;
+    padding: 8px;
     .name {
       color: #555;
     }

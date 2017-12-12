@@ -48,7 +48,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onSearchBlured() {
-    this.isUserTyping = false;
+    setTimeout(() => {
+      this.isUserTyping = false;
+    }, 300);
   }
 
   onQueryChange(text: string) {
@@ -61,7 +63,7 @@ export class HeaderComponent implements OnInit {
         this.foundUsers = users;
 
         users.map((user, idx) => {
-          this.followService.checkFollowers(user.name).subscribe((flag: boolean) => {
+          this.followService.checkFollowers(user.screen_name).subscribe((flag: boolean) => {
             this.userFollowing[idx] = flag;
           });
         });
@@ -71,13 +73,11 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateProfile(screenName: string) {
+    this.router.navigate(['/profile/' + screenName]);
     this.isUserTyping = false;
     this.spSearching = false;
     this.searchQuery = '';
     this.foundUsers = [];
-
-    this.router.navigate(['/profile/' + screenName]);
-
   }
 
 }

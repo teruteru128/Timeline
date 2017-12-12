@@ -133,7 +133,7 @@ header {
     align-items: center;
     padding: 8px 12px;
     border-bottom: 1px solid #efefef;
-    .avatar {
+    .avatar-container {
       width: 48px;
       height: 48px;
     }
@@ -219,6 +219,11 @@ header {
         align-items: center;
         padding: 12px;
         border-bottom: 1.25px solid #eee;
+        .avatar-container {
+          width: 48px;
+          height: 48px;
+          margin-right: 8px;
+        }        
         &:last-child {
           border-bottom: none;
         }

@@ -2,7 +2,9 @@
     <div class="card" *ngFor="let event of events">
         <div class="post-top" *ngIf="event.user != null">
           <div class="left">
-            <img (click)="profileClick(event.user)" [src]="event.user.profile_image_url" class="avatar" [alt]="event.user.screen_name">
+            <div class="avatar-container">
+                <img (click)="profileClick(event.user)" [src]="event.user.profile_image_url" class="avatar" [alt]="event.user.screen_name">                
+            </div>
           </div>
           <div class="right">
             <span class="body">
