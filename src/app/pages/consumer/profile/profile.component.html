@@ -1,12 +1,15 @@
 <div class="page" *ngIf="initialized && err === ''; else error">
   <div class="header-wrapper">
       <header>
+        <!-- 編集モードではない -->
           <div class="cover" *ngIf="!editing; else edit">
-            <img [src]="user.profile_image_url" alt="avatar" class="avatar">
+            <div class="avatar-container">
+                <img [src]="user.profile_image_url" alt="avatar" class="avatar">                
+            </div>
             <span class="name">{{user.name}}</span>
             <span class="screen-name">@{{user.screen_name}}</span>
-            <span class="meta">{{user.description}}</span>
-            <a [href]="user.url" class="meta">{{user.url}}</a>
+            <span class="meta" [innerHTML]="user.description | autolink"></span>
+            <a [href]="user.url" target="_blank" class="meta">{{user.url}}</a>
           </div>
       
           <ng-template #edit>
@@ -15,7 +18,9 @@
       
                 <label>
                     <span class="btn btn-primary">
-                        <img [src]="user.profile_image_url" alt="avatar" class="avatar">
+                      <div class="avatar-container">
+                          <img [src]="user.profile_image_url" alt="avatar" class="avatar">                          
+                      </div>
                         <input type="file" style="display:none" accept="image/*" (change)="imageChangeListener($event)">
                     </span>
                 </label>
@@ -28,6 +33,7 @@
         </header>
       
         <div class="badge-wrapper">
+          <!-- 自分のページ -->
             <div class="header-badge badge-edit"
             *ngIf="myname === user.screen_name; else otherUser">
             <div class="edit-pending" *ngIf="!editing">
@@ -37,23 +43,26 @@
                 <i class="material-icons" (click)="editing = !editing" (click)="commitProfile()">check</i>        
             </div>
           </div>
+          <!-- 自分のページではない -->
             <ng-template #otherUser>
+              <!-- フォローしていない -->
               <div class="header-badge badge-follow" (click)="follow()" *ngIf="!isFollow; else following">
                   <i class="material-icons">add</i>          
               </div>
+              <!-- フォローしている -->
               <ng-template #following>
                   <div class="header-badge badge-unfollow" (click)="unfollow()">
                       <i class="material-icons">remove</i>          
                   </div>    
               </ng-template>          
             </ng-template>
+          </div>    
           
             <section class="timeline" *ngIf="initialized">
               <div class="posts">
                 <tl-post-card *ngFor="let post of posts" [post]="post" (profileClicked)="openProfile($event)"></tl-post-card>
               </div>
             </section>
-          </div>    
         </div>
   </div>
 

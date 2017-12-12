@@ -15,14 +15,13 @@ aside {
     display: flex;
     align-items: center;
     margin-bottom: 32px;
-    .avatar {
+    .avatar-container {
         width: 48px;
         height: 48px;
         justify-content: center;
         align-items: center;
         margin-right: 14px;
-        object-fit: scale-down;   
-        cursor: pointer;     
+        cursor: pointer;
     }
     .name {
         display: flex;
