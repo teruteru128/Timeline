@@ -7,6 +7,8 @@ import { StorageService } from '../../../services/storage/storage.service';
 import { FollowService } from '../../../services/rest/follow/follow.service';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { Subscription } from 'rxjs/Subscription';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser/src/security/dom_sanitization_service';
 
 @Component({
   selector: 'tl-profile',
@@ -21,7 +23,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private router: Router,
     private postService: PostService,
     private storageService: StorageService,
-    private followService: FollowService
+    private followService: FollowService,
+    private sanitizer: DomSanitizer
   ) { }
 
   user: User;
@@ -137,15 +140,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   imageChangeListener($event) {
-    this.uploadImage($event.target);
+    this.prepareUploadImage($event.target);
   }
 
-  uploadImage(value: any) {
+  prepareUploadImage(value: any) {
     const file: File = value.files[0];
     const r: FileReader = new FileReader();
 
     r.onloadend = (e) => {
       this.uploadPendingImage = r.result;
+      this.user.profile_image_url = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(value.files[0])
+      ) as string;
     };
     r.readAsDataURL(file);
   }

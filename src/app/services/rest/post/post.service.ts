@@ -50,6 +50,7 @@ export class PostService {
       return new Observable<Post>(observer => {
         this.wsService.connect(this.url('union'))
         .subscribe((response: MessageEvent) => {
+          console.log(response);
           const post = JSON.parse(response.data) as Post;
           if (post.user.profile_image_url === '') {
             post.user.profile_image_url = '/assets/img/logo.svg';
