@@ -39,8 +39,8 @@
             <div class="edit-pending" *ngIf="!editing">
                 <i class="material-icons" (click)="editing = !editing">edit</i>        
             </div>
-            <div class="commit-profile" *ngIf="editing">
-                <i class="material-icons" (click)="editing = !editing" (click)="commitProfile()">check</i>        
+            <div class="commit-profile" *ngIf="editing" (click)="editing = !editing" (click)="commitProfile()">
+                <i class="material-icons">check</i>        
             </div>
           </div>
           <!-- 自分のページではない -->
