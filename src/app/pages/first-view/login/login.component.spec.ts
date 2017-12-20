@@ -10,6 +10,7 @@ import { UserService } from '../../../services/rest/user/user.service';
 import { Observable } from 'rxjs/Observable';
 import { LoginCallback } from '../../../services/rest/models';
 import { Router } from '@angular/router';
+import { MatSnackBarModule } from '@angular/material';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -20,7 +21,8 @@ describe('LoginComponent', () => {
       imports: [
         FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatSnackBarModule
       ],
       declarations: [ LoginComponent ],
       providers: [

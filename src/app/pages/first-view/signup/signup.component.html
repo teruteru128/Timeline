@@ -1,17 +1,17 @@
-<div id="page" [ngStyle]="{'background-image': 'url(' + bg + ')'}">
+<div id="page">
         <div class="login">
-        <img src="/assets/img/logo.png" class="logo" alt="logo">
+        <img src="/assets/img/logo.svg" class="logo" alt="logo">
         <div class="inner">
             <form #loginForm="ngForm" method="post" autocomplete="off">
                 <div class="error-wrapper">
                         <span class="error" *ngIf="formErr">{{errMsg}}</span>                        
                 </div>
-                <input type="email" value="" name="email" placeholder="Email" [(ngModel)]="form.mail" #emailField email required [autofocus]>
-                <input type="text" value="" name="name" placeholder="ID" [(ngModel)]="form.id" required [autofocus]>
-                <input type="password" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required [autofocus]>
+                <input type="email" class="input" value="" name="email" placeholder="Email" [(ngModel)]="form.mail" #emailField email required [autofocus]>
+                <input type="text" class="input" value="" name="name" placeholder="ID" [(ngModel)]="form.id" required [autofocus]>
+                <input type="password" class="input" value="" name="password" placeholder="Password" [(ngModel)]="form.password" required [autofocus]>
                 <button (click)="onSubmit()" class="submit" [disabled]="!loginForm.form.valid" [class.submit-disabled]="!loginForm.form.valid">登録</button>
             </form>
         </div>
-        <a class="newuser" [routerLink]="['/login']">ログインする</a>        
     </div>
+    <a class="newuser" [routerLink]="['/login']">ログインに戻る</a>        
 </div>

@@ -4,6 +4,7 @@ import { RandomImageService } from '../random-image/random-image.service';
 import { UserService } from '../../../services/rest/user/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import { LoginCallback } from '../../../services/rest/models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tl-login',
@@ -13,8 +14,6 @@ import { LoginCallback } from '../../../services/rest/models';
 export class LoginComponent implements OnInit {
 
   @ViewChild('idField') idField: ElementRef;
-
-  bg: string;
 
   private images = [
     '/assets/bgimgs/1.jpg',
@@ -27,22 +26,16 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  formErr = false;
-  errMsg = '';
-
   constructor(
     private service: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private bgService: RandomImageService) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.bg = this.bgService.getRandomImage(this.images);
-
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('callback') !== null) {
         const param = JSON.parse(params.get('callback')) as LoginCallback;
-        this.errMsg = 'アカウントの作成が完了しました';
         this.form.id = param.screen_name;
       }
     });
@@ -51,10 +44,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.service.login(this.form.id, this.form.password)
     .subscribe(_ => {
-      this.formErr = false;
       this.router.navigate(['']);
     }, (err: HttpErrorResponse) => {
-      this.formErr = true;
       this.idField.nativeElement.focus();
       this.form = {
         id: '',
@@ -62,27 +53,33 @@ export class LoginComponent implements OnInit {
       };
       switch (err.status) {
         case 401: {
-          this.errMsg = 'ログインできません。';
+          this.openSnackBar('ログインできません。', 'OK', 'errorSnack');
           break;
         }
         case 403: {
-          this.errMsg = 'アカウントが凍結されています。';
+          this.openSnackBar('アカウントが凍結されています。', 'OK', 'errorSnack');
           break;
         }
         case 404: {
-          this.errMsg = 'アカウントが登録されていません。';
+          this.openSnackBar('アカウントが登録されていません。', 'OK', 'errorSnack');
           break;
         }
         case 500: {
-          this.errMsg = 'サーバー内部エラーです。';
+          this.openSnackBar('サーバー内部エラーです。', 'OK', 'errorSnack');
           break;
         }
         default: {
-          this.errMsg = '不明なエラーです。';
+          this.openSnackBar('原因不明なエラーが発生しました。', 'OK', 'errorSnack');
           break;
         }
       }
     });
   }
 
+  openSnackBar(message: string, action: string, extraClass: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: extraClass
+    });
+  }
 }
