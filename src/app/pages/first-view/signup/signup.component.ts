@@ -4,6 +4,7 @@ import { RandomImageService } from '../random-image/random-image.service';
 import { UserService } from '../../../services/rest/user/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import { MessageResponse, LoginCallback } from '../../../services/rest/models';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'tl-signup',
@@ -20,36 +21,25 @@ export class SignupComponent implements OnInit {
     password: ''
   };
 
-  bg: string;
-
   private images = [
     '/assets/bgimgs/1.jpg',
     '/assets/bgimgs/2.jpg',
     '/assets/bgimgs/3.jpg'
   ];
 
-  formErr = false;
-  errMsg = '';
-
   constructor(
     private service: UserService,
     private router: Router,
-    private bgService: RandomImageService) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.bg = this.bgService.getRandomImage(this.images);
   }
 
   onSubmit() {
     this.service.signup(this.form.id, this.form.mail, this.form.password)
       .subscribe((res: MessageResponse) => {
-        this.formErr = false;
-        this.service.login(this.form.id, this.form.password)
-          .subscribe(_ => {
-            this.router.navigate(['']);
-          });
+        this.router.navigate(['']);
       }, (err: HttpErrorResponse) => {
-        this.formErr = true;
         this.emailField.nativeElement.focus();
         this.form = {
           id: '',
@@ -59,23 +49,29 @@ export class SignupComponent implements OnInit {
 
         switch (err.status) {
           case 400: {
-            this.errMsg = '情報が正しく入力されていません。';
+            this.openSnackBar('情報を確認してください。', 'OK', 'errorSnack');
             break;
           }
           case 409: {
-            this.errMsg = 'すでに登録されています。';
+            this.openSnackBar('すでに登録されています。', 'OK', 'errorSnack');
             break;
           }
           case 500: {
-            this.errMsg = 'サーバー内部エラーです。';
+            this.openSnackBar('サーバー内部エラーです。', 'OK', 'errorSnack');
             break;
           }
           default: {
-            this.errMsg = '不明なエラーです。';
+            this.openSnackBar('原因不明なエラーが発生しました。', 'OK', 'errorSnack');
             break;
           }
         }
       });
   }
 
+  openSnackBar(message: string, action: string, extraClass: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: extraClass
+    });
+  }
 }

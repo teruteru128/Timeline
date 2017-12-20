@@ -37,7 +37,7 @@ export class PostService {
         .subscribe((response: MessageEvent) => {
           const post = JSON.parse(response.data) as Post;
           if (post.user.profile_image_url === '') {
-            post.user.profile_image_url = '/assets/img/logo.png';
+            post.user.profile_image_url = '/assets/img/logo.svg';
           }
 
           post.favorited = this.likeService.isLiked(post);
@@ -52,7 +52,7 @@ export class PostService {
         .subscribe((response: MessageEvent) => {
           const post = JSON.parse(response.data) as Post;
           if (post.user.profile_image_url === '') {
-            post.user.profile_image_url = '/assets/img/logo.png';
+            post.user.profile_image_url = '/assets/img/logo.svg';
           }
 
           post.favorited = this.likeService.isLiked(post);
@@ -86,7 +86,7 @@ export class PostService {
           if (posts !== null) {
             posts = posts.map(post => {
               if (post.user.profile_image_url === '') {
-                post.user.profile_image_url = '/assets/img/logo.png';
+                post.user.profile_image_url = '/assets/img/logo.svg';
               }
 
               post.favorited = this.likeService.isLiked(post);
@@ -110,7 +110,7 @@ export class PostService {
           if (posts !== null) {
             posts = posts.map(post => {
               if (post.user.profile_image_url === '') {
-                post.user.profile_image_url = '/assets/img/logo.png';
+                post.user.profile_image_url = '/assets/img/logo.svg';
               }
 
               post.favorited = this.likeService.isLiked(post);
@@ -132,7 +132,7 @@ export class PostService {
           '/statuses/single.json?token=' + storageData.session_token + '&id=' + postId)
         .subscribe((post: Post) => {
               if (post.user.profile_image_url === '') {
-                post.user.profile_image_url = '/assets/img/logo.png';
+                post.user.profile_image_url = '/assets/img/logo.svg';
               }
 
               post.favorited = this.likeService.isLiked(post);

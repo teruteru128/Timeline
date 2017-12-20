@@ -6,12 +6,15 @@ import { LoginComponent } from './login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import {MatSnackBarModule} from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatSnackBarModule
   ],
   declarations: [
     LoginComponent

@@ -61,6 +61,7 @@
             <section class="timeline" *ngIf="initialized">
               <div class="posts">
                 <tl-post-card *ngFor="let post of posts" [post]="post" (profileClicked)="openProfile($event)"></tl-post-card>
+                <tl-system-card *ngIf="posts === null" text="まだ投稿はありません。"></tl-system-card>
               </div>
             </section>
         </div>
