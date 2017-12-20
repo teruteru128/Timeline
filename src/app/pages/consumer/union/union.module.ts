@@ -5,6 +5,7 @@ import { PostCardModule } from '../../../shared/post-card/post-card.module';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '../../../shared/button/button.module';
 import { NewPostModule } from '../../../shared/new-post/new-post.module';
+import { SystemCardModule } from '../../../shared/system-card/system-card.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { NewPostModule } from '../../../shared/new-post/new-post.module';
     PostCardModule,
     FormsModule,
     ButtonModule,
-    NewPostModule
+    NewPostModule,
+    SystemCardModule
   ],
   declarations: [UnionComponent],
   exports: [UnionComponent]

@@ -1,36 +1,36 @@
 <div class="page" *ngIf="initialized">
-    <div class="card" *ngFor="let event of events">
+  <div class="card" *ngFor="let event of events">
+    <div class="post-top" *ngIf="event.user != null">
+      <div class="left">
+        <div class="avatar-container">
+          <img (click)="profileClick(event.user)" [src]="event.user.profile_image_url" class="avatar" [alt]="event.user.screen_name">
+        </div>
+      </div>
+      <div class="right">
+        <span class="body">
+          <span class="name" (click)="profileClick(event.user)">{{event.user.name}}</span>
+          さんが{{event.type_str}}
+        </span>
+      </div>
+    </div>
+
+    <div class="post-bottom event-target" *ngIf="event.post != null">
+      <div class="target-card">
         <div class="post-top" *ngIf="event.user != null">
-          <div class="left">
-            <div class="avatar-container">
-                <img (click)="profileClick(event.user)" [src]="event.user.profile_image_url" class="avatar" [alt]="event.user.screen_name">                
-            </div>
-          </div>
           <div class="right">
             <span class="body">
-                <span class="name" (click)="profileClick(event.user)">{{event.user.name}}</span>           
-                さんが{{event.type_str}}
+              <span class="name">{{event.post.user.name}}</span>
+            </span>
+            <span class="meta">
+              @{{event.post.user.screen_name}}&nbsp; {{event.post.created_at}}
+            </span>
+            <span class="inner-post-text">
+              {{event.post.text}}
             </span>
           </div>
         </div>
-
-        <div class="post-bottom event-target" *ngIf="event.post != null">
-            <div class="target-card">
-                <div class="post-top" *ngIf="event.user != null">
-                  <div class="right">
-                    <span class="body">
-                        <span class="name">{{event.post.user.name}}</span>           
-                    </span>
-                    <span class="meta">
-                      @{{event.post.user.screen_name}}&nbsp; {{event.post.created_at}}
-                    </span>
-                    <span class="inner-post-text">
-                      {{event.post.text}}
-                    </span>
-                  </div>
-                  
-                </div>
-        
-        </div>
       </div>
+    </div>
+  </div>
+      <tl-system-card *ngIf="events.length === 0" text="通知はありません。"></tl-system-card>
 </div>

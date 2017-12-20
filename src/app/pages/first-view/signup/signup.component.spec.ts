@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -21,7 +22,8 @@ describe('SignupComponent', () => {
       imports: [
         FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatSnackBarModule
       ],
       declarations: [ SignupComponent ],
       providers: [
@@ -45,7 +47,6 @@ describe('SignupComponent', () => {
 
   it('onSubmit', () => {
     component.onSubmit();
-    expect(component.formErr).toBe(false);
   });
 
   class UserServiceMock extends UserService {
@@ -70,7 +71,8 @@ describe('SignupComponent Error', () => {
       imports: [
         FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatSnackBarModule
       ],
       declarations: [ SignupComponent ],
       providers: [

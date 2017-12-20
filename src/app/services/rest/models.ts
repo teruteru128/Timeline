@@ -41,7 +41,7 @@ export interface Post {
     in_reply_to_user_id: string;
     text: string;
     shared: boolean;
-    shared_count: boolean;
+    shared_count: number;
     in_reply_to_screen_name: string;
     favorited: boolean;
 }

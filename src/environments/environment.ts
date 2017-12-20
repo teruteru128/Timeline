@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://tldev.ddns.net:2053/1.0',
-  wsEndpoint: 'wss://tldev.ddns.net:2053/1.0',
+  apiEndpoint: 'http://localhost:5000/v1',
+  wsEndpoint: 'ws://localhost:5000/v1',
   localStorageToken: 'secret'
 };

@@ -1,8 +1,6 @@
 <header *ngIf="initialized">
   <i class="menu material-icons" (click)="clicked()">menu</i>
-  <div class="title">
-    <h1 [routerLink]="['']" *ngIf="!spSearching; else spSearchBox">Timeline Alpha</h1>
-  </div>
+  <img class="logo" [routerLink]="['']" src="/assets/img/logo.svg" alt="logo">
 
   <ng-template #spSearchBox>
     <div class="search-input-wrapper">

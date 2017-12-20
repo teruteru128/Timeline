@@ -20,7 +20,7 @@ export class UserService {
         this.http.get<User>(environment.apiEndpoint + '/users/show.json?token=' + storageData.session_token + '&user_id=' + userID)
           .subscribe(resp => {
             if (resp.profile_image_url === '') {
-              resp.profile_image_url = '/assets/img/logo.png';
+              resp.profile_image_url = '/assets/img/logo.svg';
             }
             obs.next(resp);
           }, (err: HttpErrorResponse) => {
@@ -34,7 +34,7 @@ export class UserService {
         this.http.get<User>(environment.apiEndpoint + '/users/show.json?token=' + storageData.session_token + '&screen_name=' + screenName)
           .subscribe(resp => {
             if (resp.profile_image_url === '') {
-              resp.profile_image_url = '/assets/img/logo.png';
+              resp.profile_image_url = '/assets/img/logo.svg';
             }
             obs.next(resp);
           }, (err: HttpErrorResponse) => {
@@ -82,7 +82,7 @@ export class UserService {
           if (resp.length !== 0) {
             resp = resp.map(user => {
               if (user.profile_image_url === '') {
-                user.profile_image_url = '/assets/img/logo.png';
+                user.profile_image_url = '/assets/img/logo.svg';
                 return user;
               }
               return user;

@@ -90,6 +90,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.postService.getPosts(screenName)
       .subscribe((posts: Post[]) => {
         this.posts = posts;
+        if (posts === null) {
+
+        }
       });
   }
 
