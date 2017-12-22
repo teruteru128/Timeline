@@ -13,10 +13,15 @@ before_script:
   - yarn global add @angular/cli
   - yarn global add karma
   - yarn
-  - ng build --aot
+  - yarn build
 script: yarn test-ci
-after_success: yarn build
-after_success:
-    "lftp -u ${FTP_USER},${FTP_PASS} -e 'mirror -Rev dist/. /site/wwwroot/.' ${FTP_SITE}"
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
+  local_dir: dist/
+  fqdn: timeline.blue
 notifications:
     slack: kittentl:moBQCRlnTw615glK6ogAaZ1w
