@@ -17,6 +17,6 @@ before_script:
 script: yarn test-ci
 after_success: yarn build
 after_success:
-    "lftp -u $FTP_USER,$FTP_PASS $FTP_SITE -e 'mirror -c -e -R dist ~'"
+    "lftp -u ${FTP_USER},${FTP_PASS} -e 'mirror -Rev dist/. /site/wwwroot/.' ${FTP_SITE}"
 notifications:
     slack: kittentl:moBQCRlnTw615glK6ogAaZ1w
