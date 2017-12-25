@@ -35,9 +35,10 @@
         <div class="badge-wrapper">
           <!-- 自分のページ -->
             <div class="header-badge badge-edit"
-            *ngIf="myname === user.screen_name; else otherUser">
+            *ngIf="myname === user.screen_name; else otherUser"
+            (click)="editing = !editing">
             <div class="edit-pending" *ngIf="!editing">
-                <i class="material-icons" (click)="editing = !editing">edit</i>        
+                <i class="material-icons">edit</i>        
             </div>
             <div class="commit-profile" *ngIf="editing" (click)="editing = !editing" (click)="commitProfile()">
                 <i class="material-icons">check</i>        
