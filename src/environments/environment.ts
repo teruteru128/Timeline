@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://api.timeline.blue/1.0',
-  wsEndpoint: 'wss://api.timeline.blue/1.0',
+  apiEndpoint: 'http://localhost:5000/v1',
+  wsEndpoint: 'ws://localhost:5000/v1',
   localStorageToken: 'secret'
 };
