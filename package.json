@@ -4,11 +4,15 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "node server.js",
+    "build": "ng build --prod --aot",
+    "deploy": "ng build --prod --aot --base-href /NearStation/ && angular-cli-ghpages",
+    "test": "ng test --watch=false --code-coverage",
+    "e2e": "ng e2e --prod",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ci": "npm run lint && npm run test && npm run e2e",
+    "sme": "ng build && source-map-explorer dist/main.bundle.js",
+    "release": "standard-version && git push --follow-tags origin master"
   },
   "private": true,
   "dependencies": {
