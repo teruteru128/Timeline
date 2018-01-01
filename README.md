@@ -1,5 +1,10 @@
-# Timeline
-[![Build Status](https://travis-ci.org/TinyKitten/Timeline.svg?branch=develop)](https://travis-ci.org/TinyKitten/Timeline)
-[![Coverage Status](https://coveralls.io/repos/github/TinyKitten/Timeline/badge.svg?branch=develop)](https://coveralls.io/github/TinyKitten/Timeline?branch=develop)
+# Alphaテストは終了しました。次回リリースは3月1日の予定です。
 
-Twitterのタイムラインっぽいやつ
+# Timeline
+
+その瞬間を、共有しよう。
+
+TimelineはTwitterライクを目指すSNSです。
+
+## License
+Released under the [MIT](LICENSE) license.
